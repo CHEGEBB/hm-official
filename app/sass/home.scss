@@ -1,0 +1,13 @@
+@import "./fonts.scss";
+body{
+    font-family: $font-Rubik !important;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: $font-Sora !important;
+}
+p{
+    font-family: $font-Raleway !important;
+}
+.mockup{
+    margin-top: -20px !important;
+}
