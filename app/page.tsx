@@ -60,15 +60,16 @@ const LandingPage = () => {
               </div>
               
               {/* Video content */}
-              <video
-                className="object-cover w-full h-full"
-                playsInline
-                loop
-                muted
-                autoPlay
-              >
-                <source src="/assets/videos/app-demo.mp4" type="video/mp4" />
-              </video>
+              <iframe
+          width="100%"
+          height="100%"
+          src="https://www.youtube.com/embed/yee1MjD-vtc?start=160"
+          title="HealthMaster Demo Video"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="rounded-lg shadow-lg"
+        ></iframe>
             </div>
   
             {/* Home indicator */}
