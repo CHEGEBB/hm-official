@@ -192,8 +192,6 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-
-      /* Team Section with Animations */
 <section className="py-20 bg-slate-800">
   <div className="container px-4 mx-auto sm:px-6">
     <motion.div
@@ -251,7 +249,7 @@ const AboutPage = () => {
         <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Brian Chege Mwangi</h3>
         <p className="mb-4 text-gray-300 font-raleway">Co-Founder & CTO</p>
         <p className="text-gray-400 font-raleway">
-           Brian, a computer scientist from Kenya specializes in full-stack web and app development and software engineering. His strong coding skills, creativity, and problem-solving mindset drive HealthMaster's technical innovations. 
+           Brian, a computer scientist from Kenya specializes in full-stack web and app development and software engineering. His strong coding skills, creativity, and problem-solving mindset drive HealthMaster technical innovations. 
            Follow him on github <span>
            <a href="
             https://github.com/CHEGEBB"

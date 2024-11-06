@@ -200,7 +200,7 @@ const BlogPage = () => {
       <section className="bg-slate-800 py-8">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category, index) => (
+            {categories.map((category) => (
               <motion.button
                 key={category}
                 whileHover={{ scale: 1.05 }}

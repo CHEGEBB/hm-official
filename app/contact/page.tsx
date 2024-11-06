@@ -70,7 +70,7 @@ const ContactPage = () => {
               Get in Touch
             </h1>
             <p className="mb-8 text-lg sm:text-xl lg:text-2xl font-raleway text-white/90">
-              We're here to help and answer any questions you might have.
+              We are here to help and answer any questions you might have.
             </p>
           </motion.div>
         </div>
@@ -133,7 +133,7 @@ const ContactPage = () => {
               className="space-y-6"
             >
               <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl font-rubik text-emerald-500">
-                Let's Start a Conversation
+                Let us Start a Conversation
               </h2>
               <p className="text-lg text-gray-300 font-raleway">
                 Whether you have a question about features, trials, pricing, or anything else, our team is ready to answer all your questions.
@@ -146,7 +146,7 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-emerald-400">24/7 Support</h3>
-                    <p className="text-gray-300">We're here to help anytime</p>
+                    <p className="text-gray-300">We are here to help anytime</p>
                   </div>
                 </div>
 
