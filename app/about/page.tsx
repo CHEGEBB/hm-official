@@ -340,11 +340,11 @@ const AboutPage = () => {
               Be a part of our mission to transform healthcare management.
             </motion.p>
             <motion.a
-              href="/signup"
+              href="https://drive.google.com/uc?export=download&id=14jAsVH3qv2KogL1UigwB6ft14bpt4Q4o"
               whileHover={{ scale: 1.1 }}
               className="inline-block px-6 py-3 text-lg font-semibold text-white transition-all bg-emerald-500 rounded-lg hover:bg-emerald-600"
             >
-              Sign Up Now
+              Download Now
             </motion.a>
           </div>
         </div>

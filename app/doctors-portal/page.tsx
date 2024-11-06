@@ -80,9 +80,13 @@ const DoctorPortal: React.FC = () => {
     try {
       const session = await account.createEmailPasswordSession(username, password);
       setIsLoggedIn(true);
-      setSession(session);
+      setSession({
+        $id: session.$id,
+        name: session.providerUid, // Assuming 'providerUid' is the name, replace it with the correct property if different
+        email: session.userId // Assuming 'userId' is the email, replace it with the correct property if different
+      });
       fetchAppointments();
-    } catch (error) {
+    } catch {
       setError('Invalid credentials');
     } finally {
       setLoading(false);
@@ -107,7 +111,14 @@ const DoctorPortal: React.FC = () => {
         Config.appoinmentsCollectionId,
         [Query.orderDesc('date')]
       );
-      setAppointments(response.documents as Appointment[]);
+      setAppointments(response.documents.map(doc => ({
+        $id: doc.$id,
+        patientName: doc.patientName,
+        date: doc.date,
+        time: doc.time,
+        reason: doc.reason,
+        status: doc.status,
+      })));
     } catch (error) {
       console.error('Error fetching appointments:', error);
     }
