@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import {  User, Users, Heart, Clock, Clipboard } from 'lucide-react';
 import Navbar from '../components/navbar';
+import "../sass/home.scss"
 
 const AboutPage = () => {
 
@@ -28,7 +29,7 @@ const AboutPage = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/50 to-slate-900/90" />
           <Image
-            src="/assets/images/about.jpg"
+            src="/assets/images/bg.jpg"
             alt="About Page Background"
             fill
             className="object-cover opacity-30"
@@ -43,7 +44,7 @@ const AboutPage = () => {
             className="text-center"
           >
             <h1 className="mb-6 text-4xl font-bold sm:text-5xl lg:text-6xl font-rubik">
-              About HealthMaster
+              HealthMaster
             </h1>
             <p className="mb-8 text-lg sm:text-xl lg:text-2xl font-raleway text-white/90">
               Empowering individuals to take control of their healthcare journey.
@@ -192,87 +193,124 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Our Team */}
-      <section className="py-20 bg-slate-800">
-        <div className="container px-4 mx-auto sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-14"
-          >
-            <h2 className="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl font-rubik text-emerald-500">
-              Our Team
-            </h2>
-            <p className="max-w-2xl mx-auto text-lg font-raleway text-gray-300">
-              Meet the passionate individuals behind HealthMaster, dedicated to transforming the healthcare experience.
-            </p>
-          </motion.div>
+      /* Team Section with Animations */
+<section className="py-20 bg-slate-800">
+  <div className="container px-4 mx-auto sm:px-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="text-center mb-14"
+    >
+      <h2 className="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl font-rubik text-emerald-500">
+        Our Team
+      </h2>
+      <p className="max-w-2xl mx-auto text-lg font-raleway text-gray-300">
+        Meet the passionate individuals behind HealthMaster, dedicated to transforming the healthcare experience.
+      </p>
+    </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="p-6 bg-slate-700 rounded-2xl"
-            >
-              <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
-                <Image
-                  src="/assets/images/team-1.jpg"
-                  alt="John Doe"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">John Doe</h3>
-              <p className="mb-4 text-gray-300 font-raleway">Co-Founder & CEO</p>
-              <p className="text-gray-400 font-raleway">
-                With a background in healthcare technology, John is passionate about empowering individuals to take control of their health.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="p-6 bg-slate-700 rounded-2xl"
-            >
-              <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
-                <Image
-                  src="/assets/images/team-2.jpg"
-                  alt="Jane Smith"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Jane Smith</h3>
-              <p className="mb-4 text-gray-300 font-raleway">Co-Founder & CTO</p>
-              <p className="text-gray-400 font-raleway">
-                Jane brings her expertise in software engineering and user experience design to create intuitive healthcare solutions.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="p-6 bg-slate-700 rounded-2xl"
-            >
-              <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
-                <Image
-                  src="/assets/images/team-3.jpg"
-                  alt="Michael Johnson"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Michael Johnson</h3>
-              <p className="mb-4 text-gray-300 font-raleway">Head of Product</p>
-              <p className="text-gray-400 font-raleway">
-                Michael deep understanding of the healthcare industry and user-centric approach drives the development of HealthMaster's features.
-              </p>
-            </motion.div>
-          </div>
+    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {/* Irenee Dushime Uwineza */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="p-6 bg-slate-700 rounded-2xl"
+      >
+        <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+          <Image
+            src="/assets/images/irenee.jpg"
+            alt="Irenee Dushime Uwineza"
+            fill
+            className="object-cover"
+          />
         </div>
-      </section>
+        <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Irenee Dushime Uwineza</h3>
+        <p className="mb-4 text-gray-300 font-raleway">Founder & CEO</p>
+        <p className="text-gray-400 font-raleway">
+          A resilient medical student from Rwanda, Irenee is passionate about driving HealthMaster as a healthcare startup, showing unwavering commitment to improve healthcare through technology and innovation.
+        </p>
+      </motion.div>
+
+      {/* Brian Chege Mwangi */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="p-6 bg-slate-700 rounded-2xl"
+      >
+        <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+          <Image
+            src="/assets/images/brian.jpg"
+            alt="Brian Chege Mwangi"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Brian Chege Mwangi</h3>
+        <p className="mb-4 text-gray-300 font-raleway">Co-Founder & CTO</p>
+        <p className="text-gray-400 font-raleway">
+           Brian, a computer scientist from Kenya specializes in full-stack web and app development and software engineering. His strong coding skills, creativity, and problem-solving mindset drive HealthMaster's technical innovations. 
+           Follow him on github <span>
+           <a href="
+            https://github.com/CHEGEBB"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-red-500 hover:text-blue-600 font-bold"
+          >Follow Github</a>
+            </span> 
+        </p>
+      </motion.div>
+
+      {/* Bonheur Dishimimana */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="p-6 bg-slate-700 rounded-2xl"
+      >
+        <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+          <Image
+            src="/assets/images/bonheur.jpg"
+            alt="Bonheur Dishimimana"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Bonheur Dishimimana</h3>
+        <p className="mb-4 text-gray-300 font-raleway">Co-Founder</p>
+        <p className="text-gray-400 font-raleway">
+          Bonheur, a passionate medical student from Rwanda, co-founded HealthMaster with a deep commitment to improving healthcare access and delivery. Known for his go-getter attitude, Bonheur excels in connecting with people, fostering a positive environment, and working effectively with others.
+           
+        </p>
+      </motion.div>
+
+      {/* Francis Muhirwa */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="p-6 bg-slate-700 rounded-2xl"
+      >
+        <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+          <Image
+            src="/assets/images/francis.jpg"
+            alt="Francis Muhirwa"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Francis Muhirwa</h3>
+        <p className="mb-4 text-gray-300 font-raleway">UI/UX Designer</p>
+        <p className="text-gray-400 font-raleway">
+          A talented designer from Rwanda, Francis is efficient, flexible, and consistently delivers top-quality work on time. His keen eye for detail and ability to adapt to any design challenge make him an invaluable member of the HealthMaster team, ensuring that the user experience is both intuitive and engaging.
+        </p>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA */}
       <section className="relative py-20 overflow-hidden bg-emerald-600">

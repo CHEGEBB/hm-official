@@ -129,42 +129,40 @@ const AppPage = () => {
           </div>
         </div>
       </section>
-
       {/* Demo Section */}
-      <section id="demo" className="relative py-20 overflow-hidden bg-emerald-600">
-        <div className="container relative z-10 px-4 mx-auto sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-14"
-          >
-            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl font-rubik">
-              Experience the App
-            </h2>
-            <p className="max-w-2xl mx-auto mb-8 text-lg text-emerald-100 font-raleway">
-              Watch our demo to see how HealthMaster can transform your healthcare experience.
-            </p>
-          </motion.div>
+<section id="demo" className="relative py-20 overflow-hidden bg-emerald-600">
+  <div className="container relative z-10 px-4 mx-auto sm:px-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="text-center mb-14"
+    >
+      <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl font-rubik">
+        Experience the App
+      </h2>
+      <p className="max-w-2xl mx-auto mb-8 text-lg text-emerald-100 font-raleway">
+        Watch our demo to see how HealthMaster can transform your healthcare experience.
+      </p>
+    </motion.div>
 
-          <div className="flex justify-center">
-            <div className="relative w-64 h-128 bg-slate-800 rounded-lg shadow-lg overflow-hidden">
-              <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop muted>
-                <source src="/assets/videos/demo.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <a 
-                  href="/demo" 
-                  className="px-4 py-2 text-lg font-semibold text-white bg-emerald-500 rounded-lg hover:bg-emerald-600"
-                >
-                  View Full Demo
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="flex justify-center">
+      <div className="w-full max-w-4xl aspect-video">
+        <iframe
+          width="100%"
+          height="100%"
+          src="https://www.youtube.com/embed/yee1MjD-vtc?start=160"
+          title="HealthMaster Demo Video"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="rounded-lg shadow-lg"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA */}
       <section className="py-20 bg-slate-800">
@@ -182,10 +180,10 @@ const AppPage = () => {
               Join the HealthMaster community and take control of your health today.
             </p>
             <a 
-              href="/signup" 
+              href="https://drive.google.com/uc?export=download&id=14jAsVH3qv2KogL1UigwB6ft14bpt4Q4o" 
               className="inline-block px-6 py-3 text-lg font-semibold text-white transition-all bg-emerald-500 rounded-lg hover:bg-emerald-600"
             >
-              Sign Up Now
+              Download Now
             </a>
           </motion.div>
         </div>
@@ -196,19 +194,21 @@ const AppPage = () => {
 
 // Sample data for features and screenshots
 const features = [
-  { title: 'Personal Health Dashboard', description: 'Track your health metrics and get personalized insights.', icon: '/assets/icons/dashboard.svg' },
-  { title: 'Medication Reminders', description: 'Never miss a dose with timely notifications.', icon: '/assets/icons/reminders.svg' },
-  { title: 'Secure Messaging', description: 'Communicate with your healthcare providers securely.', icon: '/assets/icons/messaging.svg' },
-  { title: 'Health Records', description: 'Access your medical history anytime, anywhere.', icon: '/assets/icons/records.svg' },
-  { title: 'Telehealth Services', description: 'Consult with doctors through video calls.', icon: '/assets/icons/telehealth.svg' },
-  { title: 'Community Support', description: 'Join forums and connect with others on similar health journeys.', icon: '/assets/icons/community.svg' },
+  { title: 'Personal Health Dashboard', description: 'Track your health metrics and get personalized insights.', icon: '/assets/icons/dash.png' },
+  { title: 'Medication Reminders', description: 'Never miss a dose with timely notifications.', icon: '/assets/icons/rem.png' },
+  { title: 'Appointment Scheduling', description: 'Schedule Appointments with your healthcare providers securely.', icon: '/assets/icons/message.png' },
+  { title: 'Health Stats', description: 'Access your health stats anytime, anywhere with smartwatch IOT intergration.', icon: '/assets/icons/records.png' },
+  { title: 'Telehealth Services', description: 'Consult with doctors through video calls.', icon: '/assets/icons/teleh.png' },
+  { title: 'Community Support', description: 'Join forums and connect with others on similar health journeys.', icon: '/assets/icons/community.png' },
 ];
 
 const screenshots = [
-  '/assets/images/screenshot1.jpg',
-  '/assets/images/screenshot2.jpg',
-  '/assets/images/screenshot3.jpg',
-  '/assets/images/screenshot4.jpg',
+  '/assets/images/screen1.jpg',
+  '/assets/images/screen2.jpg',
+  '/assets/images/screen3.jpg',
+  '/assets/images/screen4.jpg',
+  '/assets/images/screen5.jpg',
+  '/assets/images/screen6.jpg',
 ];
 
 export default AppPage;

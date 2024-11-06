@@ -234,14 +234,16 @@ const LandingPage = () => {
                 Take control of your health journey with HealthMaster. Manage medications, 
                 track symptoms, and connect with healthcare professionals - all in one place.
               </p>
-              <motion.button
+              
+              <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center px-8 py-3 text-lg font-poppins text-white transition-colors rounded-full bg-emerald-500 hover:bg-emerald-600"
+                href={downloadUrl} download
               >
                 <Download className="w-5 h-5 mr-2" />
                 Download Beta Version
-              </motion.button>
+              </motion.a>
             </motion.div>
 
             <div className="relative">
@@ -363,10 +365,17 @@ const LandingPage = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center px-8 py-3 text-emerald-600 bg-white rounded-full hover:bg-emerald-50 font-poppins"
+          className="inline-flex items-center px-8 py-3 text-emerald-600 bg-emerald-300 rounded-full hover:bg-emerald-50 font-poppins"
         >
-          <Download className="w-5 h-5 mr-2" />
-          Download Beta Version
+          <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center px-8 py-3 text-lg font-poppins text-white transition-colors rounded-full bg-emerald-500 hover:bg-emerald-600"
+                href={downloadUrl} download
+              >
+                <Download className="w-5 h-5 mr-2" />
+                Download Beta Version
+              </motion.a>
         </motion.button>
       </div>
 

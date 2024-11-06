@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Search, Calendar, Clock, User, Tag, ChevronRight } from 'lucide-react';
+import { Search, Calendar, Clock, User,  ChevronRight } from 'lucide-react';
 import Navbar from '../components/navbar';
+import "../sass/home.scss";
 
 // Types
 interface BlogPost {
