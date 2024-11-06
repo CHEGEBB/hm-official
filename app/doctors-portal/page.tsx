@@ -2,7 +2,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { Client, Account, Databases, Query } from 'appwrite';
-import "../sass/doctors.scss"
 interface Appointment {
   $id: string;
   patientName: string;
@@ -129,7 +128,8 @@ const DoctorPortal: React.FC = () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-slate-700 flex items-center justify-center container">
+        <div className="overlay">
+      <div className="min-h-screen bg-slate-700 flex items-center justify-center container min-w-full">
         <div className="bg-slate-600/50 p-8 rounded-lg shadow-md w-96">
           <h2 className="text-2xl font-bold mb-6 text-center text-white">Doctor Portal Login</h2>
           {error && (
@@ -171,6 +171,7 @@ const DoctorPortal: React.FC = () => {
             </button>
           </form>
         </div>
+      </div>
       </div>
     );
   }

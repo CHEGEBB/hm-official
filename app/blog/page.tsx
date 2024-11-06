@@ -32,9 +32,69 @@ const blogPosts: BlogPost[] = [
     readTime: "5 min read",
     category: "Technology",
     tags: ["Healthcare", "Innovation", "AI", "Digital Health"],
-    imageUrl: "/assets/images/blog-1.jpg"
+    imageUrl: "/assets/images/tech.jpeg"
   },
-  // Add more blog posts...
+  {
+    id: 2,
+    title: "5 Health Tips for a Balanced Lifestyle",
+    excerpt: "Simple yet effective ways to improve your overall health and well-being",
+    content: "Full content here...",
+    author: "Dr. John Doe",
+    date: "2024-02-20",
+    readTime: "3 min read",
+    category: "Health Tips",
+    tags: ["Self-Care", "Mental Health", "Nutrition"],
+    imageUrl: "/assets/images/exercise.jpeg"
+  },
+  {
+    id: 3,
+    title: "The Importance of Mental Wellness",
+    excerpt: "Understanding the significance of mental health and ways to prioritize it",
+    content: "Full content here...",
+    author: "Dr. Mary Johnson",
+    date: "2024-01-25",
+    readTime: "4 min read",
+    category: "Wellness",
+    tags: ["Mental Health", "Self-Care", "Stress Management"],
+    imageUrl: "/assets/images/mental.jpeg"
+  },
+  {
+    id: 4,
+    title: "Latest Medical Research Breakthroughs",
+    excerpt: "A roundup of recent advancements in medical research and treatments",
+    content: "Full content here...",
+    author: "Dr. Jane Smith",
+    date: "2024-03-10",
+    readTime: "6 min read",
+    category: "Medical Research",
+    tags: ["Research", "Clinical Trials", "Public Health"],
+    imageUrl: "/assets/images/break.jpeg"
+  },
+  {
+    id: 5,
+    title: "Enhancing Patient Care Experience",
+    excerpt: "Strategies to improve patient satisfaction and quality of care in healthcare",
+    content: "Full content here...",
+    author: "Dr. John Doe",
+    date: "2024-02-15",
+    readTime: "5 min read",
+    category: "Patient Care",
+    tags: ["Patient Satisfaction", "Quality of Care", "Patient Education"],
+    imageUrl: "/assets/images/patient.jpeg"
+  },
+  {
+    id: 7,
+    title: "Revolutionizing Patient Care Through Technology",
+    excerpt: "A deep dive into the transformative tech advances enhancing patient experience and healthcare accessibility.",
+    content: "Complete article content here...",
+    author: "Dr. Alex Martinez",
+    date: "2024-04-10",
+    readTime: "6 min read",
+    category: "HealthTech",
+    tags: ["Patient Care", "Telemedicine", "Machine Learning", "Healthcare Tech"],
+    imageUrl: "/assets/images/fut.jpeg"
+},
+
 ];
 
 const categories = [
@@ -99,7 +159,7 @@ const BlogPage = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/50 to-slate-900/90" />
           <Image
-            src="/assets/images/blog-hero.jpg"
+            src="/assets/images/blogg.jpg"
             alt="Blog Hero"
             fill
             className="object-cover opacity-20"
