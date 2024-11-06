@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpCircle, Menu, X, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Download, Star, Calendar, Clock, User, Heart } from 'lucide-react';
 import Image from 'next/image';
@@ -19,7 +19,6 @@ const LandingPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const downloadUrl = "https://drive.google.com/uc?export=download&id=14jAsVH3qv2KogL1UigwB6ft14bpt4Q4o";
   
   useEffect(() => {
@@ -249,7 +248,7 @@ const LandingPage = () => {
               </h1>
               <p className="mb-8 text-lg sm:text-xl lg:text-2xl font-raleway text-white/90">
                 Take control of your health journey with HealthMaster. Manage medications, 
-                track symptoms, and connect with healthcare professionals - all in one place.
+                track appointments, and connect with healthcare professionals - all in one place.
               </p>
               
               <motion.a
@@ -289,7 +288,7 @@ const LandingPage = () => {
 
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={30}
+            spaceBetween={70}
             slidesPerView={1}
             navigation
             pagination={{ clickable: true }}
@@ -302,7 +301,7 @@ const LandingPage = () => {
                 slidesPerView: 3,
               },
             }}
-            className="!pb-14"
+            className="!pb-12"
           >
             {features.map((feature) => (
               <SwiperSlide key={feature.title}>
