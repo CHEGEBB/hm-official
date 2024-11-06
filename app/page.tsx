@@ -162,7 +162,7 @@ const LandingPage = () => {
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center px-6 py-2 text-sm text-white transition-colors rounded-full font-poppins bg-emerald-500 hover:bg-emerald-600"
+          className="inline-flex items-center px-6  py-2 text-sm text-white transition-colors rounded-full font-poppins bg-emerald-500 hover:bg-emerald-600"
         >
           <Download className="w-4 h-4 mr-2" />
           Download App
@@ -171,13 +171,13 @@ const LandingPage = () => {
     </div>
 
           <button 
-            className="text-emerald-500 md:hidden" 
+            className="text-emerald-500 md:hidden mr-10 pr-10" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
-
+      
         {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
