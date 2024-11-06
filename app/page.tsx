@@ -46,30 +46,47 @@ const LandingPage = () => {
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="relative w-[300px] h-[600px] mx-auto mt-12 mockup"
+        className="relative w-[300px] h-[600px] mx-auto mt-12"
       >
-        <div className="absolute w-full h-full border-[13px] border-gray-800 rounded-[45px] overflow-hidden shadow-xl bg-black">
-          <div className="relative w-full h-full overflow-hidden bg-black">
-            <video
-              ref={videoRef}
-              className="object-cover w-full h-full"
-              playsInline
-              loop
-              muted
-              autoPlay
-              onLoadedData={() => {
-                if (videoRef.current) {
-                  videoRef.current.play();
-                }
-              }}
-            >
-              <source 
-                src="/assets/videos/app-demo.mp4" 
-                type="video/mp4" 
-              />
-            </video>
+        <div className="absolute w-full h-full">
+          {/* Phone frame */}
+          <div className="absolute w-full h-full border-[14px] border-gray-800 rounded-[45px] overflow-hidden shadow-xl bg-black">
+            {/* Screen Content */}
+            <div className="relative w-full h-full overflow-hidden bg-black">
+              {/* Dynamic notch */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-black rounded-b-[20px] z-20">
+                <div className="absolute top-[10px] left-1/2 -translate-x-1/2 w-[60px] h-[4px] bg-gray-800 rounded-full" />
+                <div className="absolute top-[8px] left-[25px] w-[8px] h-[8px] bg-gray-700 rounded-full" />
+                <div className="absolute top-[8px] right-[25px] w-[8px] h-[8px] bg-gray-700 rounded-full" />
+              </div>
+              
+              {/* Video content */}
+              <video
+                className="object-cover w-full h-full"
+                playsInline
+                loop
+                muted
+                autoPlay
+              >
+                <source src="/assets/videos/app-demo.mp4" type="video/mp4" />
+              </video>
+            </div>
+  
+            {/* Home indicator */}
+            <div className="absolute bottom-2 left-1/2 w-32 h-1 -translate-x-1/2 bg-gray-300 rounded-full" />
           </div>
-          <div className="absolute bottom-3 left-1/2 w-32 h-0.5 -translate-x-1/2 bg-white rounded-full"></div>
+  
+          {/* Side buttons */}
+          <div className="absolute -left-[2px] top-[120px] w-[4px] h-16 bg-gray-700 rounded-l-lg" /> {/* Volume up */}
+          <div className="absolute -left-[2px] top-[170px] w-[4px] h-16 bg-gray-700 rounded-l-lg" /> {/* Volume down */}
+          <div className="absolute -right-[2px] top-[140px] w-[4px] h-20 bg-gray-700 rounded-r-lg" /> {/* Power button */}
+  
+          {/* Silent switch */}
+          <div className="absolute -left-[2px] top-[80px] w-[4px] h-6 bg-gray-700 rounded-l-lg" />
+  
+          {/* Top and bottom speaker grills */}
+          <div className="absolute top-[8px] left-1/2 -translate-x-1/2 w-16 h-[4px] bg-gray-700 rounded-full" />
+          <div className="absolute bottom-[8px] left-1/2 -translate-x-1/2 w-16 h-[4px] bg-gray-700 rounded-full" />
         </div>
       </motion.div>
     );

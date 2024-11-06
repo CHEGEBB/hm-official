@@ -250,7 +250,7 @@ const ContactPage = () => {
                   >
                     <div className="text-center">
                       <h3 className="mb-2 text-2xl font-bold">Thank You!</h3>
-                      <p>We'll get back to you soon.</p>
+                      <p>We will get back to you soon.</p>
                     </div>
                   </motion.div>
                 )}
@@ -261,21 +261,26 @@ const ContactPage = () => {
       </section>
 
       {/* Map Section */}
-      <section className="py-20 bg-slate-800">
-        <div className="container px-4 mx-auto sm:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="overflow-hidden rounded-2xl"
-          >
-            {/* Replace with your actual map component or iframe */}
-            <div className="w-full h-[400px] bg-slate-700 flex items-center justify-center">
-              <MapPin className="w-12 h-12 text-emerald-500" />
-            </div>
-          </motion.div>
-        </div>
-      </section>
+<section className="py-20 bg-slate-800">
+  <div className="container px-4 mx-auto sm:px-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="overflow-hidden rounded-2xl"
+    >
+      {/* Google Maps iframe centered on Kigali, Rwanda */}
+      <iframe
+        className="w-full h-[400px] rounded-2xl"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15953.470554470562!2d30.0644352!3d-1.9456869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca7dbf0cf2f57%3A0x41d3c36a84b7ae41!2sKigali%2C%20Rwanda!5e0!3m2!1sen!2s!4v1698267209469!5m2!1sen!2s"
+        style={{ border: 0 }}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </motion.div>
+  </div>
+</section>
+
     </div>
   );
 };
