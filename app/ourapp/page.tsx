@@ -1,22 +1,10 @@
 'use client';
 import React from 'react';
-import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Navbar from '../components/navbar';
 
 const AppPage = () => {
-  const video1Ref = useRef<HTMLVideoElement>(null);
-  const video2Ref = useRef<HTMLVideoElement>(null);
-  const video3Ref = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    // Delay the start of each video by different intervals
-    if (video1Ref.current) setTimeout(() => video1Ref.current?.play(), 0);      
-    if (video2Ref.current) setTimeout(() => video2Ref.current?.play(), 500);    
-    if (video3Ref.current) setTimeout(() => video3Ref.current?.play(), 1000);   
-  }, []);
-
   return (
     <div className="min-h-screen text-white bg-slate-900 font-outfit">
       <Navbar />
@@ -36,36 +24,12 @@ const AppPage = () => {
           className="absolute inset-0 z-0"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/50 to-slate-900/90" />
-          <div className="flex overflow-hidden justify-center space-x-4">
-      <video
-        ref={video1Ref}
-        src="/assets/videos/app-demo.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-1/3 opacity-80 rounded-lg shadow-lg"
-      />
-      <video
-        ref={video2Ref}
-        src="/assets/videos/app-demo.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-1/3 opacity-80 rounded-lg shadow-lg"
-      />
-      <video
-        ref={video3Ref}
-        src="/assets/videos/app-demo.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-1/3 opacity-80 rounded-lg shadow-lg"
-      />
-    </div>
-
+          <Image
+            src="/assets/images/design.png"
+            alt="App Page Background"
+            fill
+            className="object-cover opacity-30"
+          />
         </motion.div>
 
         <div className="container relative z-10 mx-auto">
