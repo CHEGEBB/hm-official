@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock } from 'lucide-react';
 import Navbar from '../components/navbar';
+import "../sass/home.scss";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({

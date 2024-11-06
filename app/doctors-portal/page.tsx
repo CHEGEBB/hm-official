@@ -2,6 +2,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { Client, Account, Databases, Query } from 'appwrite';
+import "../sass/home.scss";
 interface Appointment {
   $id: string;
   patientName: string;

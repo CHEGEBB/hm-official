@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Navbar from '../components/navbar';
+import "../sass/home.scss";
 
 const ServicesPage = () => {
   return (
