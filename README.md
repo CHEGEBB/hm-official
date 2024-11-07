@@ -1,7 +1,3 @@
-Here's a README template with plenty of emojis and an arrow pointing to the live site for "HealthMaster," a health management app:
-
-
----
 
 🩺 HealthMaster
 
@@ -132,9 +128,4 @@ This project is licensed under the MIT License.
 ---
 
 💙 Thank you for choosing HealthMaster! We hope this app empowers you to take control of your health with ease.
-
-
----
-
-Let me know if you want any modifications!
 
