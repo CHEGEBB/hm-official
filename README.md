@@ -3,8 +3,9 @@
 
 HealthMaster is a comprehensive health management app that helps users stay on top of their medication, manage appointments, and track their health stats—all in one place! Tailored to support patients with chronic conditions, HealthMaster ensures users can maintain their well-being with timely reminders and easy access to critical health data.
 
-➡️ Live Site
+➡️ Live Site:
 
+https://hm-official-9lha-50roh9fo9-chegebbs-projects.vercel.app/
 
 ---
 
@@ -42,11 +43,13 @@ Secure and Confidential: Your health data is secure with us, ensuring privacy an
 
 1. Visit the Live Site to explore HealthMaster's features.
 
+https://hm-official-9lha-50roh9fo9-chegebbs-projects.vercel.app/
 
-2. Sign Up and set up your health profile.
+
+3. Sign Up and set up your health profile.
 
 
-3. Start managing your health with ease! 😊
+4. Start managing your health with ease! 😊
 
 
 
