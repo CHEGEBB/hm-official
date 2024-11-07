@@ -62,12 +62,12 @@ If you're looking to contribute or modify the project, here's how to get started
 
 1. Clone the repository:
 
-git clone https://github.com/CHEGEBB/-my-task-board.git
+git clone https://github.com/CHEGEBB/hm-official.git
 
 
 2. Navigate to the project directory:
 
-cd healthmaster
+cd hm-official 
 
 
 3. Install dependencies:
