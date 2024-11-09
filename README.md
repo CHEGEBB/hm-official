@@ -5,7 +5,7 @@ HealthMaster is a comprehensive health management app that helps users stay on t
 
 ➡️ Live Site:
 
-https://hm-official-9lha-50roh9fo9-chegebbs-projects.vercel.app/
+https://www.healthmasterco.com/
 
 ---
 
@@ -43,7 +43,7 @@ Secure and Confidential: Your health data is secure with us, ensuring privacy an
 
 1. Visit the Live Site to explore HealthMaster's features.
 
-https://hm-official-9lha-50roh9fo9-chegebbs-projects.vercel.app/
+https://www.healthmasterco.com/
 
 
 3. Sign Up and set up your health profile.
