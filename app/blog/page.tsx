@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Calendar, Clock, User, ChevronRight, X, Bookmark, Share2, ThumbsUp } from 'lucide-react';
+import Navbar from "../components/navbar"
+import Image from 'next/image';
 const blogPosts = [
   {
     id: 1,
@@ -236,6 +238,8 @@ const ReadingMode = ({ post, onClose }: { post: Post; onClose: () => void }) => 
   const [likes, setLikes] = useState(0);
 
   return (
+    <div className="min-h-screen bg-slate-900 text-white font-outfit">
+      <Navbar />
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -245,7 +249,7 @@ const ReadingMode = ({ post, onClose }: { post: Post; onClose: () => void }) => 
       <div className="min-h-screen py-12 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto bg-slate-800 rounded-2xl shadow-xl">
           <div className="relative">
-            <img 
+            <Image
               src={post.imageUrl} 
               alt={post.title}
               className="w-full h-64 object-cover rounded-t-2xl"
@@ -323,6 +327,7 @@ const ReadingMode = ({ post, onClose }: { post: Post; onClose: () => void }) => 
         </div>
       </div>
     </motion.div>
+    </div>
   );
 };
 
@@ -363,6 +368,7 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">
+      <Navbar /> 
       <AnimatePresence>
         {selectedPost && (
           <ReadingMode 
