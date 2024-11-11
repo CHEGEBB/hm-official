@@ -335,7 +335,7 @@ const BlogPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const postsPerPage = 6;
 
   const filteredPosts = blogPosts.filter(post => {
@@ -387,8 +387,10 @@ const BlogPage = () => {
           className="absolute inset-0 z-0"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/50 to-slate-900/90" />
-          <img
+          < Image
             src="/assets/images/blogg.jpg"
+            width={1920}
+            height={1080}
             alt="Blog Hero"
             className="object-cover w-full h-full opacity-20"
           />
@@ -461,8 +463,10 @@ const BlogPage = () => {
                 className="bg-slate-800 rounded-2xl overflow-hidden hover:transform hover:scale-[1.02] transition-all duration-300"
               >
                 <div className="relative h-48">
-                  <img
+                  <Image
                     src={post.imageUrl}
+                    width={720}
+                    height={480}
                     alt={post.title}
                     className="w-full h-full object-cover"
                   />
