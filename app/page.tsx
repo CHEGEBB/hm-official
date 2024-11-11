@@ -31,7 +31,6 @@ const LandingPage = () => {
 
   const navItems = [
     { name: 'Home', path: '/' },
-    //these pages tell people baout healthmaster what we do and how we do it,features,
     { name: 'About', path: '/about' },
     {name :'Our App', path: '/ourapp'},
     {name :'Services', path: '/services'},
@@ -139,7 +138,7 @@ const LandingPage = () => {
               className="w-8 h-8 mr-2 sm:w-10 sm:h-10" 
             />
             <span className="text-lg font-bold sm:text-xl font-sora text-emerald-500">
-              HealthMaster
+              Health Master
             </span>
           </Link>
 
@@ -687,7 +686,7 @@ const LandingPage = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-emerald-400">Email Us</h4>
-                  <p className="text-gray-300">support@healthmaster.com</p>
+                  <p className="text-gray-300">info@healthmasterco.com</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -696,7 +695,7 @@ const LandingPage = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-emerald-400">Call Us</h4>
-                  <p className="text-gray-300">+1 (555) 123-4567</p>
+                  <p className="text-gray-300">+250789399765</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -705,7 +704,9 @@ const LandingPage = () => {
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-emerald-400">Visit Us</h4>
-                  <p className="text-gray-300">123 Health Street, Medical District</p>
+                  <p className="text-gray-300">
+                  Norrsken House Kigali , 1 KN 78 St, Kigali
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -761,7 +762,7 @@ const LandingPage = () => {
                   alt="HealthMaster logo" 
                   className="w-8 h-8 mr-2" 
                 />
-                <span className="text-xl font-bold text-emerald-500">HealthMaster</span>
+                <span className="text-xl font-bold text-emerald-500">Health Master</span>
               </Link>
               <p className="text-gray-400">
                 Revolutionizing healthcare management through technology and innovation.
