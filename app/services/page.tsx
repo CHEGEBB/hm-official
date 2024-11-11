@@ -155,10 +155,10 @@ const ServicesPage = () => {
 
 // Sample data for services and testimonials
 const services = [
+  { title:'Medication Adherence', description: 'Receive reminders and track your medication intake.', icon: '/assets/icons/medication.png' },
+  { title: 'Appointment management', description: 'Schedule and manage your healthcare appointments.', icon: '/assets/icons/appointment.png' },
   { title: 'Personal Health Coaching', description: 'Get one-on-one coaching tailored to your health goals.', icon: '/assets/icons/personal.png' },
-  { title: 'Nutritional Guidance', description: 'Receive personalized meal plans and nutrition advice.', icon: '/assets/icons/nutrition.png' },
   { title: 'Mental Health Support', description: 'Access mental health resources and counseling services.', icon: '/assets/icons/brain.png' },
-  { title: 'Fitness Programs', description: 'Join our community fitness programs designed for all levels.', icon: '/assets/icons/fitness.png' },
   { title: 'Chronic Disease Management', description: 'Support and resources for managing chronic conditions.', icon: '/assets/icons/chronic.png' },
   { title: 'Telehealth Services', description: 'Consult with our healthcare professionals online.', icon: '/assets/icons/tele.png' },
 ];
