@@ -90,7 +90,7 @@ const ContactPage = () => {
                 <Mail className="w-8 h-8 text-emerald-500" />
               </div>
               <h3 className="mb-2 text-xl font-bold text-emerald-400">Email Us</h3>
-              <p className="text-gray-300">support@healthmaster.com</p>
+              <p className="text-gray-300">info@healthmasterco.com</p>
             </motion.div>
 
             <motion.div
@@ -103,7 +103,7 @@ const ContactPage = () => {
                 <Phone className="w-8 h-8 text-emerald-500" />
               </div>
               <h3 className="mb-2 text-xl font-bold text-emerald-400">Call Us</h3>
-              <p className="text-gray-300">+1 (555) 123-4567</p>
+              <p className="text-gray-300">+250789399765</p>
             </motion.div>
 
             <motion.div
@@ -116,7 +116,7 @@ const ContactPage = () => {
                 <MapPin className="w-8 h-8 text-emerald-500" />
               </div>
               <h3 className="mb-2 text-xl font-bold text-emerald-400">Visit Us</h3>
-              <p className="text-gray-300">123 Health Street, Medical District</p>
+              <p className="text-gray-300">Norrsken House Kigali , 1 KN 78 St, Kigali</p>
             </motion.div>
           </div>
         </div>

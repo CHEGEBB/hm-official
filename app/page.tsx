@@ -330,9 +330,9 @@ const LandingPage = () => {
   <div className="container px-4 mx-auto sm:px-6">
     <div className="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
       {[
-        { number: "2.5K+", label: "Beta Users" },
-        { number: "100+", label: "Healthcare Providers" },
-        { number: "5K+", label: "Appointments Booked" },
+        { number: "120+", label: "Beta Users" },
+        { number: "25+", label: "Healthcare Providers" },
+        { number: "55+", label: "Appointments Booked" },
         { number: "95%", label: "Beta Satisfaction" }
       ].map((stat, index) => (
         <motion.div

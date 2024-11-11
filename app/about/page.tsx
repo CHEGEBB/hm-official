@@ -44,7 +44,7 @@ const AboutPage = () => {
             className="text-center"
           >
             <h1 className="mb-6 text-4xl font-bold sm:text-5xl lg:text-6xl font-rubik">
-              HealthMaster
+              Health Master
             </h1>
             <p className="mb-8 text-lg sm:text-xl lg:text-2xl font-raleway text-white/90">
               Empowering individuals to take control of their healthcare journey.
@@ -66,7 +66,7 @@ const AboutPage = () => {
                 Our Mission
               </h2>
               <p className="mb-6 text-lg font-raleway text-gray-300">
-                At HealthMaster, our mission is to revolutionize the way individuals manage their healthcare. We believe that by empowering people with the right tools and information, we can help them make more informed decisions, improve their overall well-being, and achieve better health outcomes.
+                At Health Master, our mission is to revolutionize the way individuals manage their healthcare. We believe that by empowering people with the right tools and information, we can help them make more informed decisions, improve their overall well-being, and achieve better health outcomes.
               </p>
               <p className="mb-6 text-lg font-raleway text-gray-300">
                 Through our comprehensive platform, we aim to bridge the gap between patients and healthcare providers, fostering a more collaborative and transparent healthcare ecosystem. Our goal is to put the power of healthcare management in the hands of the people, enabling them to take control of their journey and achieve their best health.
@@ -277,7 +277,7 @@ const AboutPage = () => {
           />
         </div>
         <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Bonheur Dishimimana</h3>
-        <p className="mb-4 text-gray-300 font-raleway">Co-Founder</p>
+        <p className="mb-4 text-gray-300 font-raleway">COO & Co-Founder</p>
         <p className="text-gray-400 font-raleway">
           Bonheur, a passionate medical student from Rwanda, co-founded HealthMaster with a deep commitment to improving healthcare access and delivery. Known for his go-getter attitude, Bonheur excels in connecting with people, fostering a positive environment, and working effectively with others.
            
