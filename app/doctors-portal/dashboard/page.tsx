@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import "../../sass/home.scss";
 import {
   LayoutDashboard,
   Users,
