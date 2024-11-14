@@ -17,7 +17,6 @@ import {
   Clock,
   Activity,
   UserCheck,
-  Tablets,
   Heart,
   TrendingUp,
 } from 'lucide-react';
@@ -99,7 +98,6 @@ const DoctorDashboard = () => {
     { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal/dashboard" },
     { icon: Calendar, label: "Appointments", path: "/doctors-portal/appointments" },
     { icon: Users, label: "My Patients", path: "/doctors-portal/patients" },
-    { icon: Tablets, label: "Medications", path: "/doctors-portal/medications" },
     { icon: FileText, label: "Reports", path: "/doctors-portal/reports" },
     { icon: Settings, label: "Settings", path: "/doctors-portal/settings" }
   ];

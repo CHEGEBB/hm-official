@@ -20,7 +20,6 @@ import {
   Mail,
   Clock,
   Activity,
-  Tablets
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card';
 import Image from 'next/image';
@@ -99,7 +98,6 @@ const PatientsPage = () => {
     { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal/dashboard" },
     { icon: Calendar, label: "Appointments", path: "/doctors-portal/appointments" },
     { icon: Users, label: "My Patients", path: "/doctors-portal/patients" },
-    { icon: Tablets, label: "Medications", path: "/doctors-portal/medications" },
     { icon: FileText, label: "Reports", path: "/doctors-portal/reports" },
     { icon: Settings, label: "Settings", path: "/doctors-portal/settings" }
   ];
