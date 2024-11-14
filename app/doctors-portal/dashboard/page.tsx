@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import "../../sass/home.scss";
 import {
   LayoutDashboard,
@@ -93,6 +93,7 @@ const mockActivity: ActivityLog[] = [
 const DoctorDashboard = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const router = useRouter();
+  const pathname = usePathname();
 
   const navigation = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal/dashboard" },
@@ -115,7 +116,7 @@ const DoctorDashboard = () => {
       whileHover={{ x: 5 }}
       onClick={() => router.push(path)}
       className={`flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-colors
-        ${location.pathname === path 
+        ${pathname === path 
           ? 'bg-emerald-500/20 text-emerald-500' 
           : 'text-slate-300 hover:bg-slate-800'}`}
     >
