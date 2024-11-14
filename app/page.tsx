@@ -12,6 +12,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import "./sass/home.scss"
+import { FaUserDoctor } from 'react-icons/fa6';
 
 const LandingPage = () => {
   // const router = useRouter();
@@ -155,6 +156,15 @@ const LandingPage = () => {
               </Link>
             ))}
           </div>
+          {/* <div className="portal">
+          <Link
+              href="/doctors-portal"
+              className="w-50 rounded-2xl px-6 py-2 mt-2 text-left bg-emerald-500 hover:bg-emerald-600 font-poppins"
+            >
+              Doctors Portal
+            </Link>
+            </div> */}
+            
 
           <div className="hidden md:flex md:items-center md:space-x-4">
       <a href={downloadUrl} download>
@@ -165,6 +175,18 @@ const LandingPage = () => {
         >
           <Download className="w-4 h-4 mr-2" />
           Download App
+        </motion.button>
+      </a>
+    </div>
+    <div className="hidden md:flex md:items-center md:space-x-4">
+      <a href="/doctors-portal">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex items-center px-6  py-2 text-sm text-white transition-colors rounded-full font-poppins bg-emerald-500 hover:bg-emerald-600"
+        >
+          <FaUserDoctor className="w-4 h-4 mr-2" />
+          Doctors Portal
         </motion.button>
       </a>
     </div>
