@@ -28,7 +28,7 @@ const SettingsPage = () => {
   const router = useRouter();
 
   const navigation = [
-    { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal" },
+    { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal/dashboard" },
     { icon: Calendar, label: "Appointments", path: "/doctors-portal/appointments" },
     { icon: Users, label: "My Patients", path: "/doctors-portal/patients" },
     { icon: FileText, label: "Reports", path: "/doctors-portal/reports" },
@@ -125,7 +125,7 @@ const SettingsPage = () => {
               <div className="flex items-center space-x-6">
                 <div className="relative">
                   <Image
-                    src="/api/placeholder/100/100" 
+                    src="/assets/images/ab6.jpeg" 
                     width={100}
                     height={100}
                     alt="Profile" 

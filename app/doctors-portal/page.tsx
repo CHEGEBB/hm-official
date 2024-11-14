@@ -18,8 +18,8 @@ const LoginPage = () => {
     setIsLoading(true);
     
     if (formData.doctorId === "DOC123" && 
-        formData.name === "Smith" && 
-        formData.email === "dr.smith@hospital.com") {
+        formData.name === "DOC" && 
+        formData.email === "doc@gmail.com") {
       setTimeout(() => {
         router.push('/doctors-portal/dashboard');
       }, 1500);

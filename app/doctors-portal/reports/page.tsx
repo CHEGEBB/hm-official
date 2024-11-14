@@ -88,7 +88,7 @@ const ReportsPage = () => {
   const router = useRouter();
 
   const navigation = [
-    { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal" },
+    { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal/dashboard" },
     { icon: Calendar, label: "Appointments", path: "/doctors-portal/appointments" },
     { icon: Users, label: "My Patients", path: "/doctors-portal/patients" },
     { icon: FileText, label: "Reports", path: "/doctors-portal/reports" },

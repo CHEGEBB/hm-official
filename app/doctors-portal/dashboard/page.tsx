@@ -21,6 +21,7 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card';
+import Image from 'next/image';
 // import Image from 'next/image';
 
 // TypeScript interfaces
@@ -62,15 +63,15 @@ const mockDoctor: Doctor = {
   id: "DOC123",
   name: "Dr. Sarah Smith",
   specialization: "Cardiologist",
-  avatar: "/api/placeholder/100/100",
+  avatar: "/assets/images/ab6.jpeg",
   email: "dr.smith@medical.com"
 };
 
 const mockAppointments: Appointment[] = [
-  { id: 1, patient: "Jane Cooper", time: "09:00 AM", type: "Check-up", status: "Confirmed", patientAvatar: "/api/placeholder/50/50" },
-  { id: 2, patient: "Wade Warren", time: "10:30 AM", type: "Follow-up", status: "Pending", patientAvatar: "/api/placeholder/50/50" },
-  { id: 3, patient: "Esther Howard", time: "02:00 PM", type: "Consultation", status: "Confirmed", patientAvatar: "/api/placeholder/50/50" },
-  { id: 4, patient: "Robert Fox", time: "03:30 PM", type: "Emergency", status: "Confirmed", patientAvatar: "/api/placeholder/50/50" }
+  { id: 1, patient: "Jane Cooper", time: "09:00 AM", type: "Check-up", status: "Confirmed", patientAvatar: "/assets/images/13.png" },
+  { id: 2, patient: "Mitchelle Chang", time: "10:30 AM", type: "Follow-up", status: "Pending", patientAvatar: "/assets/images/12.png" },
+  { id: 3, patient: "Esther Howard", time: "02:00 PM", type: "Consultation", status: "Confirmed", patientAvatar: "/assets/images/54.jpg" },
+  { id: 4, patient: "Robert Fox", time: "03:30 PM", type: "Emergency", status: "Confirmed", patientAvatar: "/assets/images/14.png" }
 ];
 
 const mockStats: DashboardStats = {
@@ -94,7 +95,7 @@ const DoctorDashboard = () => {
   const router = useRouter();
 
   const navigation = [
-    { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal" },
+    { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal/dashboard" },
     { icon: Calendar, label: "Appointments", path: "/doctors-portal/appointments" },
     { icon: Users, label: "My Patients", path: "/doctors-portal/patients" },
     { icon: Tablets, label: "Medications", path: "/doctors-portal/medications" },
@@ -207,8 +208,10 @@ const DoctorDashboard = () => {
         <div className="mt-auto">
           <div className="border-t border-slate-700 pt-4">
             <div className="flex items-center space-x-3 p-3">
-              <img 
+              <Image 
                 src={mockDoctor.avatar} 
+                width={40}
+                height={40}
                 alt={mockDoctor.name} 
                 className="w-10 h-10 rounded-full"
               />
@@ -307,8 +310,8 @@ const DoctorDashboard = () => {
                       className="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors"
                     >
                       <div className="flex items-center space-x-3">
-                        <img
-                            src={apt.patientAvatar} 
+                        <Image
+                        src={apt.patientAvatar || '/assets/images/default-avatar.png'}
                           width={40}
                           height={40}
                           alt={apt.patient} 

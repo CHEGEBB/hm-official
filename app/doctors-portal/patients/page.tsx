@@ -52,7 +52,7 @@ const mockPatients: Patient[] = [
     nextAppointment: "2024-04-20",
     condition: "Hypertension",
     status: "Active",
-    avatar: "/api/placeholder/50/50"
+    avatar: "/assets/images/54.jpg"
   },
   {
     id: "P002",
@@ -65,7 +65,7 @@ const mockPatients: Patient[] = [
     nextAppointment: "2024-04-15",
     condition: "Diabetes Type 2",
     status: "Critical",
-    avatar: "/api/placeholder/50/50"
+    avatar: "/assets/images/36.jpg"
   },
   {
     id: "P003",
@@ -78,7 +78,7 @@ const mockPatients: Patient[] = [
     nextAppointment: "2024-04-25",
     condition: "Regular Checkup",
     status: "Active",
-    avatar: "/api/placeholder/50/50"
+    avatar: "/assets/images/12.png"
   }
 ];
 
@@ -95,7 +95,7 @@ const PatientsPage = () => {
   const router = useRouter();
 
   const navigation = [
-    { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal" },
+    { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal/dashboard" },
     { icon: Calendar, label: "Appointments", path: "/doctors-portal/appointments" },
     { icon: Users, label: "My Patients", path: "/doctors-portal/patients" },
     { icon: Tablets, label: "Medications", path: "/doctors-portal/medications" },

@@ -28,6 +28,7 @@ import {
   CardTitle,
 } from '../../components/Card';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 // Types
 interface Appointment {
@@ -51,7 +52,7 @@ const mockAppointments: Appointment[] = [
   {
     id: "APT001",
     patientName: "Emma Thompson",
-    patientAvatar: "/api/placeholder/64/64",
+    patientAvatar: "/assets/images/36.jpg",
     dateTime: "2024-11-14T09:00:00",
     type: "Check-up",
     status: "Scheduled",
@@ -66,7 +67,7 @@ const mockAppointments: Appointment[] = [
   {
     id: "APT002",
     patientName: "James Wilson",
-    patientAvatar: "/api/placeholder/64/64",
+    patientAvatar: "/assets/images/54.jpg",
     dateTime: "2024-11-14T10:00:00",
     type: "Follow-up",
     status: "In Progress",
@@ -81,7 +82,7 @@ const mockAppointments: Appointment[] = [
   {
     id: "APT003",
     patientName: "Sarah Parker",
-    patientAvatar: "/api/placeholder/64/64",
+    patientAvatar: "/assets/images/12.jpeg",
     dateTime: "2024-11-14T11:30:00",
     type: "Consultation",
     status: "Scheduled",
@@ -94,8 +95,8 @@ const mockAppointments: Appointment[] = [
   },
   {
     id: "APT004",
-    patientName: "Michael Chang",
-    patientAvatar: "/api/placeholder/64/64",
+    patientName: "Mitchelle Chang",
+    patientAvatar: "/assets/images/12.png",
     dateTime: "2024-11-14T14:00:00",
     type: "Emergency",
     status: "Scheduled",
@@ -112,6 +113,8 @@ const mockAppointments: Appointment[] = [
 const AppointmentsPage = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+
 
   const navigation = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal/dashboard" },
@@ -132,6 +135,7 @@ const AppointmentsPage = () => {
   }) => (
     <motion.div
       whileHover={{ x: 5 }}
+      onClick={() => router.push(path)}
       className={`flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-colors
         ${path === '/doctors-portal/appointments' 
           ? 'bg-emerald-500/20 text-emerald-500' 
