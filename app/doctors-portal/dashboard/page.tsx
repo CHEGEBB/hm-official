@@ -1,4 +1,4 @@
-'use client'
+'use client'; // This ensures the component is client-side only
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
@@ -22,7 +22,6 @@ import {
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card';
 import Image from 'next/image';
-// import Image from 'next/image';
 
 // TypeScript interfaces
 interface Doctor {
@@ -230,137 +229,120 @@ const DoctorDashboard = () => {
       <div className="flex-1 overflow-auto">
         {/* Header */}
         <div className="bg-slate-800/50 p-4 sticky top-0 z-10">
-          <div className="flex items-center justify-between max-w-7xl mx-auto">
+          <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
-              <button 
-                onClick={() => setIsNavOpen(!isNavOpen)}
-                className="p-2 hover:bg-slate-700 rounded-lg hidden md:block"
-              >
-                <ChevronRight 
-                  className={`transform transition-transform ${isNavOpen ? 'rotate-180' : ''}`} 
-                />
-              </button>
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
-                <input
-                  type="text"
-                  placeholder="Search patients, appointments..."
-                  className="pl-10 pr-4 py-2 bg-slate-700/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 w-full md:w-64"
-                />
-              </div>
+              <Search className="w-5 h-5 text-slate-400" />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="bg-transparent text-white placeholder-slate-400 focus:outline-none"
+              />
             </div>
+
             <div className="flex items-center space-x-4">
-              <button className="p-2 hover:bg-slate-700 rounded-lg relative">
-                <Bell className="w-5 h-5" />
-                <span className="absolute top-0 right-0 w-2 h-2 bg-emerald-500 rounded-full" />
-              </button>
-              <button className="p-2 hover:bg-slate-700 rounded-lg">
-                <LogOut className="w-5 h-5" />
-              </button>
+              <Bell className="w-5 h-5 text-slate-400" />
+              <LogOut className="w-5 h-5 text-slate-400" />
             </div>
           </div>
         </div>
 
-        {/* Dashboard Content */}
-        <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            <StatCard
+        <div className="p-6 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <StatCard 
               icon={Users}
               label="Total Patients"
               value={mockStats.totalPatients}
-              trend={mockStats.weeklyGrowth}
               color="blue"
             />
-            <StatCard
-              icon={Calendar}
+            <StatCard 
+              icon={Clock}
               label="Today's Appointments"
               value={mockStats.todayAppointments}
               color="emerald"
             />
-            <StatCard
-              icon={UserCheck}
+            <StatCard 
+              icon={Activity}
               label="Completed Today"
               value={mockStats.completedToday}
+              trend="+2"
               color="violet"
             />
-            <StatCard
+            <StatCard 
+              icon={UserCheck}
+              label="Pending Reviews"
+              value={mockStats.pendingReviews}
+              trend="-1"
+              color="amber"
+            />
+            <StatCard 
               icon={TrendingUp}
+              label="Weekly Growth"
+              value={mockStats.weeklyGrowth}
+              color="blue"
+            />
+            <StatCard 
+              icon={Heart}
               label="Patient Satisfaction"
               value={`${mockStats.patientSatisfaction}%`}
-              color="amber"
+              color="emerald"
             />
           </div>
 
-          {/* Appointments and Activity Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Today's Appointments */}
-            <Card className="bg-slate-800/50 border-slate-700">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-lg font-medium">Todays Appointments</CardTitle>
-                <Clock className="w-4 h-4 text-slate-400" />
+          {/* Recent Appointments */}
+          <div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Today's Appointments</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {mockAppointments.map((apt) => (
-                    <motion.div
-                      key={apt.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <Image
-                        src={apt.patientAvatar || '/assets/images/default-avatar.png'}
-                          width={40}
-                          height={40}
-                          alt={apt.patient} 
-                          className="w-10 h-10 rounded-full bg-slate-600"
-                        />
-                        <div>
-                          <p className="font-medium">{apt.patient}</p>
-                          <p className="text-sm text-slate-400">{apt.type}</p>
-                        </div>
+                <div className="space-y-3">
+                  {mockAppointments.map((appointment) => (
+                    <div key={appointment.id} className="flex items-center space-x-3">
+                      <Image 
+                        src={appointment.patientAvatar || "/assets/images/default-avatar.png"}
+                        width={40}
+                        height={40}
+                        alt={appointment.patient}
+                        className="w-10 h-10 rounded-full"
+                      />
+                      <div>
+                        <p className="font-medium">{appointment.patient}</p>
+                        <p className="text-sm text-slate-400">{appointment.time} - {appointment.type}</p>
                       </div>
-                      <div className="text-right">
-                        <p className="font-medium">{apt.time}</p>
-                        <p className={`text-sm ${
-                          apt.status === 'Confirmed' ? 'text-emerald-500' : 
-                          apt.status === 'Pending' ? 'text-amber-500' : 
-                          'text-red-500'
-                        }`}>{apt.status}</p>
-                      </div>
-                    </motion.div>
+                      <span 
+                        className={`ml-auto text-sm ${
+                          appointment.status === "Confirmed" 
+                            ? "text-emerald-500" 
+                            : appointment.status === "Pending" 
+                            ? "text-amber-500" 
+                            : "text-red-500"
+                        }`}
+                      >
+                        {appointment.status}
+                      </span>
+                    </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
+          </div>
 
-            {/* Activity Timeline */}
-            <Card className="bg-slate-800/50 border-slate-700">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-lg font-medium">Recent Activity</CardTitle>
-                <Activity className="w-4 h-4 text-slate-400" />
+          {/* Recent Activity */}
+          <div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Recent Activity</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="relative pl-6 space-y-6">
-                  <div className="absolute left-0 top-0 bottom-0 w-px bg-slate-700" />
-                  {mockActivity.map((activity) => (
-                    <motion.div
-                      key={activity.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      className="relative"
-                    >
-                      <div className={`absolute -left-[23px] w-4 h-4 rounded-full ${
-                        activity.type === 'update' ? 'bg-blue-500' :
-                        activity.type === 'prescription' ? 'bg-emerald-500' :
-                        activity.type === 'consultation' ? 'bg-violet-500' :
-                        'bg-amber-500'
-                      }`} />
-                      <p className="text-sm text-slate-400">{activity.time}</p>
-                      <p className="mt-1">{activity.text}</p>
-                    </motion.div>
+                <div className="space-y-3">
+                  {mockActivity.map((log) => (
+                    <div key={log.id} className="flex items-start space-x-3">
+                      <div className="text-sm text-slate-400">{log.time}</div>
+                      <div className="flex-1">
+                        <p className="text-sm">{log.text}</p>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-slate-400" />
+                    </div>
                   ))}
                 </div>
               </CardContent>
