@@ -93,7 +93,7 @@ const mockActivity: ActivityLog[] = [
 const DoctorDashboard = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = typeof window !== "undefined" ? usePathname() : "";
 
   const navigation = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/doctors-portal/dashboard" },
