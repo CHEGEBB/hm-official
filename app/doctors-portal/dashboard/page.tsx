@@ -11,18 +11,17 @@ import {
   Settings,
   Bell,
   Search,
-  User,
   LogOut,
   ChevronRight,
   Clock,
   Activity,
   UserCheck,
-  BadgeAlert,
   Tablets,
   Heart,
   TrendingUp,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card';
+// import Image from 'next/image';
 
 // TypeScript interfaces
 interface Doctor {
@@ -127,25 +126,26 @@ const DoctorDashboard = () => {
     </motion.div>
   );
 
+  const colors = {
+    blue: "bg-blue-500/20 text-blue-500",
+    emerald: "bg-emerald-500/20 text-emerald-500",
+    violet: "bg-violet-500/20 text-violet-500",
+    amber: "bg-amber-500/20 text-amber-500"
+  };
+  
   const StatCard = ({ 
-    icon: Icon, 
-    label, 
-    value, 
-    trend, 
-    color 
-  }: { 
-    icon: React.ComponentType<{ className?: string }>, 
-    label: string, 
-    value: number | string, 
-    trend?: string, 
-    color: keyof typeof colors 
-  }) => {
-    const colors = {
-      blue: "bg-blue-500/20 text-blue-500",
-      emerald: "bg-emerald-500/20 text-emerald-500",
-      violet: "bg-violet-500/20 text-violet-500",
-      amber: "bg-amber-500/20 text-amber-500"
-    };
+      icon: Icon, 
+      label, 
+      value, 
+      trend, 
+      color 
+    }: { 
+      icon: React.ComponentType<{ className?: string }>, 
+      label: string, 
+      value: number | string, 
+      trend?: string, 
+      color: keyof typeof colors 
+    }) => {
 
     return (
       <motion.div
@@ -294,7 +294,7 @@ const DoctorDashboard = () => {
             {/* Today's Appointments */}
             <Card className="bg-slate-800/50 border-slate-700">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-lg font-medium">Today's Appointments</CardTitle>
+                <CardTitle className="text-lg font-medium">Todays Appointments</CardTitle>
                 <Clock className="w-4 h-4 text-slate-400" />
               </CardHeader>
               <CardContent>
@@ -307,8 +307,10 @@ const DoctorDashboard = () => {
                       className="flex items-center justify-between p-3 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors"
                     >
                       <div className="flex items-center space-x-3">
-                        <img 
-                          src={apt.patientAvatar} 
+                        <img
+                            src={apt.patientAvatar} 
+                          width={40}
+                          height={40}
                           alt={apt.patient} 
                           className="w-10 h-10 rounded-full bg-slate-600"
                         />

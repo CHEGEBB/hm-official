@@ -1,4 +1,4 @@
-// components/ui/card.tsx
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import * as React from "react"
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
