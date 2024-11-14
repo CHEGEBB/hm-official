@@ -9,26 +9,19 @@ import {
   FileText,
   Settings,
   Heart,
-  Search,
   Bell,
   LogOut,
   ChevronRight,
   User,
-  Lock,
   Bell as BellIcon,
-  Globe,
-  Palette,
   Shield,
-  Clock,
   Mail,
-  Phone,
   Building,
-  AlertCircle,
   Save,
   Camera
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card';
-import { Alert, AlertDescription } from '../../components/Alert';
+import Image from 'next/image';
 
 const SettingsPage = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
@@ -41,16 +34,8 @@ const SettingsPage = () => {
     { icon: FileText, label: "Reports", path: "/doctors-portal/reports" },
     { icon: Settings, label: "Settings", path: "/doctors-portal/settings" }
   ];
-
-  const NavItem = ({ 
-    icon: Icon, 
-    label, 
-    path 
-  }: { 
-    icon: React.ComponentType<{ className?: string }>, 
-    label: string, 
-    path: string 
-  }) => (
+  
+  const NavItem = ({ icon: Icon, label, path }: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, label: string, path: string }) => (
     <motion.div
       whileHover={{ x: 5 }}
       onClick={() => router.push(path)}
@@ -66,15 +51,7 @@ const SettingsPage = () => {
     </motion.div>
   );
 
-  const SettingSection = ({ 
-    icon: Icon, 
-    title, 
-    children 
-  }: { 
-    icon: React.ComponentType<{ className?: string }>, 
-    title: string, 
-    children: React.ReactNode 
-  }) => (
+  const SettingSection = ({ icon: Icon, title, children }: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, title: string, children: React.ReactNode }) => (
     <Card className="bg-slate-800/50 border-slate-700">
       <CardHeader className="flex flex-row items-center space-x-4 space-y-0">
         <div className="p-2 bg-slate-700/50 rounded-lg">
@@ -88,7 +65,6 @@ const SettingsPage = () => {
 
   return (
     <div className="min-h-screen bg-slate-900 text-white flex">
-      {/* Sidebar */}
       <motion.div 
         initial={{ width: 240 }}
         animate={{ width: isNavOpen ? 240 : 80 }}
@@ -117,9 +93,7 @@ const SettingsPage = () => {
         </nav>
       </motion.div>
 
-      {/* Main Content */}
       <div className="flex-1 overflow-auto">
-        {/* Header */}
         <div className="bg-slate-800/50 p-4 sticky top-0 z-10">
           <div className="flex items-center justify-between max-w-7xl mx-auto">
             <div className="flex items-center space-x-4">
@@ -145,15 +119,15 @@ const SettingsPage = () => {
           </div>
         </div>
 
-        {/* Settings Content */}
         <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
-          {/* Profile Section */}
           <SettingSection icon={User} title="Profile Settings">
             <div className="space-y-6">
               <div className="flex items-center space-x-6">
                 <div className="relative">
-                  <img 
+                  <Image
                     src="/api/placeholder/100/100" 
+                    width={100}
+                    height={100}
                     alt="Profile" 
                     className="w-24 h-24 rounded-full"
                   />
@@ -187,7 +161,6 @@ const SettingsPage = () => {
             </div>
           </SettingSection>
 
-          {/* Contact Information */}
           <SettingSection icon={Mail} title="Contact Information">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -209,7 +182,6 @@ const SettingsPage = () => {
             </div>
           </SettingSection>
 
-          {/* Practice Information */}
           <SettingSection icon={Building} title="Practice Information">
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -242,7 +214,6 @@ const SettingsPage = () => {
             </div>
           </SettingSection>
 
-          {/* Notification Preferences */}
           <SettingSection icon={BellIcon} title="Notification Preferences">
             <div className="space-y-4">
               <div className="flex items-center justify-between p-2 hover:bg-slate-700/50 rounded-lg">
@@ -268,7 +239,6 @@ const SettingsPage = () => {
             </div>
           </SettingSection>
 
-          {/* Security Settings */}
           <SettingSection icon={Shield} title="Security Settings">
             <div className="space-y-4">
               <div className="space-y-2">
@@ -297,16 +267,9 @@ const SettingsPage = () => {
                   />
                 </div>
               </div>
-              <Alert className="bg-yellow-500/20 border-yellow-500/50 text-yellow-500">
-                <AlertCircle className="w-4 h-4" />
-                <AlertDescription>
-                  Enable two-factor authentication for enhanced security
-                </AlertDescription>
-              </Alert>
             </div>
           </SettingSection>
 
-          {/* Save Changes Button */}
           <div className="flex justify-end">
             <button className="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600 flex items-center space-x-2">
               <Save className="w-4 h-4" />

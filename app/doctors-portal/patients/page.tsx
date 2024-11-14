@@ -22,6 +22,7 @@ import {
   Tablets
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card';
+import Image from 'next/image';
 
 // Types
 interface Patient {
@@ -276,8 +277,11 @@ const PatientsPage = () => {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
-                        <img 
+                        <Image
                           src={patient.avatar} 
+                          width={60}
+                          height={60}
+                          quality={100}
                           alt={patient.name} 
                           className="w-12 h-12 rounded-full"
                         />
