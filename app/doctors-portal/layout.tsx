@@ -3,6 +3,7 @@
 import appwriteAuth from '@/appwrite/auth';
 import { AuthProvider } from '@/contexts/authContext';
 import { UserProvider } from '@/contexts/doctorContext';
+import { setDefaultAutoSelectFamily } from 'net';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -19,12 +20,16 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
       })
     }
       if (!authStatus && pathname != "/doctors-portal") {
-        router.replace('/doctors-portal');
+        router.push('/doctors-portal');
       }
     
 }, [authStatus, pathname]);
 
-useEffect()
+useEffect(() => {
+  appwriteAuth.isLoggedIn().then((status) => {
+    setAuthStatus(status)
+  })
+}, [])
   return (
     <AuthProvider value={{ authStatus, setAuthStatus }}>
       <UserProvider value={{ user, setUser }}>

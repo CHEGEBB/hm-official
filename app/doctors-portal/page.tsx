@@ -5,15 +5,13 @@ import { useRouter } from 'next/navigation';
 import { Stethoscope, Mail, Hospital, ArrowRight, Shield, LockIcon } from 'lucide-react';
 import appwriteAuth from '@/appwrite/auth';
 import appwriteDoctors from '@/appwrite/doctors'
-import { useUser} from '@/contexts/doctorContext';
 import { useAuth } from '@/contexts/authContext';
 
 const LoginPage = () => {
   const router = useRouter();
-  const { setUser } = useUser()
   const {setAuthStatus} = useAuth()
   const [formData, setFormData] = useState({
-    doctorId: '6721fde300302d860b7f',
+    doctorId: '671b7b13002972cd15e0',
     email: 'wegbajuniour@gmail.com',
     password: '12345678',
   });
@@ -27,7 +25,6 @@ const LoginPage = () => {
     if (response?.$id) {
       const doctor = await appwriteDoctors.getDoctorById(formData.doctorId)
       if (doctor) {
-        setUser(doctor)
         setIsLoading(false)
         setAuthStatus(true)
         router.push("/doctors-portal/dashboard")

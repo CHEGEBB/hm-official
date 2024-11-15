@@ -67,9 +67,9 @@ class AppwriteAuth {
 
   async getCurrentUser() {
     try {
-      const {$id} = await account.get()
-      const user = await AppwriteDoctors.getDoctorById($id)
-      return user
+      const userAccount = await account.get()
+      const doctor = await AppwriteDoctors.getDoctorById(userAccount.$id)
+      return {userAccount, doctor}
     } catch (error) {
       console.log('getcurrentUser error: ' + error);
     }
