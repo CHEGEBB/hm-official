@@ -92,6 +92,7 @@ const mockActivity: ActivityLog[] = [
 
 const DoctorDashboard = () => {
   const {user} = useUser()
+  const {doctor, userAccount} = user
   console.log(user);
   
   const [isNavOpen, setIsNavOpen] = useState(true);

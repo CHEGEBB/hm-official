@@ -1,10 +1,22 @@
 'use client'
 
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useContext } from 'react';
+
+interface User {
+  userAccount: {
+    email: string;
+  }, doctor: {
+  id: string;
+  name: string;
+  specialization: string;
+  avatar: string;
+  email: string;
+}
+}
 
 const UserContext = createContext<{
-  user: {} | null;
-  setUser: (user: {}) => void;
+  user: User | null;
+  setUser: (user: User) => void;
 }>({
   user: null,
   setUser: () => {},
