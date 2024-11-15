@@ -1,9 +1,8 @@
-'use client'
+'use client';
 
 import appwriteAuth from '@/appwrite/auth';
 import { AuthProvider } from '@/contexts/authContext';
-import { UserProvider } from '@/contexts/doctorContext';
-import { setDefaultAutoSelectFamily } from 'net';
+import { User, UserProvider } from '@/contexts/doctorContext';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -12,29 +11,27 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
   const [authStatus, setAuthStatus] = useState(false);
-  const [user, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
     if (authStatus && user === null) {
       appwriteAuth.getCurrentUser().then((data) => {
-        setUser(data)
-      })
+        setUser(data);
+      });
     }
-      if (!authStatus && pathname != "/doctors-portal") {
-        router.push('/doctors-portal');
-      }
-    
-}, [authStatus, pathname]);
+    if (!authStatus && pathname != '/doctors-portal') {
+      router.push('/doctors-portal');
+    }
+  }, [authStatus, pathname]);
 
-useEffect(() => {
-  appwriteAuth.isLoggedIn().then((status) => {
-    setAuthStatus(status)
-  })
-}, [])
+  useEffect(() => {
+    appwriteAuth.isLoggedIn().then((status) => {
+      setAuthStatus(status);
+    });
+  }, []);
+
   return (
     <AuthProvider value={{ authStatus, setAuthStatus }}>
-      <UserProvider value={{ user, setUser }}>
-        {children}
-      </UserProvider>
+      <UserProvider value={{ user, setUser }}>{children}</UserProvider>
     </AuthProvider>
   );
 };

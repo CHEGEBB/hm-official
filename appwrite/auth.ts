@@ -1,9 +1,10 @@
 import { config, appwriteClient } from './conf';
 import { Account, ID, Avatars, Databases } from 'appwrite';
-import AppwriteDoctors from '@/appwrite/doctors'
+import AppwriteDoctors from '@/appwrite/doctors';
+import { User } from '@/contexts/doctorContext';
 
 const account = new Account(appwriteClient);
-const avatar = new Avatars(appwriteClient)
+const avatar = new Avatars(appwriteClient);
 const databases = new Databases(appwriteClient);
 
 class AppwriteAuth {
@@ -35,19 +36,19 @@ class AppwriteAuth {
           email,
           username: fullName,
           phone,
-          avatar: avatar.getInitials(email)
+          avatar: avatar.getInitials(email),
         },
       );
 
       return this.login({ email, password });
-    } catch (e: any) {
+    } catch (e) {
       throw e;
     }
   }
 
   async login({ email, password }: { email: string; password: string }) {
     try {
-      if ( await this.isLoggedIn()) await this.logout()
+      if (await this.isLoggedIn()) await this.logout();
       const session = await account.createEmailPasswordSession(email, password);
       return session;
     } catch (error) {
@@ -58,18 +59,20 @@ class AppwriteAuth {
   async isLoggedIn(): Promise<boolean> {
     try {
       const data = await this.getCurrentUser();
-      
+
       return Boolean(data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
 
     return false;
   }
 
   async getCurrentUser() {
     try {
-      const userAccount = await account.get()
-      const doctor = await AppwriteDoctors.getDoctorById(userAccount.$id)
-      return {userAccount, doctor}
+      const userAccount = await account.get();
+      const doctor = await AppwriteDoctors.getDoctorById(userAccount.$id);
+      return { userAccount, doctor } as unknown as  User;
     } catch (error) {
       console.log('getcurrentUser error: ' + error);
     }
@@ -86,6 +89,6 @@ class AppwriteAuth {
   }
 }
 
-const appwriteAuth = new AppwriteAuth()
+const appwriteAuth = new AppwriteAuth();
 
-export default appwriteAuth
+export default appwriteAuth;
