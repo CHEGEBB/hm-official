@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import "../../sass/home.scss";
+import { useUser } from '@/contexts/doctorContext';
 import {
   LayoutDashboard,
   Users,
@@ -90,6 +91,9 @@ const mockActivity: ActivityLog[] = [
 ];
 
 const DoctorDashboard = () => {
+  const {user} = useUser()
+  console.log(user);
+  
   const [isNavOpen, setIsNavOpen] = useState(true);
   const router = useRouter();
   const navigation = [

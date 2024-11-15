@@ -1,5 +1,6 @@
 import { config, appwriteClient } from './conf';
 import { Account, ID, Avatars, Databases } from 'appwrite';
+import AppwriteDoctors from '@/appwrite/doctors'
 
 const account = new Account(appwriteClient);
 const avatar = new Avatars(appwriteClient)
@@ -46,6 +47,7 @@ class AppwriteAuth {
 
   async login({ email, password }: { email: string; password: string }) {
     try {
+      if ( await this.isLoggedIn()) await this.logout()
       const session = await account.createEmailPasswordSession(email, password);
       return session;
     } catch (error) {
@@ -56,6 +58,7 @@ class AppwriteAuth {
   async isLoggedIn(): Promise<boolean> {
     try {
       const data = await this.getCurrentUser();
+      
       return Boolean(data);
     } catch (error) {}
 
@@ -64,7 +67,9 @@ class AppwriteAuth {
 
   async getCurrentUser() {
     try {
-      return account.get();
+      const {$id} = await account.get()
+      const user = await AppwriteDoctors.getDoctorById($id)
+      return user
     } catch (error) {
       console.log('getcurrentUser error: ' + error);
     }

@@ -2,14 +2,20 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { Stethoscope, Mail, User, Hospital, ArrowRight, Shield } from 'lucide-react';
+import { Stethoscope, Mail, Hospital, ArrowRight, Shield, LockIcon } from 'lucide-react';
+import appwriteAuth from '@/appwrite/auth';
+import appwriteDoctors from '@/appwrite/doctors'
+import { useUser} from '@/contexts/doctorContext';
+import { useAuth } from '@/contexts/authContext';
 
 const LoginPage = () => {
   const router = useRouter();
+  const { setUser } = useUser()
+  const {setAuthStatus} = useAuth()
   const [formData, setFormData] = useState({
-    doctorId: '',
-    name: '',
-    email: '',
+    doctorId: '6721fde300302d860b7f',
+    email: 'wegbajuniour@gmail.com',
+    password: '12345678',
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -17,12 +23,21 @@ const LoginPage = () => {
     e.preventDefault();
     setIsLoading(true);
     
-    if (formData.doctorId === "DOC123" && 
-        formData.name === "DOC" && 
-        formData.email === "doc@gmail.com") {
-      setTimeout(() => {
-        router.push('/doctors-portal/dashboard');
-      }, 1500);
+    const response = await appwriteAuth.login(formData)
+    if (response?.$id) {
+      const doctor = await appwriteDoctors.getDoctorById(formData.doctorId)
+      if (doctor) {
+        setUser(doctor)
+        setIsLoading(false)
+        setAuthStatus(true)
+        router.push("/doctors-portal/dashboard")
+      } else {
+      setIsLoading(false);
+      console.error("Failed to login. Please check your credentials")
+      }
+    } else {
+      console.error("Failed to log in. Please check your credentials");
+
     }
   };
 
@@ -110,12 +125,12 @@ const LoginPage = () => {
               transition={{ delay: 0.2 }}
             >
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                <LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
-                  type="text"
-                  placeholder="Full Name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  type="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="w-full pl-12 pr-4 py-3 bg-slate-700/50 rounded-lg border border-slate-600 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-white placeholder:text-slate-400 transition-all"
                 />
               </div>

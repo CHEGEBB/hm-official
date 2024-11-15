@@ -1,33 +1,33 @@
 'use client'
 
 import appwriteAuth from '@/appwrite/auth';
-import appwriteInfo from '@/appwrite/info';
 import { AuthProvider } from '@/contexts/authContext';
 import { UserProvider } from '@/contexts/doctorContext';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const [authStatus, setAuthStatus] = useState(false);
-  const [doctor, setUser] = useState<object | null>(null);
+  const [user, setUser] = useState<object | null>(null);
   useEffect(() => {
-    appwriteAuth.isLoggedIn().then((authStatus) => {
-      setAuthStatus(authStatus);
-      appwriteInfo.getPersonalInfo().then((data) => {
-        setUser(data);
+    if (authStatus && user === null) {
+      appwriteAuth.getCurrentUser().then((data) => {
+        setUser(data)
+      })
+    }
+      if (!authStatus && pathname != "/doctors-portal") {
+        router.replace('/doctors-portal');
       }
-      );
-      if (!authStatus) {
-        router.replace('/login');
-        return <></>;
-      }
-    });
-  }, []);
+    
+}, [authStatus, pathname]);
+
+useEffect()
   return (
     <AuthProvider value={{ authStatus, setAuthStatus }}>
-      <UserProvider value={{ doctor, setUser }}>
+      <UserProvider value={{ user, setUser }}>
         {children}
       </UserProvider>
     </AuthProvider>

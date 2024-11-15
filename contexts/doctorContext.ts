@@ -3,10 +3,10 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const UserContext = createContext<{
-  doctor: {} | null;
+  user: {} | null;
   setUser: (user: {}) => void;
 }>({
-  doctor: null,
+  user: null,
   setUser: () => {},
 });
 
