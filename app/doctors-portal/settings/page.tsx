@@ -32,7 +32,8 @@ const SettingsPage = () => {
   const {user, setUser} = useUser()
   const doctor = user?.doctor
   const userAccount = user?.userAccount
-  const [data, setData] = useState(doctor)
+  const [data, setData] = useState( doctor|| {})
+
 
   const handleSubmit = () => {
     console.log(data)
@@ -40,7 +41,7 @@ const SettingsPage = () => {
 
 const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   setData((prev) => {
-    if (!prev) return prev;
+    // if (!prev) return prev;
     return { ...prev, [e.target.id]: e.target.value };
   });
 }
@@ -149,7 +150,7 @@ const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
               <div className="flex items-center space-x-6">
                 <div className="relative">
                   <Image
-                    src={data?.avatar} 
+                    src={doctor?.avatar || '/assets/images/ab6.jpeg'} 
                     width={100}
                     height={100}
                     alt="Profile" 
@@ -164,23 +165,23 @@ const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
                     <input 
                       type="text" 
                       placeholder="First Name" 
-                      defaultValue={data?.name}
+                      value={data?.name || ''}
                       id='name'
                       className="bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                       onChange={handleChange}
                     />
-                    <input 
+                   {/* <input 
                       type="text" 
                       placeholder="Last Name" 
-                      defaultValue={data?.name}
-                      id='name'
+                      value={data?.name || ''}
+                      id='names'
                       className="bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                       onChange={handleChange}
-                    />
+                    /> */}
                   </div>
                   <textarea 
                     placeholder="Bio"
-                    defaultValue={data?.bio || ''}
+                    value={data?.bio || ''}
                     id='bio'
                     className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     rows={3}
@@ -197,7 +198,7 @@ const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
                 <label className="text-sm text-slate-400">Email Address</label>
                 <input 
                   type="email" 
-                  defaultValue={data?.email || userAccount?.email}
+                  value={data?.email || userAccount?.email}
                   id='email'
                   onChange={handleChange}
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -207,7 +208,7 @@ const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
                 <label className="text-sm text-slate-400">Phone Number</label>
                 <input 
                   type="tel" 
-                  defaultValue={data?.phone}
+                  value={data?.phone || ''}
                   id='phone'
                   onChange={handleChange}
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -221,7 +222,7 @@ const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm text-slate-400">Specialization</label>
-                  <select id='specialization' value={doctor?.specialization} className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  <select id='specialization' value={doctor?.specialization || ''} className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   onChange={handleSelect}>
                     <option>Select specialization</option>
                     <option value={'Cardiology'}>Cardiology</option>
@@ -234,7 +235,7 @@ const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
                   <label className="text-sm text-slate-400">License Number</label>
                   <input 
                     type="text" 
-                    defaultValue={data?.licenseNumber}
+                    value={data?.licenseNumber || ''}
                     id='licenseNumber'
                     onChange={handleChange}
                     className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -244,7 +245,7 @@ const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
               <div className="space-y-2">
                 <label className="text-sm text-slate-400">Office Address</label>
                 <textarea 
-                  defaultValue={data?.address}
+                  value={data?.address || ''}
                   id='address'
                   onChange={handleChange}
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"

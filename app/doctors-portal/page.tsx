@@ -13,10 +13,12 @@ import {
 import appwriteAuth from '@/appwrite/auth';
 import appwriteDoctors from '@/appwrite/doctors';
 import { useAuth } from '@/contexts/authContext';
+import { User, useUser } from '@/contexts/doctorContext';
 
 const LoginPage = () => {
   const router = useRouter();
   const { setAuthStatus } = useAuth();
+  const {user, setUser} = useUser()
   const [formData, setFormData] = useState({
     doctorId: '671b7b13002972cd15e0',
     email: 'wegbajuniour@gmail.com',
@@ -30,10 +32,13 @@ const LoginPage = () => {
 
     const response = await appwriteAuth.login(formData);
     if (response?.$id) {
-      const doctor = await appwriteDoctors.getDoctorById(formData.doctorId);
+      const doctor = await appwriteDoctors.getDoctorById(formData.doctorId) as unknown as User['doctor']
       if (doctor) {
+        setUser({ userAccount: {email: response.providerUid}, doctor})
+        console.log(user)
         setIsLoading(false);
         setAuthStatus(true);
+
         router.push('/doctors-portal/dashboard');
       } else {
         setIsLoading(false);

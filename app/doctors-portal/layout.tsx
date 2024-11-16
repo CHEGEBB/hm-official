@@ -13,21 +13,22 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   const [authStatus, setAuthStatus] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
-    if (authStatus && user === null) {
-      appwriteAuth.getCurrentUser().then((data) => {
-        setUser(data);
-      });
-    }
-    if (!authStatus && pathname != '/doctors-portal') {
-      router.push('/doctors-portal');
-    }
-  }, [authStatus, pathname]);
-
-  useEffect(() => {
-    appwriteAuth.isLoggedIn().then((status) => {
+    const getAuthStatus = async () => {
+      const status = await appwriteAuth.isLoggedIn();
       setAuthStatus(status);
-    });
-  }, []);
+
+      if (status && user === null) {
+        const data = await appwriteAuth.getCurrentUser();
+        setUser(data);
+      }
+
+      if (!status && pathname != 'doctor-portal') {
+        router.push('doctors-portal')
+      }
+    }
+
+    getAuthStatus();
+  }, [pathname]);
 
   return (
     <AuthProvider value={{ authStatus, setAuthStatus }}>
