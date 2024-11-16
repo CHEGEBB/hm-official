@@ -32,18 +32,26 @@ const SettingsPage = () => {
   const {user, setUser} = useUser()
   const doctor = user?.doctor
   const userAccount = user?.userAccount
-  const [data, setData] = useState( doctor|| {})
+  const [data, setData] = useState({
+    name: doctor?.name,
+    specialization: doctor?.specialization,
+    avatar: doctor?.avatar,
+    email: doctor?.email,
+    bio: doctor?.bio,
+    phone: doctor?.phone,
+    licenseNumber: doctor?.licenseNumber,
+    address: doctor?.address
+  })
 
 
   const handleSubmit = () => {
     console.log(data)
   }
-
+  
 const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  setData((prev) => {
-    // if (!prev) return prev;
-    return { ...prev, [e.target.id]: e.target.value };
-  });
+  const { id, value } = e.target;
+    setData((prev) => ({ ...prev, [id]: value }));
+    
 }
 const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
   setData((prev) => {
