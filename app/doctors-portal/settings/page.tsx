@@ -24,12 +24,13 @@ import {
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card';
 import Image from 'next/image';
-import { User } from '@/contexts/doctorContext';
+// import { User } from '@/contexts/doctorContext';
 
 const SettingsPage = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const router = useRouter();
   const [formData, setFormData] = useState<User>({
+    avatar:'',
     firstName: '',
     lastName: '',
     bio: '',
@@ -52,6 +53,11 @@ const SettingsPage = () => {
       [e.target.name]: e.target.value,
     })
   )
+}
+
+const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  console.log(formData);
+  
 }
 
   const navigation = [
@@ -168,20 +174,24 @@ const SettingsPage = () => {
                       type="text" 
                       placeholder="First Name" 
                       name='firstName'
-                      onChange={handleChange}
-                      defaultValue="Dr. Sarah"
+                      onChange={(e) => handleChange(e)}
+                      value={formData.firstName}
                       className="bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     />
                     <input 
                       type="text" 
                       placeholder="Last Name" 
-                      defaultValue="Johnson"
+                      name='lastName'
+                      value={formData.lastName}
+                      onChange={handleChange}
                       className="bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     />
                   </div>
                   <textarea 
                     placeholder="Bio"
-                    defaultValue="Experienced cardiologist with over 10 years of practice."
+                    name='bio'
+                    value={formData.bio}
+                    onChange={handleChange}
                     className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     rows={3}
                   />
@@ -195,16 +205,22 @@ const SettingsPage = () => {
               <div className="space-y-2">
                 <label className="text-sm text-slate-400">Email Address</label>
                 <input 
-                  type="email" 
-                  defaultValue="sarah.johnson@medportal.com"
+                  type="email"
+                  name='email'
+                  value={formData.email}
+                  onChange={handleChange}
+                
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
               <div className="space-y-2">
                 <label className="text-sm text-slate-400">Phone Number</label>
                 <input 
-                  type="tel" 
-                  defaultValue="+1 (555) 123-4567"
+                  type="tel"
+                  name='phone'
+                  value={formData.phone}
+                  onChange={handleChange}
+                  
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
@@ -216,18 +232,21 @@ const SettingsPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm text-slate-400">Specialization</label>
-                  <select className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                    <option>Cardiology</option>
-                    <option>Neurology</option>
-                    <option>Pediatrics</option>
-                    <option>Oncology</option>
+                  <select name='specialization' value={formData.specialization} onChange={handleChange}className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                  <option>Select specialization</option>
+                    <option value='Cardiology' >Cardiology</option>
+                    <option value='Neurology'>Neurology</option>
+                    <option value='Pediatrics'>Pediatrics</option>
+                    <option value='Oncology'>Oncology</option>
                   </select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm text-slate-400">License Number</label>
                   <input 
                     type="text" 
-                    defaultValue="MD123456"
+                    name='licenseNumber'
+                    value={formData.licenseNumber}
+                    onChange={handleChange}
                     className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
@@ -235,7 +254,9 @@ const SettingsPage = () => {
               <div className="space-y-2">
                 <label className="text-sm text-slate-400">Office Address</label>
                 <textarea 
-                  defaultValue="123 Medical Center Drive, Suite 456, Boston, MA 02115"
+                name='address'
+                  value={formData.address}
+                  onChange={handleChange}
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   rows={2}
                 />
@@ -300,7 +321,7 @@ const SettingsPage = () => {
           </SettingSection>
 
           <div className="flex justify-end">
-            <button className="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600 flex items-center space-x-2">
+            <button onClick={handleSubmit} className="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600 flex items-center space-x-2">
               <Save className="w-4 h-4" />
               <span>Save Changes</span>
             </button>
