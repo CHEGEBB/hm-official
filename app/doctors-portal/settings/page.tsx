@@ -26,6 +26,34 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card'
 import Image from 'next/image';
 // import { User } from '@/contexts/doctorContext';
 
+const NavItem = ({ icon: Icon, label, path }: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, label: string, path: string }) => (
+    <motion.div
+      whileHover={{ x: 5 }}
+      onClick={() => router.push(path)}
+      className={`flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-colors
+        ${path.includes('settings') 
+          ? 'bg-emerald-500/20 text-emerald-500' 
+          : 'text-slate-300 hover:bg-slate-800'}`}
+    >
+      <Icon className="w-5 h-5" />
+      <span className={`${!isNavOpen ? 'hidden' : ''} transition-opacity duration-200`}>
+        {label}
+      </span>
+    </motion.div>
+  );
+
+const SettingSection = ({ icon: Icon, title, children }: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, title: string, children: React.ReactNode }) => (
+    <Card className="bg-slate-800/50 border-slate-700">
+      <CardHeader className="flex flex-row items-center space-x-4 space-y-0">
+        <div className="p-2 bg-slate-700/50 rounded-lg">
+          <Icon className="w-5 h-5 text-emerald-500" />
+        </div>
+        <CardTitle className="text-lg font-medium">{title}</CardTitle>
+      </CardHeader>
+      <CardContent>{children}</CardContent>
+    </Card>
+  );
+
 const SettingsPage = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const router = useRouter();
@@ -68,33 +96,9 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     { icon: Settings, label: "Settings", path: "/doctors-portal/settings" }
   ];
   
-  const NavItem = ({ icon: Icon, label, path }: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, label: string, path: string }) => (
-    <motion.div
-      whileHover={{ x: 5 }}
-      onClick={() => router.push(path)}
-      className={`flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-colors
-        ${path.includes('settings') 
-          ? 'bg-emerald-500/20 text-emerald-500' 
-          : 'text-slate-300 hover:bg-slate-800'}`}
-    >
-      <Icon className="w-5 h-5" />
-      <span className={`${!isNavOpen ? 'hidden' : ''} transition-opacity duration-200`}>
-        {label}
-      </span>
-    </motion.div>
-  );
+  
 
-  const SettingSection = ({ icon: Icon, title, children }: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, title: string, children: React.ReactNode }) => (
-    <Card className="bg-slate-800/50 border-slate-700">
-      <CardHeader className="flex flex-row items-center space-x-4 space-y-0">
-        <div className="p-2 bg-slate-700/50 rounded-lg">
-          <Icon className="w-5 h-5 text-emerald-500" />
-        </div>
-        <CardTitle className="text-lg font-medium">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>{children}</CardContent>
-    </Card>
-  );
+  
 
   return (
     <div className="min-h-screen bg-slate-900 text-white flex">
