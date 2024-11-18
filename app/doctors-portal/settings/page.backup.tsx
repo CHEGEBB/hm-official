@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { ChangeEventHandler, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import "../../sass/home.scss";
@@ -24,34 +24,40 @@ import {
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card';
 import Image from 'next/image';
-import { User } from '@/contexts/doctorContext';
+import { useUser } from '@/contexts/doctorContext';
 
 const SettingsPage = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const router = useRouter();
-  const [formData, setFormData] = useState<User>({
-    firstName: '',
-    lastName: '',
-    bio: '',
-    email: '',
-    phone:'',
-    specialization: '',
-    licenseNumber: '',
-    address: '',
-    emailNotifications: true,
-    smsNotifications: true,
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: '',
+  const {user, setUser} = useUser()
+  const doctor = user?.doctor
+  const userAccount = user?.userAccount
+  const [data, setData] = useState({
+    name: doctor?.name,
+    specialization: doctor?.specialization,
+    avatar: doctor?.avatar,
+    email: doctor?.email,
+    bio: doctor?.bio,
+    phone: doctor?.phone,
+    licenseNumber: doctor?.licenseNumber,
+    address: doctor?.address
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData((prev) => 
-    ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    })
-  )
+
+  const handleSubmit = () => {
+    console.log(data)
+  }
+  
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { id, value } = e.target;
+    setData((prev) => ({ ...prev, [id]: value }));
+    
+}
+const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  setData((prev) => {
+    if (!prev) return prev;
+    return { ...prev, [e.target.id]: e.target.value };
+  });
 }
 
   const navigation = [
@@ -152,7 +158,7 @@ const SettingsPage = () => {
               <div className="flex items-center space-x-6">
                 <div className="relative">
                   <Image
-                    src="/assets/images/ab6.jpeg" 
+                    src={doctor?.avatar || '/assets/images/ab6.jpeg'} 
                     width={100}
                     height={100}
                     alt="Profile" 
@@ -167,23 +173,27 @@ const SettingsPage = () => {
                     <input 
                       type="text" 
                       placeholder="First Name" 
-                      name='firstName'
-                      onChange={handleChange}
-                      defaultValue="Dr. Sarah"
+                      value={data?.name || ''}
+                      id='name'
                       className="bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      onChange={handleChange}
                     />
-                    <input 
+                   {/* <input 
                       type="text" 
                       placeholder="Last Name" 
-                      defaultValue="Johnson"
+                      value={data?.name || ''}
+                      id='names'
                       className="bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                    />
+                      onChange={handleChange}
+                    /> */}
                   </div>
                   <textarea 
                     placeholder="Bio"
-                    defaultValue="Experienced cardiologist with over 10 years of practice."
+                    value={data?.bio || ''}
+                    id='bio'
                     className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     rows={3}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -196,7 +206,9 @@ const SettingsPage = () => {
                 <label className="text-sm text-slate-400">Email Address</label>
                 <input 
                   type="email" 
-                  defaultValue="sarah.johnson@medportal.com"
+                  value={data?.email || userAccount?.email}
+                  id='email'
+                  onChange={handleChange}
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
@@ -204,7 +216,9 @@ const SettingsPage = () => {
                 <label className="text-sm text-slate-400">Phone Number</label>
                 <input 
                   type="tel" 
-                  defaultValue="+1 (555) 123-4567"
+                  value={data?.phone || ''}
+                  id='phone'
+                  onChange={handleChange}
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
@@ -216,18 +230,22 @@ const SettingsPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm text-slate-400">Specialization</label>
-                  <select className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                    <option>Cardiology</option>
-                    <option>Neurology</option>
-                    <option>Pediatrics</option>
-                    <option>Oncology</option>
+                  <select id='specialization' value={doctor?.specialization || ''} className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  onChange={handleSelect}>
+                    <option>Select specialization</option>
+                    <option value={'Cardiology'}>Cardiology</option>
+                    <option value={'Neurology'}>Neurology</option>
+                    <option value={'Pediatrics'}>Pediatrics</option>
+                    <option value={'Oncology'}>Oncology</option>
                   </select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm text-slate-400">License Number</label>
                   <input 
                     type="text" 
-                    defaultValue="MD123456"
+                    value={data?.licenseNumber || ''}
+                    id='licenseNumber'
+                    onChange={handleChange}
                     className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
                 </div>
@@ -235,7 +253,9 @@ const SettingsPage = () => {
               <div className="space-y-2">
                 <label className="text-sm text-slate-400">Office Address</label>
                 <textarea 
-                  defaultValue="123 Medical Center Drive, Suite 456, Boston, MA 02115"
+                  value={data?.address || ''}
+                  id='address'
+                  onChange={handleChange}
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   rows={2}
                 />
@@ -300,7 +320,7 @@ const SettingsPage = () => {
           </SettingSection>
 
           <div className="flex justify-end">
-            <button className="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600 flex items-center space-x-2">
+            <button onClick={handleSubmit} className="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600 flex items-center space-x-2">
               <Save className="w-4 h-4" />
               <span>Save Changes</span>
             </button>

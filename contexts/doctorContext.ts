@@ -8,7 +8,8 @@ export interface User {
   };
   doctor: {
     $id: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     specialization: string;
     avatar: string;
     email?: string;
@@ -16,6 +17,8 @@ export interface User {
     phone?: string;
     licenseNumber?: string;
     address?: string;
+    smsNotifications?: boolean;
+    emailNotifications?: boolean;
   };
 }
 
