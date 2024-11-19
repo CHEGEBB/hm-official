@@ -25,6 +25,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card';
 import Image from 'next/image';
 import { useUser } from '@/contexts/doctorContext';
+import appwriteDoctor from '@/appwrite/doctors'
 import { UserType } from '@/contexts/doctorContext';
 
 const NavItem = ({ icon: Icon, label, path, isNavOpen }: { isNavOpen: boolean, icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, label: string, path: string }) => {
@@ -60,7 +61,8 @@ const SettingSection = ({ icon: Icon, title, children }: { icon: React.Component
 
 const SettingsPage = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
-  const { user } = useUser()
+  const { user, setUser } = useUser()
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState<UserType.doctor>({
     avatar:'',
     firstName: '',
@@ -104,9 +106,16 @@ const SettingsPage = () => {
 }
 }
 
-const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   console.log(formData);
-  
+  setIsLoading(true)
+  appwriteDoctor.updateSelf(formData).then(() => {
+  setUser({doctor: formData, userAccount})
+  setIsLoading(false)
+  }).catch((error) => {
+    console.log(error);
+    setIsLoading(false)
+  })
 }
 
   const navigation = [
@@ -355,7 +364,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
           </SettingSection>
 
           <div className="flex justify-end">
-            <button onClick={handleSubmit} className="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600 flex items-center space-x-2">
+            <button disabled={isLoading} onClick={handleSubmit} className="bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-600 flex items-center space-x-2">
               <Save className="w-4 h-4" />
               <span>Save Changes</span>
             </button>

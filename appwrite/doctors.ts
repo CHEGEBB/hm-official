@@ -2,6 +2,7 @@ import { Databases, ID } from 'appwrite';
 import { config, appwriteClient } from './conf';
 import { User } from '@/contexts/doctorContext';
 import { SpellCheck } from 'lucide-react';
+import appwriteAuth from './auth';
 
 export const doctors = new Databases(appwriteClient);
 const databases = new Databases(appwriteClient);
@@ -34,12 +35,40 @@ class AppwriteDoctors {
     }
   }
 
+  async updateSelf(doctor: User.doctor) {
+    try {
+      const currentUser = await appwriteAuth.getCurrentUser()
+      const { firstName, lastName, bio, email, avatar, specialization, phone, licenseNumber, address, emailNotifications, smsNotifications} = doctor
+      await databases.updateDocument(
+        config.databaseId,
+        config.doctorsCollectionId,
+        currentUser?.doctor.$id || '',
+        {
+          firstName,
+          lastName,
+          bio,
+          email,
+          avatar,
+          specialization,
+          phone,
+          licenseNumber,
+          address,
+          emailNotifications,
+          smsNotifications
+        },
+      );
+    } catch (error) {
+      console.error('Error updating user info:', error);
+      throw error;
+    }
+  }
+
   async updateDoctor(doctorId: string, doctor: User) {
     try {
       const { $id, firstName, lastName, bio, email, avatar, specialization, phone, licenseNumber, address, emailNotifications, smsNotifications} = doctor.doctor
       await databases.updateDocument(
         config.databaseId,
-        config.userCollectionId,
+        config.doctorsCollectionId,
         $id || '',
         {
           firstName,
