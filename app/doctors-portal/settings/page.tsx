@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import "../../sass/home.scss";
@@ -24,9 +24,13 @@ import {
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card';
 import Image from 'next/image';
-// import { User } from '@/contexts/doctorContext';
+import { useUser } from '@/contexts/doctorContext';
+import { UserType } from '@/contexts/doctorContext';
 
-const NavItem = ({ icon: Icon, label, path }: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, label: string, path: string }) => (
+const NavItem = ({ icon: Icon, label, path, isNavOpen }: { isNavOpen: boolean, icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, label: string, path: string }) => {
+  const router = useRouter()
+  
+  return (
     <motion.div
       whileHover={{ x: 5 }}
       onClick={() => router.push(path)}
@@ -40,7 +44,7 @@ const NavItem = ({ icon: Icon, label, path }: { icon: React.ComponentType<React.
         {label}
       </span>
     </motion.div>
-  );
+  )};
 
 const SettingSection = ({ icon: Icon, title, children }: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, title: string, children: React.ReactNode }) => (
     <Card className="bg-slate-800/50 border-slate-700">
@@ -56,8 +60,8 @@ const SettingSection = ({ icon: Icon, title, children }: { icon: React.Component
 
 const SettingsPage = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
-  const router = useRouter();
-  const [formData, setFormData] = useState<User>({
+  const { user } = useUser()
+  const [formData, setFormData] = useState<UserType.doctor>({
     avatar:'',
     firstName: '',
     lastName: '',
@@ -74,13 +78,30 @@ const SettingsPage = () => {
     confirmPassword: '',
   })
 
+  const [userAccount, setUserAccount] = useState<UserType.userAccount>({})
+
+  useEffect(() => {
+  if(user) {
+    setFormData(user.doctor)
+    setUserAccount(user.userAccount)
+  }
+    
+  }, [user])
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    if (e.target.type === 'checkbox') {
+      setFormData((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value === 'on' ? true : false,
+      }))
+    } else {
     setFormData((prev) => 
     ({
       ...prev,
       [e.target.name]: e.target.value,
     })
   )
+}
 }
 
 const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -125,6 +146,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
               icon={item.icon}
               label={item.label}
               path={item.path}
+              isNavOpen={ isNavOpen}
             />
           ))}
         </nav>
@@ -162,7 +184,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
               <div className="flex items-center space-x-6">
                 <div className="relative">
                   <Image
-                    src="/assets/images/ab6.jpeg" 
+                    src={formData.avatar || "/assets/images/ab6.jpeg" }
                     width={100}
                     height={100}
                     alt="Profile" 
@@ -179,14 +201,14 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                       placeholder="First Name" 
                       name='firstName'
                       onChange={(e) => handleChange(e)}
-                      value={formData.firstName}
+                      value={formData.firstName || ''}
                       className="bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     />
                     <input 
                       type="text" 
                       placeholder="Last Name" 
                       name='lastName'
-                      value={formData.lastName}
+                      value={formData.lastName || ''}
                       onChange={handleChange}
                       className="bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     />
@@ -194,7 +216,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                   <textarea 
                     placeholder="Bio"
                     name='bio'
-                    value={formData.bio}
+                    value={formData.bio || ''}
                     onChange={handleChange}
                     className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     rows={3}
@@ -211,7 +233,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                 <input 
                   type="email"
                   name='email'
-                  value={formData.email}
+                  value={formData.email || userAccount.email ||  ''}
                   onChange={handleChange}
                 
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -222,7 +244,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                 <input 
                   type="tel"
                   name='phone'
-                  value={formData.phone}
+                  value={formData.phone || ''}
                   onChange={handleChange}
                   
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -236,8 +258,8 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm text-slate-400">Specialization</label>
-                  <select name='specialization' value={formData.specialization} onChange={handleChange}className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                  <option>Select specialization</option>
+                  <select name='specialization' value={formData.specialization || ''} onChange={handleChange}className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                  <option value=''>Select specialization</option>
                     <option value='Cardiology' >Cardiology</option>
                     <option value='Neurology'>Neurology</option>
                     <option value='Pediatrics'>Pediatrics</option>
@@ -249,7 +271,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                   <input 
                     type="text" 
                     name='licenseNumber'
-                    value={formData.licenseNumber}
+                    value={formData.licenseNumber || ''}
                     onChange={handleChange}
                     className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   />
@@ -259,7 +281,7 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                 <label className="text-sm text-slate-400">Office Address</label>
                 <textarea 
                 name='address'
-                  value={formData.address}
+                  value={formData.address || ''}
                   onChange={handleChange}
                   className="w-full bg-slate-700/50 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   rows={2}
@@ -276,7 +298,11 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                   <p className="text-sm text-slate-400">Receive email updates about your appointments</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" defaultChecked />
+                  <input type="checkbox" 
+                  name='emailNotifications'
+                  onChange={handleChange}
+                  checked={formData.emailNotifications || false}
+                  className="sr-only peer" />
                   <div className="w-11 h-6 bg-slate-700 rounded-full peer peer-checked:bg-emerald-500"></div>
                 </label>
               </div>
@@ -286,7 +312,11 @@ const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
                   <p className="text-sm text-slate-400">Get text messages for urgent updates</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" defaultChecked />
+                  <input type="checkbox"
+                  name='smsNotifications'
+                  onChange={handleChange}
+                  checked={formData.smsNotifications || false}
+                  className="sr-only peer" />
                   <div className="w-11 h-6 bg-slate-700 rounded-full peer peer-checked:bg-emerald-500"></div>
                 </label>
               </div>

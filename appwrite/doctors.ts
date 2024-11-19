@@ -1,7 +1,10 @@
 import { Databases, ID } from 'appwrite';
 import { config, appwriteClient } from './conf';
+import { User } from '@/contexts/doctorContext';
+import { SpellCheck } from 'lucide-react';
 
 export const doctors = new Databases(appwriteClient);
+const databases = new Databases(appwriteClient);
 
 class AppwriteDoctors {
   async getDoctors() {
@@ -27,6 +30,33 @@ class AppwriteDoctors {
       return data;
     } catch (error) {
       console.error('Error getting doctor:', error);
+      throw error;
+    }
+  }
+
+  async updateDoctor(doctorId: string, doctor: User) {
+    try {
+      const { $id, firstName, lastName, bio, email, avatar, specialization, phone, licenseNumber, address, emailNotifications, smsNotifications} = doctor.doctor
+      await databases.updateDocument(
+        config.databaseId,
+        config.userCollectionId,
+        $id || '',
+        {
+          firstName,
+          lastName,
+          bio,
+          email,
+          avatar,
+          specialization,
+          phone,
+          licenseNumber,
+          address,
+          emailNotifications,
+          smsNotifications
+        },
+      );
+    } catch (error) {
+      console.error('Error updating user info:', error);
       throw error;
     }
   }
