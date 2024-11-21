@@ -45,10 +45,10 @@ class AppwriteDoctors {
         config.doctorsCollectionId,
         doctorId,
       );
-      return data as unknown as UserType;
+      return data as unknown as UserType['doctor'];
     } catch (error) {
       console.error('Error getting doctor:', error);
-      throw error;
+      return null
     }
   }
 
@@ -56,12 +56,24 @@ class AppwriteDoctors {
     try {
       const currentUser = await appwriteAuth.getCurrentUser()
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const {$id, ...rest} = doctor
+      const {  firstName, lastName, bio, email, avatar, specialization, phone, licenseNumber, address, emailNotifications, smsNotifications} = doctor
       return await db.updateDocument(
         config.databaseId,
         config.doctorsCollectionId,
         currentUser?.doctor.$id || '',
-        rest
+        {
+          firstName,
+          lastName,
+          bio,
+          email,
+          avatar,
+          specialization,
+          phone,
+          licenseNumber,
+          address,
+          emailNotifications,
+          smsNotifications
+        }
       );
     } catch (error) {
       console.error('Error updating user info:', error);

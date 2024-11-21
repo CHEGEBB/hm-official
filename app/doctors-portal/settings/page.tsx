@@ -140,7 +140,6 @@ const SettingsPage = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(formData);
     setIsLoading(true);
     appwriteDoctor
       .updateSelf(formData)

@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         hostname: 'cloud.appwrite.io',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.app.goo.gl',
+        port: '',
+      },
     ],
   }
 };

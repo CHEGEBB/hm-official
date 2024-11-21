@@ -41,7 +41,7 @@ import doctors from '@/appwrite/doctors';
 //   patientAvatar: string;
 //   dateTime: string;
 //   type: 'Check-up' | 'Follow-up' | 'Consultation' | 'Emergency';
-//   status: 'Scheduled' | 'In Progress' | 'Completed' | 'Cancelled';
+//   status: 'Scheduled' | 'Pending' | 'Completed' | 'Cancelled';
 //   duration: number;
 //   location: 'In-person' | 'Video Call';
 //   contact: {
@@ -126,16 +126,49 @@ interface appointmentType extends AppointmentType {
 const AppointmentsPage = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  const [appointments, setAppiontments] = useState<AppointmentType[] | null>([]);
+  const [appointments, setAppiontments] = useState<appointmentType[] | null>(
+    [],
+  );
   const router = useRouter();
 
-  useEffect (() => {
+  const handleAccept = async (appiontmentId: string) => {
+    await AppwriteAppiontments.updateAppiontment(appiontmentId, {status: 'Scheduled'})
+    setAppiontments(appointments?.map((appiontment) => {
+      if (appiontment.$id === appiontmentId) {
+        return {...appiontment, status: 'Scheduled'};
+      }
+      return appointments
+    }))
+  }
+
+  useEffect(() => {
     const getAppiontments = async () => {
-      const appiontments = await AppwriteAppiontments.getAllAppiontments()
-      setAppiontments(appiontments)
-    }
-    getAppiontments()
-  }, [])
+      const appiontments = await AppwriteAppiontments.getAllAppiontments();
+      if (!appiontments) return null;
+      const appiontmentDataPromise = appiontments.map(async (appiontment) => {
+        const patient = await patients.getPatientById(appiontment.userId);
+
+        const doctor = await doctors.getDoctorById(appiontment.doctorId);
+
+        const username = patient?.username;
+        const avatar = patient?.avatar;
+        const data: appointmentType = {
+          ...appiontment,
+          patientAvatar: avatar || '',
+          patientName: username || '',
+          contact: {
+            phone: doctor?.phone || '',
+            email: doctor?.email || '',
+          },
+        };
+
+        return data;
+      });
+      const appiontmentData = await Promise.all(appiontmentDataPromise);
+      setAppiontments(appiontmentData);
+    };
+    getAppiontments();
+  }, []);
 
   const navigation = [
     {
@@ -177,10 +210,10 @@ const AppointmentsPage = () => {
     </motion.div>
   );
 
-  const AppointmentCard = async ({
+  const AppointmentCard = ({
     appointment,
   }: {
-    appointment: AppointmentType;
+    appointment: appointmentType;
   }) => {
     const statusColors = {
       Scheduled: 'bg-blue-500/20 text-blue-500',
@@ -196,23 +229,6 @@ const AppointmentsPage = () => {
       Emergency: 'text-red-500',
     };
 
-    const patient = await patients.getPatientById(appointment.userId);
-    if (!patient) return null;
-
-    const doctor = await doctors.getDoctorById(appointment.doctorId);
-    if (!doctor) return null;
-
-    const { username, avatar } = patient;
-    const data: appointmentType = {
-      ...appointment,
-      patientAvatar: avatar,
-      patientName: username,
-      contact: {
-        phone: doctor.doctor.phone || '',
-        email: doctor.userAccount.email,
-      }
-    };
-
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -222,38 +238,40 @@ const AppointmentsPage = () => {
         <div className='flex items-start justify-between'>
           <div className='flex items-start space-x-4'>
             <Image
-              src={data.patientAvatar}
+              src={appointment.patientAvatar}
               width={48}
               height={48}
-              alt={data.patientName}
+              alt={appointment.patientName || ''}
               className='w-12 h-12 rounded-full'
             />
             <div>
-              <h3 className='font-medium'>{data.patientName}</h3>
-              <p className={`text-sm ${typeColors[data.type]}`}>{data.type}</p>
+              <h3 className='font-medium'>{appointment.patientName}</h3>
+              <p className={`text-sm ${typeColors[appointment.type]}`}>
+                {appointment.type}
+              </p>
               <div className='flex items-center space-x-2 mt-2 text-sm text-slate-400'>
                 <Clock className='w-4 h-4' />
                 <span>
-                  {new Date(data.date).toLocaleTimeString([], {
+                  {new Date(appointment.date).toLocaleTimeString([], {
                     hour: '2-digit',
                     minute: '2-digit',
                   })}
                 </span>
-                <span>({data.duration} mins)</span>
+                <span>({appointment.duration} mins)</span>
               </div>
             </div>
           </div>
           <div className='flex flex-col items-end space-y-2'>
             <span
               className={`px-3 py-1 rounded-full text-xs ${
-                statusColors[data.status]
+                statusColors[appointment.status]
               }`}
             >
-              {data.status}
+              {appointment.status}
             </span>
             <span className='flex items-center text-sm text-slate-400'>
               <MapPin className='w-4 h-4 mr-1' />
-              {data.location}
+              {appointment.location}
             </span>
           </div>
         </div>
@@ -262,24 +280,24 @@ const AppointmentsPage = () => {
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             <div className='flex items-center space-x-2 text-sm text-slate-400'>
               <Phone className='w-4 h-4' />
-              <span>{data.contact.phone}</span>
+              <span>{appointment.contact.phone}</span>
             </div>
             <div className='flex items-center space-x-2 text-sm text-slate-400'>
               <Mail className='w-4 h-4' />
-              <span>{data.contact.email}</span>
+              <span>{appointment.contact.email}</span>
             </div>
           </div>
-          {data.reason && (
+          {appointment.reason && (
             <p className='mt-3 text-sm text-slate-400'>
-              Note: {data.reason}
+              Note: {appointment.reason}
             </p>
           )}
         </div>
 
         <div className='mt-4 flex justify-end space-x-2'>
-          {data.status === 'Scheduled' && (
+          {appointment.status === 'Scheduled' && (
             <>
-              <button className='p-2 rounded-lg bg-emerald-500/20 text-emerald-500 hover:bg-emerald-500/30'>
+              <button onClick={() => handleAccept(appointment.$id)} className='p-2 rounded-lg bg-emerald-500/20 text-emerald-500 hover:bg-emerald-500/30'>
                 <Check className='w-4 h-4' />
               </button>
               <button className='p-2 rounded-lg bg-red-500/20 text-red-500 hover:bg-red-500/30'>
@@ -427,9 +445,13 @@ const AppointmentsPage = () => {
 
           {/* Appointments Grid */}
           <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
-            {appointments && appointments.map((appointment) => (
-              <AppointmentCard key={appointment.$id} appointment={appointment} />
-            ))}
+            {appointments &&
+              appointments.map((appointment) => (
+                <AppointmentCard
+                  key={appointment.$id}
+                  appointment={appointment}
+                />
+              ))}
           </div>
         </div>
       </div>

@@ -59,14 +59,13 @@ class Appiontments {
     return todayAppiiontments;
   }
 
-  async updateAppiontment(appiontmentId: string, data: AppointmentType) {
+  async updateAppiontment(appiontmentId: string, data: {[x:string]: string}) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { $id, ...rest } = data;
     await databases.updateDocument(
       config.databaseId,
       config.appoinmentsCollectionId,
       appiontmentId,
-      rest,
+      data,
     );
   }
 }

@@ -11,17 +11,18 @@ import {
   LockIcon,
 } from 'lucide-react';
 import appwriteAuth from '@/appwrite/auth';
-import appwriteDoctors from '@/appwrite/doctors';
+import appwriteDoctors, { UserType } from '@/appwrite/doctors';
 import { useAuth } from '@/contexts/authContext';
-import { User, useUser } from '@/contexts/doctorContext';
+import { useUser } from '@/contexts/doctorContext';
+
 
 const LoginPage = () => {
   const router = useRouter();
   const { setAuthStatus } = useAuth();
   const {user, setUser} = useUser()
   const [formData, setFormData] = useState({
-    doctorId: '671b7b13002972cd15e0',
-    email: 'wegbajuniour@gmail.com',
+    doctorId: '673f3866003c0d897eec',
+    email: 'jj@gmail.com',
     password: '12345678',
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -31,8 +32,9 @@ const LoginPage = () => {
     setIsLoading(true);
 
     const response = await appwriteAuth.login(formData);
-    if (response?.$id) {
-      const doctor = await appwriteDoctors.getDoctorById(formData.doctorId) as unknown as User['doctor']
+    if (response?.userId) {
+      const doctor = await appwriteDoctors.getDoctorById(formData.doctorId) as unknown as UserType['doctor']
+      console.log(doctor)
       if (doctor) {
         setUser({ userAccount: {email: response.providerUid}, doctor})
         console.log(user)

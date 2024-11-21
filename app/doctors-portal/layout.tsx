@@ -3,7 +3,7 @@
 import appwriteAuth from '@/appwrite/auth';
 import { AuthProvider } from '@/contexts/authContext';
 import { UserProvider } from '@/contexts/doctorContext';
-import { UserType } from '@/appwrite/doctors';
+import appwriteDoctor, { UserType } from '@/appwrite/doctors';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -24,7 +24,7 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
       }
 
       if (!status && pathname != 'doctor-portal') {
-        router.push('doctors-portal')
+        router.push('/doctors-portal')
       }
     }
 
