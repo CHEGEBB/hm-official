@@ -25,22 +25,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../components/Card'
 import Image from 'next/image';
 
 // Types
-interface Patient {
-  id: string;
-  name: string;
-  age: number;
-  gender: string;
-  contact: string;
-  email: string;
-  lastVisit: string;
-  nextAppointment: string;
-  condition: string;
-  status: 'Active' | 'Inactive' | 'Critical';
-  avatar: string;
-}
-
 // Mock data
-const mockPatients: Patient[] = [
+const mockPatients= [
   {
     id: "P001",
     name: "Emma Thompson",

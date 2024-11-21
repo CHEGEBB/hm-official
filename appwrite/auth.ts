@@ -1,7 +1,7 @@
 import { config, appwriteClient } from './conf';
 import { Account, ID, Avatars, Databases } from 'appwrite';
 import AppwriteDoctors from '@/appwrite/doctors';
-import { User } from '@/contexts/doctorContext';
+import { UserType } from '@/appwrite/doctors';
 
 const account = new Account(appwriteClient);
 const avatar = new Avatars(appwriteClient);
@@ -72,7 +72,7 @@ class AppwriteAuth {
     try {
       const userAccount = await account.get();
       const doctor = await AppwriteDoctors.getDoctorById(userAccount.$id);
-      return { userAccount, doctor } as unknown as  User;
+      return { userAccount, doctor } as unknown as  UserType;
     } catch (error) {
       console.log('getcurrentUser error: ' + error);
     }
@@ -85,6 +85,26 @@ class AppwriteAuth {
       return await account.deleteSession('current');
     } catch (error) {
       console.log('logout error: ' + error);
+    }
+  }
+
+  async updatePassword(oldPassword: string, newpassword: string) {
+    try {
+      return await account.updatePassword(newpassword, oldPassword)
+      
+    } catch (e) {
+      console.log(e)
+      return null
+    }
+  }
+
+  async updateEmail(email: string, password: string) {
+    try {
+      return await account.updateEmail(email, password)
+      
+    } catch (e) {
+      console.log(e)
+      return null
     }
   }
 }

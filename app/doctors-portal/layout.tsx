@@ -2,7 +2,8 @@
 
 import appwriteAuth from '@/appwrite/auth';
 import { AuthProvider } from '@/contexts/authContext';
-import { User, UserProvider } from '@/contexts/doctorContext';
+import { UserProvider } from '@/contexts/doctorContext';
+import { UserType } from '@/appwrite/doctors';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
@@ -11,7 +12,7 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
 
   const [authStatus, setAuthStatus] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   useEffect(() => {
     const getAuthStatus = async () => {
       const status = await appwriteAuth.isLoggedIn();

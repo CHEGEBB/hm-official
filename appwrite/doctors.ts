@@ -1,16 +1,33 @@
-import { Databases, ID } from 'appwrite';
+import { Databases } from 'appwrite';
 import { config, appwriteClient } from './conf';
-import { User } from '@/contexts/doctorContext';
-import { SpellCheck } from 'lucide-react';
 import appwriteAuth from './auth';
 
-export const doctors = new Databases(appwriteClient);
-const databases = new Databases(appwriteClient);
+export const db = new Databases(appwriteClient);
+
+export interface UserType {
+  userAccount: {
+    email: string;
+  };
+  doctor: {
+    $id: string;
+    firstName: string;
+    lastName: string;
+    specialization: string;
+    avatar: string;
+    email?: string;
+    bio?: string;
+    phone?: string;
+    licenseNumber?: string;
+    address?: string;
+    smsNotifications?: boolean;
+    emailNotifications?: boolean;
+  };
+}
 
 class AppwriteDoctors {
   async getDoctors() {
     try {
-      const data = await doctors.listDocuments(
+      const data = await db.listDocuments(
         config.databaseId,
         config.doctorsCollectionId,
       );
@@ -23,50 +40,39 @@ class AppwriteDoctors {
 
   async getDoctorById(doctorId: string) {
     try {
-      const data = await doctors.getDocument(
+      const data = await db.getDocument(
         config.databaseId,
         config.doctorsCollectionId,
         doctorId,
       );
-      return data;
+      return data as unknown as UserType;
     } catch (error) {
       console.error('Error getting doctor:', error);
       throw error;
     }
   }
 
-  async updateSelf(doctor: User.doctor) {
+  async updateSelf(doctor: UserType["doctor"]) {
     try {
       const currentUser = await appwriteAuth.getCurrentUser()
-      const { firstName, lastName, bio, email, avatar, specialization, phone, licenseNumber, address, emailNotifications, smsNotifications} = doctor
-      await databases.updateDocument(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const {$id, ...rest} = doctor
+      return await db.updateDocument(
         config.databaseId,
         config.doctorsCollectionId,
         currentUser?.doctor.$id || '',
-        {
-          firstName,
-          lastName,
-          bio,
-          email,
-          avatar,
-          specialization,
-          phone,
-          licenseNumber,
-          address,
-          emailNotifications,
-          smsNotifications
-        },
+        rest
       );
     } catch (error) {
       console.error('Error updating user info:', error);
-      throw error;
+      return null
     }
   }
 
-  async updateDoctor(doctorId: string, doctor: User) {
+  async updateDoctor(doctor: UserType) {
     try {
       const { $id, firstName, lastName, bio, email, avatar, specialization, phone, licenseNumber, address, emailNotifications, smsNotifications} = doctor.doctor
-      await databases.updateDocument(
+      await db.updateDocument(
         config.databaseId,
         config.doctorsCollectionId,
         $id || '',
@@ -91,4 +97,5 @@ class AppwriteDoctors {
   }
 }
 
-export default new AppwriteDoctors();
+const appwriteDoctor = new AppwriteDoctors();
+export default appwriteDoctor

@@ -32,13 +32,13 @@ import appwriteAuth from '@/appwrite/auth';
 // import Image from 'next/image';
 
 // TypeScript interfaces
-interface Doctor {
-  id: string;
-  name: string;
-  specialization: string;
-  avatar: string;
-  email: string;
-}
+// interface Doctor {
+//   id: string;
+//   name: string;
+//   specialization: string;
+//   avatar: string;
+//   email: string;
+// }
 
 interface Appointment {
   id: number;
@@ -254,7 +254,7 @@ const DoctorDashboard = () => {
   };
 
   if (!user) return <></>;
-  const { doctor, userAccount } = user;
+  const { doctor } = user;
 
   return (
     <div className='min-h-screen bg-slate-900 text-white flex'>
@@ -293,12 +293,12 @@ const DoctorDashboard = () => {
                 src={doctor.avatar}
                 width={40}
                 height={40}
-                alt={doctor.name}
+                alt={doctor.firstName}
                 className='w-10 h-10 rounded-full'
               />
               {isNavOpen && (
                 <div>
-                  <p className='font-medium'>{doctor.name}</p>
+                  <p className='font-medium'>{doctor.firstName}</p>
                   <p className='text-sm text-slate-400'>
                     {doctor.specialization}
                   </p>
