@@ -133,12 +133,13 @@ const AppointmentsPage = () => {
 
   const handleAccept = async (appiontmentId: string) => {
     await AppwriteAppiontments.updateAppiontment(appiontmentId, {status: 'Scheduled'})
-    setAppiontments(appointments?.map((appiontment) => {
+    const newAppiontments = appointments?.map((appiontment) => {
       if (appiontment.$id === appiontmentId) {
         return {...appiontment, status: 'Scheduled'};
       }
       return appointments
-    }))
+    }) as appointmentType[]
+    setAppiontments(newAppiontments)
   }
 
   useEffect(() => {

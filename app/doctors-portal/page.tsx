@@ -21,9 +21,9 @@ const LoginPage = () => {
   const { setAuthStatus } = useAuth();
   const {user, setUser} = useUser()
   const [formData, setFormData] = useState({
-    doctorId: '673f3866003c0d897eec',
-    email: 'jj@gmail.com',
-    password: '12345678',
+    doctorId: '',
+    email: '',
+    password: '',
   });
   const [isLoading, setIsLoading] = useState(false);
 
