@@ -2,8 +2,8 @@ import { Client } from "appwrite";
 
 export const config = {
   endpoint: process.env.NEXT_PUBLIC_APPWRITE_URL!,
-  projectId: process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!,
-  databaseId: process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
+  projectId: '6704d37c003c8a2f6a36',
+  databaseId: '670a2468000caae299eb',
   userCollectionId: '670a248800049761218e',
   appoinmentsCollectionId: '670a254100339e546aa4',
   medicationCollectionId: process.env.NEXT_PUBLIC_APPWRITE_MEDICATIONS_COLLECTION_ID!,
