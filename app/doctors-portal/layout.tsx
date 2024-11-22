@@ -3,7 +3,7 @@
 import appwriteAuth from '@/appwrite/auth';
 import { AuthProvider } from '@/contexts/authContext';
 import { UserProvider } from '@/contexts/doctorContext';
-import appwriteDoctor, { UserType } from '@/appwrite/doctors';
+import { UserType } from '@/appwrite/doctors';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 

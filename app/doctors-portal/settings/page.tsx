@@ -93,7 +93,7 @@ const SettingsPage = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const { user, setUser } = useUser();
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<UserType['doctor']>({
+  const [formData, setFormData] = useState({
     avatar: '',
     firstName: '',
     lastName: '',
@@ -116,7 +116,7 @@ const SettingsPage = () => {
 
   useEffect(() => {
     if (user) {
-      setFormData(user.doctor);
+      setFormData((prev) => ({...prev, ...user.doctor}));
       setUserAccount(user.userAccount);
     }
   }, [user]);
@@ -142,9 +142,9 @@ const SettingsPage = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     appwriteDoctor
-      .updateSelf(formData)
+      .updateSelf(formData as unknown as UserType['doctor'])
       .then(() => {
-        setUser({ doctor: formData, userAccount });
+        setUser({ doctor: formData as unknown as UserType['doctor'], userAccount });
         setIsLoading(false);
       })
       .catch((error) => {
