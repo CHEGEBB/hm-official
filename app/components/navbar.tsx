@@ -35,13 +35,18 @@ const Navbar = () => {
       }`}
     >
       <div className="container flex items-center justify-between px-4 py-4 mx-auto sm:px-6">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center gap-4">
           <Image
-            src="/assets/icons/logo.png"
-            width={80}
-            height={80}
+            src="/assets/icons/1.png"
+            width={150}
+            height={150}
             alt="HealthMaster logo"
-            className="w-8 h-8 mr-2 sm:w-10 sm:h-10"
+            className="rounded-full border border-slate-400 p-1
+            w-10 h-10
+             sm:w-10 sm:h-10 
+             md:w-12 md:h-12 
+             lg:w-16 lg:h-16
+             hover:scale-110 transition-transform duration-300 ease-in-out"
           />
           <span className="text-lg font-bold sm:text-xl font-sora text-emerald-500">
             Health Master
