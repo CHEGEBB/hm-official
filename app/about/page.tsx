@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import {  User, Users, Heart, Clock, Clipboard } from 'lucide-react';
+import {  User, Users, Heart, Clock, Clipboard, Linkedin } from 'lucide-react';
 import Navbar from '../components/navbar';
 import "../sass/home.scss"
 
@@ -229,6 +229,24 @@ const AboutPage = () => {
         <p className="text-gray-400 font-raleway">
           A resilient medical student from Rwanda, Irenee is passionate about driving HealthMaster as a healthcare startup, showing unwavering commitment to improve healthcare through technology and innovation.
         </p>
+        <motion.a
+          href="http://www.linkedin.com/in/irenee-dushime-uwineza-"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center mt-4 text-blue-400 hover:text-blue-300"
+          whileHover={{ scale: 1.1 }}
+          animate={{
+            y: [0, -5, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <Linkedin className="w-5 h-5 mr-2" />
+          Connect with Irenee 👋
+        </motion.a>
       </motion.div>
 
       {/* Brian Chege Mwangi */}
@@ -250,9 +268,8 @@ const AboutPage = () => {
         <p className="mb-4 text-gray-300 font-raleway">Co-Founder & CTO</p>
         <p className="text-gray-400 font-raleway">
            Brian, a computer scientist from Kenya specializes in full-stack web and app development and software engineering. His strong coding skills, creativity, and problem-solving mindset drive HealthMaster technical innovations. 
-           Follow him on github <span>
-           <a href="
-            https://github.com/CHEGEBB"
+           <span className="block mt-4">
+           <a href="https://github.com/CHEGEBB"
             target="_blank"
             rel="noopener noreferrer"
             className="text-red-500 hover:text-blue-600 font-bold"
@@ -280,8 +297,25 @@ const AboutPage = () => {
         <p className="mb-4 text-gray-300 font-raleway">COO & Co-Founder</p>
         <p className="text-gray-400 font-raleway">
           Bonheur, a passionate medical student from Rwanda, co-founded HealthMaster with a deep commitment to improving healthcare access and delivery. Known for his go-getter attitude, Bonheur excels in connecting with people, fostering a positive environment, and working effectively with others.
-           
         </p>
+        <motion.a
+          href="https://rw.linkedin.com/in/bonheur-dushimimana-6893b9224"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center mt-4 text-blue-400 hover:text-blue-300"
+          whileHover={{ scale: 1.1 }}
+          animate={{
+            y: [0, -5, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <Linkedin className="w-5 h-5 mr-2" />
+          Connect with Bonheur 👋
+        </motion.a>
       </motion.div>
 
       {/* Francis Muhirwa */}
@@ -304,11 +338,28 @@ const AboutPage = () => {
         <p className="text-gray-400 font-raleway">
           A talented designer from Rwanda, Francis is efficient, flexible, and consistently delivers top-quality work on time. His keen eye for detail and ability to adapt to any design challenge make him an invaluable member of the HealthMaster team, ensuring that the user experience is both intuitive and engaging.
         </p>
+        <motion.a
+          href="https://www.linkedin.com/in/francis-muhirwa-674786253/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center mt-4 text-blue-400 hover:text-blue-300"
+          whileHover={{ scale: 1.1 }}
+          animate={{
+            y: [0, -5, 0],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <Linkedin className="w-5 h-5 mr-2" />
+          Connect with Francis 👋
+        </motion.a>
       </motion.div>
     </div>
   </div>
 </section>
-
 
       {/* CTA */}
       <section className="relative py-20 overflow-hidden bg-emerald-600">
