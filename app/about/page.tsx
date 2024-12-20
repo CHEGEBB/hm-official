@@ -334,7 +334,7 @@ const AboutPage = () => {
           />
         </div>
         <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Francis Muhirwa</h3>
-        <p className="mb-4 text-gray-300 font-raleway">UI/UX Designer</p>
+        <p className="mb-4 text-gray-300 font-raleway">Co-founder and UI/UX Designer </p>
         <p className="text-gray-400 font-raleway">
           A talented designer from Rwanda, Francis is efficient, flexible, and consistently delivers top-quality work on time. His keen eye for detail and ability to adapt to any design challenge make him an invaluable member of the HealthMaster team, ensuring that the user experience is both intuitive and engaging.
         </p>
