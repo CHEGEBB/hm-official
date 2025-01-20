@@ -20,7 +20,7 @@ const LandingPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const downloadUrl = "https://drive.google.com/uc?export=download&id=14jAsVH3qv2KogL1UigwB6ft14bpt4Q4o";
+  const downloadUrl = "";
   
   useEffect(() => {
     const handleScroll = () => {
@@ -172,7 +172,7 @@ const LandingPage = () => {
             
 
           <div className="hidden md:flex md:items-center md:space-x-4">
-      <a href={downloadUrl} download>
+      <a href="#">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -282,7 +282,7 @@ const LandingPage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center px-8 py-3 text-lg font-poppins text-white transition-colors rounded-full bg-emerald-500 hover:bg-emerald-600"
-                href={downloadUrl} download
+                href='#'
               >
                 <Download className="w-5 h-5 mr-2" />
                 Download Beta Version
@@ -414,7 +414,7 @@ const LandingPage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center px-8 py-3 text-lg font-poppins text-white transition-colors rounded-full bg-emerald-500 hover:bg-emerald-600"
-                href={downloadUrl} download
+                href='#'
               >
                 <Download className="w-5 h-5 mr-2" />
                 Download Beta Version

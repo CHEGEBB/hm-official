@@ -141,7 +141,7 @@ const ServicesPage = () => {
               Join us today and take the first step towards better health!
             </p>
             <a 
-              href="https://drive.google.com/uc?export=download&id=14jAsVH3qv2KogL1UigwB6ft14bpt4Q4o" 
+              href="#" 
               className="inline-block px-6 py-3 text-lg font-semibold text-white transition-all bg-emerald-500 rounded-lg hover:bg-emerald-600"
             >
               Download Now
