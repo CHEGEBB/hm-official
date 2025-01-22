@@ -20,7 +20,6 @@ const LandingPage = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const downloadUrl = "";
   
   useEffect(() => {
     const handleScroll = () => {
