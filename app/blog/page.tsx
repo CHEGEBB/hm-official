@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, Calendar, Clock, User, ChevronRight, X, Bookmark, Share2, ThumbsUp, Edit, Trash, Plus, LogIn } from 'lucide-react'
-import Navbar from "../components/navbar"
 import Image from 'next/image'
 import AppwriteService from '../appwriteservices/AppwriteService';
 
