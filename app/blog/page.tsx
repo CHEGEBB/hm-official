@@ -121,7 +121,7 @@ const BlogEditorModal = ({
   onClose,
   onSave
 }: {
-  post?: Post;
+  post?: Post | null;
   onClose: () => void;
   onSave: (data: any) => void;
 }) => {
@@ -563,7 +563,7 @@ const BlogPage = () => {
         const blogsData = await AppwriteService.getBlogs();
         
         // Transform data to match our Post interface
-        const formattedBlogs = blogsData.map(blog => ({
+        const formattedBlogs = blogsData.map((blog: any) => ({
           id: blog.$id,
           title: blog.title,
           excerpt: blog.excerpt,
@@ -580,7 +580,22 @@ const BlogPage = () => {
       } catch (error) {
         console.error('Failed to fetch blogs', error);
         // Fallback to hardcoded data if API fails
-        setPosts(blogPosts);
+        // Fallback to hardcoded data if API fails
+        const fallbackPosts: Post[] = [
+          {
+            id: 1,
+            title: 'Sample Post',
+            excerpt: 'This is a sample post.',
+            content: '<p>This is the content of the sample post.</p>',
+            author: 'Admin',
+            date: new Date().toISOString().split('T')[0],
+            readTime: '5 min read',
+            category: 'Technology',
+            tags: ['sample', 'post'],
+            imageUrl: '/assets/images/tech.jpeg'
+          }
+        ];
+        setPosts(fallbackPosts);
       } finally {
         setLoading(false);
       }
