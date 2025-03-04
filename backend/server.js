@@ -1,7 +1,8 @@
-const express = require('express');
-const cors = require('cors');
-const { Client, Account, Databases, Query } = require('node-appwrite');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import { Client, Databases, Query } from 'node-appwrite';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,7 +17,7 @@ const client = new Client()
     .setProject(process.env.APPWRITE_PROJECT_ID)
     .setKey(process.env.APPWRITE_API_KEY);
 
-const account = new Account(client);
+// const account = new Account(client);
 const databases = new Databases(client);
 
 // Database and Collection IDs
