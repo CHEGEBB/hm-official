@@ -1,5 +1,5 @@
 // AppwriteService.js
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://hm-official.onrender.com/api';
 
 const AppwriteService = {
   login: async (email, password) => {
