@@ -1,9 +1,11 @@
 'use client'
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Calendar, Clock, User, ChevronRight, X, Bookmark, Share2, ThumbsUp } from 'lucide-react';
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Search, Calendar, Clock, User, ChevronRight, X, Bookmark, Share2, ThumbsUp, Edit, Trash, Plus, LogIn } from 'lucide-react'
 import Navbar from "../components/navbar"
-import Image from 'next/image';
+import Image from 'next/image'
+
+// Blog posts data
 const blogPosts = [
   {
     id: 1,
@@ -38,22 +40,22 @@ const blogPosts = [
     excerpt: "Simple yet effective ways to improve your overall health and well-being",
     content: `
       <h2>Building a Foundation for Wellness</h2>
-      <p>Finding balance in today’s hectic world can be a challenge, but there are practical steps you can take to foster a healthy lifestyle. Achieving overall wellness is about consistency, focusing on simple, sustainable habits that help you feel your best every day.</p>
+      <p>Finding balance in today's hectic world can be a challenge, but there are practical steps you can take to foster a healthy lifestyle. Achieving overall wellness is about consistency, focusing on simple, sustainable habits that help you feel your best every day.</p>
 
       <h2>1. Nourish Your Body with Mindful Nutrition</h2>
-      <p>Eating well doesn’t have to be complicated. Focus on whole, unprocessed foods, such as fresh fruits, vegetables, lean proteins, and whole grains. Stay hydrated by drinking plenty of water, and consider practicing mindful eating – that means savoring each bite, eating slowly, and listening to your body’s hunger and fullness cues.</p>
+      <p>Eating well doesn't have to be complicated. Focus on whole, unprocessed foods, such as fresh fruits, vegetables, lean proteins, and whole grains. Stay hydrated by drinking plenty of water, and consider practicing mindful eating -- that means savoring each bite, eating slowly, and listening to your body's hunger and fullness cues.</p>
 
       <h2>2. Prioritize Quality Sleep</h2>
       <p>Good sleep is vital for mental and physical recovery. Aim for 7-9 hours of sleep each night, and maintain a regular sleep schedule. Create a calming pre-sleep routine, limit screen time before bed, and make your bedroom an inviting space for rest.</p>
 
       <h2>3. Stay Active with Regular Exercise</h2>
-      <p>Exercise not only boosts your physical health but also enhances your mental well-being. Aim for at least 30 minutes of moderate exercise each day. This can include a mix of cardio, strength training, and flexibility exercises. Find activities that you enjoy, as you’ll be more likely to stick with them over the long term.</p>
+      <p>Exercise not only boosts your physical health but also enhances your mental well-being. Aim for at least 30 minutes of moderate exercise each day. This can include a mix of cardio, strength training, and flexibility exercises. Find activities that you enjoy, as you'll be more likely to stick with them over the long term.</p>
 
       <h2>4. Manage Stress Effectively</h2>
       <p>Managing stress is a cornerstone of a balanced lifestyle. Regularly practice techniques such as deep breathing exercises, mindfulness, or yoga. Engaging in hobbies, spending time outdoors, and maintaining strong social connections are also effective ways to alleviate stress.</p>
 
       <h2>5. Schedule Regular Health Check-ups</h2>
-      <p>Preventive care is essential for long-term health. Schedule regular medical check-ups to monitor key health indicators and stay up-to-date with vaccinations. Early detection and intervention are critical, so don’t overlook routine health visits.</p>
+      <p>Preventive care is essential for long-term health. Schedule regular medical check-ups to monitor key health indicators and stay up-to-date with vaccinations. Early detection and intervention are critical, so don't overlook routine health visits.</p>
     `,
     author: "Dr. John Doe",
     date: "2024-02-20",
@@ -77,10 +79,10 @@ const blogPosts = [
       <p>Mental health challenges like anxiety, depression, and stress can disrupt daily life and well-being. Recognizing these challenges and knowing when to seek help is crucial. Early intervention can provide relief and help individuals develop coping strategies to manage symptoms effectively.</p>
 
       <h2>Strategies to Enhance Mental Wellness</h2>
-      <p>Practices such as regular physical activity, mindfulness, and maintaining social support networks can improve mental well-being. Setting healthy boundaries and prioritizing self-care are equally important. Don’t hesitate to seek professional support if needed – therapy and counseling can be invaluable tools for mental health.</p>
+      <p>Practices such as regular physical activity, mindfulness, and maintaining social support networks can improve mental well-being. Setting healthy boundaries and prioritizing self-care are equally important. Don't hesitate to seek professional support if needed -- therapy and counseling can be invaluable tools for mental health.</p>
 
       <h2>Building Resilience for a Fulfilling Life</h2>
-      <p>Resilience is the ability to recover from setbacks and challenges. Developing a resilient mindset involves cultivating positive thinking, honing problem-solving skills, and nurturing strong support systems. Embracing a growth-oriented mindset can empower us to navigate life’s ups and downs with confidence and grace.</p>
+      <p>Resilience is the ability to recover from setbacks and challenges. Developing a resilient mindset involves cultivating positive thinking, honing problem-solving skills, and nurturing strong support systems. Embracing a growth-oriented mindset can empower us to navigate life's ups and downs with confidence and grace.</p>
     `,
     author: "Dr. Mary Johnson",
     date: "2024-01-25",
@@ -101,10 +103,10 @@ const blogPosts = [
       <p>Gene editing tools like CRISPR are transforming medicine by enabling precise genetic modifications. This technology holds promise for treating genetic disorders and even developing personalized cancer therapies with minimal side effects.</p>
 
       <h2>Innovative Cancer Treatments</h2>
-      <p>Oncology is seeing rapid advancements with immunotherapy and targeted treatments. These therapies work by enhancing the body’s natural defenses against cancer cells, making treatment less invasive and more effective.</p>
+      <p>Oncology is seeing rapid advancements with immunotherapy and targeted treatments. These therapies work by enhancing the body's natural defenses against cancer cells, making treatment less invasive and more effective.</p>
 
       <h2>Neurological Research and Brain Health</h2>
-      <p>Research into brain health is yielding exciting results, from new Alzheimer’s treatments to brain-computer interfaces that restore mobility. These discoveries are paving the way for a deeper understanding of the brain and potential treatments for neurological conditions.</p>
+      <p>Research into brain health is yielding exciting results, from new Alzheimer's treatments to brain-computer interfaces that restore mobility. These discoveries are paving the way for a deeper understanding of the brain and potential treatments for neurological conditions.</p>
 
       <h2>The Future of Medicine</h2>
       <p>The ongoing innovation in medical research suggests a future where personalized medicine, early disease detection, and accessible advanced treatments become the norm, ultimately transforming healthcare on a global scale.</p>
@@ -122,7 +124,7 @@ const blogPosts = [
     excerpt: "Strategies to improve patient satisfaction and quality of care in healthcare",
     content: `
       <h2>The Evolution of Patient Care</h2>
-      <p>In today’s healthcare landscape, patient experience is not only a reflection of the care quality but also a critical component of patient satisfaction and retention. With healthcare increasingly focusing on individualized care and holistic treatment, enhancing patient experience has become a core objective for healthcare providers. This guide delves into practical strategies for creating a patient-centric environment that fosters trust, satisfaction, and improved health outcomes.</p>
+      <p>In today's healthcare landscape, patient experience is not only a reflection of the care quality but also a critical component of patient satisfaction and retention. With healthcare increasingly focusing on individualized care and holistic treatment, enhancing patient experience has become a core objective for healthcare providers. This guide delves into practical strategies for creating a patient-centric environment that fosters trust, satisfaction, and improved health outcomes.</p>
 
       <h2>Communication Excellence</h2>
       <p>Communication is the cornerstone of patient satisfaction and involves more than merely conveying medical information. Effective patient communication requires:</p>
@@ -152,7 +154,7 @@ const blogPosts = [
       </ul>
 
       <h2>Staff Training and Development</h2>
-      <p>Staff are a healthcare facility’s most valuable asset, and investing in their development is crucial for patient satisfaction. Effective staff training includes:</p>
+      <p>Staff are a healthcare facility's most valuable asset, and investing in their development is crucial for patient satisfaction. Effective staff training includes:</p>
       <ul>
         <li><strong>Customer Service Training:</strong> Enhancing interpersonal skills equips staff to better meet patients' needs.</li>
         <li><strong>Cultural Sensitivity Education:</strong> By understanding diverse backgrounds, staff can provide care that respects all patients.</li>
@@ -197,7 +199,7 @@ const blogPosts = [
       <ul>
         <li><strong>Personalized Treatment Plans:</strong> Using patient-specific data, providers can tailor treatments for better outcomes and patient satisfaction.</li>
         <li><strong>Population Health Management:</strong> Big data helps identify health trends within populations, aiding in public health planning and resource allocation.</li>
-        <li><strong>Resource Optimization:</strong> Data insights improve resource management, ensuring equipment and staff are where they’re needed most.</li>
+        <li><strong>Resource Optimization:</strong> Data insights improve resource management, ensuring equipment and staff are where they're needed most.</li>
         <li><strong>Quality Improvement Initiatives:</strong> Analyzing data helps hospitals identify areas for improvement, enhancing patient care standards.</li>
       </ul>
 
@@ -233,13 +235,416 @@ interface Post {
   imageUrl: string;
 }
 
-const ReadingMode = ({ post, onClose }: { post: Post; onClose: () => void }) => {
+// Appwrite Service
+const AppwriteService = {
+  login: async (email: string, password: string) => {
+    // This is a mock implementation. In a real app, this would connect to Appwrite.
+    return new Promise((resolve, reject) => {
+      // For demo purposes, accept any credentials with valid format
+      if (email.includes('@') && password.length >= 6) {
+        setTimeout(() => resolve({ userId: 'admin-123' }), 1000);
+      } else {
+        setTimeout(() => reject(new Error('Invalid credentials')), 1000);
+      }
+    });
+  },
+  
+  getCurrentUser: async () => {
+    // Mock implementation
+    return new Promise((resolve, reject) => {
+      const isLoggedIn = localStorage.getItem('isAdmin') === 'true';
+      if (isLoggedIn) {
+        setTimeout(() => resolve({ userId: 'admin-123' }), 500);
+      } else {
+        setTimeout(() => reject(new Error('Not logged in')), 500);
+      }
+    });
+  },
+  
+  logout: async () => {
+    localStorage.removeItem('isAdmin');
+    return Promise.resolve();
+  }
+};
+
+// Auth Modal Component
+const AuthModal = ({ onClose, onSuccess }: { onClose: () => void; onSuccess: () => void }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    
+    try {
+      await AppwriteService.login(email, password);
+      localStorage.setItem('isAdmin', 'true');
+      onSuccess();
+    } catch (err) {
+      setError('Invalid credentials. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-slate-900/80 z-50 flex items-center justify-center p-4"
+    >
+      <motion.div
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
+        className="bg-slate-800 rounded-2xl p-8 max-w-md w-full relative"
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-1 hover:bg-slate-700 rounded-full"
+        >
+          <X className="w-6 h-6 text-gray-400" />
+        </button>
+
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-emerald-400 mb-2">Admin Login</h2>
+          <p className="text-gray-400">Enter your credentials to access admin features</p>
+        </div>
+
+        <form onSubmit={handleLogin} className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 bg-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+            <div className="relative">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full pl-4 pr-4 py-3 bg-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                required
+              />
+            </div>
+          </div>
+
+          {error && <p className="text-red-400 text-sm">{error}</p>}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-medium transition-colors disabled:opacity-50"
+          >
+            {loading ? 'Authenticating...' : 'Login'}
+          </button>
+        </form>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// Blog Editor Modal Component
+const BlogEditorModal = ({
+  post,
+  onClose,
+  onSave
+}: {
+  post?: Post;
+  onClose: () => void;
+  onSave: (data: any) => void;
+}) => {
+  const [formData, setFormData] = useState<any>(post ? { ...post } : {
+    title: '',
+    excerpt: '',
+    content: '',
+    author: '',
+    category: 'Technology',
+    tags: [],
+    imageUrl: '/assets/images/tech.jpeg',
+    date: new Date().toISOString().split('T')[0],
+    readTime: '5 min read'
+  });
+  
+  const [newTag, setNewTag] = useState('');
+  
+  const placeholderImages = [
+    '/assets/images/tech.jpeg',
+    '/assets/images/exercise.jpeg',
+    '/assets/images/mental.jpeg',
+    '/assets/images/break.jpeg',
+    '/assets/images/patient.jpeg',
+    '/assets/images/fut.jpeg',
+    '/assets/images/blogg.jpg'
+  ];
+
+  const addTag = () => {
+    if (newTag.trim() && !formData.tags.includes(newTag.trim())) {
+      setFormData({ ...formData, tags: [...formData.tags, newTag.trim()] });
+      setNewTag('');
+    }
+  };
+
+  const removeTag = (tagToRemove: string) => {
+    setFormData({
+      ...formData,
+      tags: formData.tags.filter((tag: string) => tag !== tagToRemove)
+    });
+  };
+
+  const formatText = (format: string) => {
+    const textarea = document.getElementById('content') as HTMLTextAreaElement;
+    if (!textarea) return;
+    
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = textarea.value.substring(start, end);
+    
+    let formattedText = '';
+    
+    switch (format) {
+      case 'bold':
+        formattedText = `<strong>${selectedText}</strong>`;
+        break;
+      case 'italic':
+        formattedText = `<em>${selectedText}</em>`;
+        break;
+      case 'h2':
+        formattedText = `<h2>${selectedText}</h2>`;
+        break;
+      case 'ul':
+        formattedText = `<ul>\n  <li>${selectedText}</li>\n</ul>`;
+        break;
+      case 'li':
+        formattedText = `<li>${selectedText}</li>`;
+        break;
+      case 'p':
+        formattedText = `<p>${selectedText}</p>`;
+        break;
+      default:
+        formattedText = selectedText;
+    }
+    
+    const newContent = 
+      textarea.value.substring(0, start) + 
+      formattedText + 
+      textarea.value.substring(end);
+    
+    setFormData({ ...formData, content: newContent });
+    
+    // Set focus back to textarea after formatting
+    setTimeout(() => {
+      textarea.focus();
+      textarea.setSelectionRange(
+        start + formattedText.length,
+        start + formattedText.length
+      );
+    }, 0);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-slate-900/80 z-50 flex items-center justify-center p-4"
+    >
+      <motion.div
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
+        className="bg-slate-800 rounded-2xl p-6 max-w-4xl w-full relative max-h-[90vh] overflow-y-auto"
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-1 hover:bg-slate-700 rounded-full"
+        >
+          <X className="w-6 h-6 text-gray-400" />
+        </button>
+
+        <h2 className="text-2xl font-bold text-emerald-400 mb-6">
+          {post ? 'Edit Blog Post' : 'Create New Blog Post'}
+        </h2>
+
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Title</label>
+            <input
+              value={formData.title}
+              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+              className="w-full px-4 py-3 bg-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+              placeholder="Enter blog title"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Excerpt</label>
+            <textarea
+              value={formData.excerpt}
+              onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
+              className="w-full px-4 py-3 bg-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+              rows={2}
+              placeholder="Brief summary of the blog post"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Author</label>
+              <input
+                value={formData.author}
+                onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+                className="w-full px-4 py-3 bg-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+                placeholder="Author name"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Category</label>
+              <select
+                value={formData.category}
+                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                className="w-full px-4 py-3 bg-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none"
+              >
+                {categories.filter(cat => cat !== 'All').map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Content</label>
+            <div className="flex flex-wrap gap-2 mb-2">
+              {['bold', 'italic', 'h2', 'p', 'ul', 'li'].map((format) => (
+                <button
+                  key={format}
+                  type="button"
+                  onClick={() => formatText(format)}
+                  className="px-3 py-1 bg-slate-700 rounded hover:bg-slate-600 text-sm"
+                >
+                  {format}
+                </button>
+              ))}
+            </div>
+            <textarea
+              id="content"
+              value={formData.content}
+              onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+              className="w-full px-4 py-3 bg-slate-700 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:outline-none font-mono"
+              rows={10}
+              placeholder="Your blog content with HTML formatting"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Featured Image</label>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {placeholderImages.map((img) => (
+                <div
+                  key={img}
+                  onClick={() => setFormData({ ...formData, imageUrl: img })}
+                  className={`relative h-24 cursor-pointer rounded-lg overflow-hidden border-2 ${
+                    formData.imageUrl === img ? 'border-emerald-500' : 'border-transparent'
+                  }`}
+                >
+                  <Image
+                    src={img}
+                    alt=""
+                    fill
+                    sizes="100px"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-2">Tags</label>
+            <div className="flex flex-wrap gap-2 mb-2">
+              {formData.tags.map((tag: string) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 bg-slate-700 rounded-full text-sm flex items-center gap-2"
+                >
+                  {tag}
+                  <button
+                    type="button"
+                    onClick={() => removeTag(tag)}
+                    className="hover:text-red-400"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <input
+                value={newTag}
+                onChange={(e) => setNewTag(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && addTag()}
+                className="px-4 py-2 bg-slate-700 rounded-lg text-sm flex-grow focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Add tag..."
+              />
+              <button
+                type="button"
+                onClick={addTag}
+                className="px-4 py-2 bg-slate-600 rounded-lg hover:bg-slate-500"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+
+          <div className="flex gap-4 pt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-medium transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() => onSave(formData)}
+              className="flex-grow px-6 py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-medium transition-colors"
+            >
+              {post ? 'Update Post' : 'Publish Post'}
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// Reading Mode Component
+const ReadingMode = ({ post, onClose, isAdmin, onEdit, onDelete }: { 
+  post: Post; 
+  onClose: () => void;
+  isAdmin: boolean;
+  onEdit: () => void;
+  onDelete: () => void;
+}) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [likes, setLikes] = useState(0);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white font-outfit">
-      <Navbar />
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -252,14 +657,39 @@ const ReadingMode = ({ post, onClose }: { post: Post; onClose: () => void }) => 
             <Image
               src={post.imageUrl} 
               alt={post.title}
+              width={1200}
+              height={630}
               className="w-full h-64 object-cover rounded-t-2xl"
             />
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 p-2 bg-slate-900/80 rounded-full hover:bg-slate-900"
-            >
-              <X className="w-6 h-6 text-white" />
-            </button>
+            <div className="absolute top-4 right-4 flex gap-2">
+              <button
+                onClick={onClose}
+                className="p-2 bg-slate-900/80 rounded-full hover:bg-slate-900"
+              >
+                <X className="w-6 h-6 text-white" />
+              </button>
+            </div>
+            
+            {isAdmin && (
+              <div className="absolute top-4 left-4 flex gap-2">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={onEdit}
+                  className="p-2 bg-emerald-500/90 rounded-full hover:bg-emerald-500"
+                >
+                  <Edit className="w-5 h-5 text-white" />
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={onDelete}
+                  className="p-2 bg-red-500/90 rounded-full hover:bg-red-500"
+                >
+                  <Trash className="w-5 h-5 text-white" />
+                </motion.button>
+              </div>
+            )}
           </div>
 
           <div className="p-8">
@@ -276,7 +706,7 @@ const ReadingMode = ({ post, onClose }: { post: Post; onClose: () => void }) => 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setLikes(likes + 1)}
-                className="p-2 rounded-full bg-slate-700 text-gray-300 hover:bg-slate-600"
+                className="p-2 rounded-full bg-slate-700 text-gray-300 hover:bg-slate-600 flex items-center"
               >
                 <ThumbsUp className="w-5 h-5" />
                 <span className="ml-1">{likes}</span>
@@ -290,7 +720,7 @@ const ReadingMode = ({ post, onClose }: { post: Post; onClose: () => void }) => 
               </motion.button>
             </div>
 
-            <h1 className="text-3xl font-bold text-white mb-4 font-rubik">
+            <h1 className="text-3xl font-bold text-white mb-4">
               {post.title}
             </h1>
 
@@ -327,29 +757,117 @@ const ReadingMode = ({ post, onClose }: { post: Post; onClose: () => void }) => 
         </div>
       </div>
     </motion.div>
-    </div>
   );
 };
 
+// Main Blog Page Component
 const BlogPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showEditorModal, setShowEditorModal] = useState(false);
+  const [editingPost, setEditingPost] = useState<Post | null>(null);
+  const [posts, setPosts] = useState<Post[]>(blogPosts);
   const postsPerPage = 6;
 
-  const filteredPosts = blogPosts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.content.toLowerCase().includes(searchTerm.toLowerCase());
+  useEffect(() => {
+    // Check if user is already logged in (using localStorage for demo)
+    const checkAuth = async () => {
+      try {
+        await AppwriteService.getCurrentUser();
+        setIsAdmin(true);
+      } catch {
+        setIsAdmin(false);
+      }
+    };
+    
+    checkAuth();
+  }, []);
+
+  const handleAdminLogin = () => {
+    setShowAuthModal(true);
+  };
+
+  const handleAdminLogout = async () => {
+    try {
+      await AppwriteService.logout();
+      setIsAdmin(false);
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
+  };
+
+  const handleLoginSuccess = () => {
+    setIsAdmin(true);
+    setShowAuthModal(false);
+  };
+
+  const handleCreatePost = () => {
+    setEditingPost(null);
+    setShowEditorModal(true);
+  };
+
+  const handleEditPost = (post: Post) => {
+    setEditingPost(post);
+    setShowEditorModal(true);
+    if (selectedPost) {
+      setSelectedPost(null);
+    }
+  };
+
+  const handleDeletePost = (id: number) => {
+    setPosts(posts.filter(post => post.id !== id));
+    if (selectedPost && selectedPost.id === id) {
+      setSelectedPost(null);
+    }
+  };
+
+  const handleSavePost = (data: any) => {
+    if (editingPost) {
+      // Update existing post
+      setPosts(posts.map(post => 
+        post.id === editingPost.id ? { ...data, id: post.id } : post
+      ));
+      
+      // If this post is currently being viewed, update the view
+      if (selectedPost && selectedPost.id === editingPost.id) {
+        setSelectedPost({ ...data, id: editingPost.id });
+      }
+    } else {
+      // Add new post with a new ID
+      const newId = Math.max(...posts.map(post => post.id), 0) + 1;
+      const newPost = { ...data, id: newId };
+      setPosts([...posts, newPost]);
+    }
+    
+    setShowEditorModal(false);
+    setEditingPost(null);
+  };
+
+  // Filtering posts
+  const filteredPosts = posts.filter(post => {
+    const matchesSearch = 
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      
     const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
+    
     return matchesSearch && matchesCategory;
   });
 
+  // Pagination
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
+  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -368,12 +886,80 @@ const BlogPage = () => {
 
   return (
     <div className="min-h-screen bg-slate-900 text-white">
-      <Navbar /> 
+      {/* Navbar with admin button */}
+      <div className="bg-slate-800 shadow-lg sticky top-0 z-40">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex justify-between items-center py-4">
+            <h1 className="text-xl font-bold text-emerald-400">HealthMaster</h1>
+            
+            <div className="flex items-center gap-4">
+              {isAdmin ? (
+                <>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleCreatePost}
+                    className="flex items-center gap-2 bg-emerald-500 px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors"
+                  >
+                    <Plus className="w-4 h-4" /> New Post
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleAdminLogout}
+                    className="px-4 py-2 border border-gray-600 rounded-lg hover:bg-slate-700 transition-colors"
+                  >
+                    Logout
+                  </motion.button>
+                </>
+              ) : (
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleAdminLogin}
+                  className="flex items-center gap-2 bg-slate-700 px-4 py-2 rounded-lg hover:bg-slate-600 transition-colors"
+                >
+                  <LogIn className="w-4 h-4" /> Admin
+                </motion.button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Auth Modal */}
+      <AnimatePresence>
+        {showAuthModal && (
+          <AuthModal
+            onClose={() => setShowAuthModal(false)}
+            onSuccess={handleLoginSuccess}
+          />
+        )}
+      </AnimatePresence>
+      
+      {/* Blog Editor Modal */}
+      <AnimatePresence>
+        {showEditorModal && (
+          <BlogEditorModal
+            post={editingPost}
+            onClose={() => {
+              setShowEditorModal(false);
+              setEditingPost(null);
+            }}
+            onSave={handleSavePost}
+          />
+        )}
+      </AnimatePresence>
+      
+      {/* Reading Mode */}
       <AnimatePresence>
         {selectedPost && (
           <ReadingMode 
             post={selectedPost} 
-            onClose={() => setSelectedPost(null)} 
+            onClose={() => setSelectedPost(null)}
+            isAdmin={isAdmin}
+            onEdit={() => handleEditPost(selectedPost)}
+            onDelete={() => handleDeletePost(selectedPost.id)}
           />
         )}
       </AnimatePresence>
@@ -387,12 +973,12 @@ const BlogPage = () => {
           className="absolute inset-0 z-0"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/50 to-slate-900/90" />
-          < Image
+          <Image
             src="/assets/images/blogg.jpg"
-            width={1920}
-            height={1080}
+            fill
+            sizes="100vw"
             alt="Blog Hero"
-            className="object-cover w-full h-full opacity-20"
+            className="object-cover opacity-20"
           />
         </motion.div>
 
@@ -456,19 +1042,63 @@ const BlogPage = () => {
             animate="visible"
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
+            {isAdmin && (
+              <motion.div
+                variants={itemVariants}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-slate-800 rounded-2xl overflow-hidden border-2 border-dashed border-emerald-500/40 cursor-pointer flex items-center justify-center min-h-[350px]"
+                onClick={handleCreatePost}
+              >
+                <div className="text-center p-8">
+                  <Plus className="w-16 h-16 text-emerald-500/40 mx-auto mb-4" />
+                  <p className="text-emerald-500/60 font-medium text-lg">Add New Blog Post</p>
+                </div>
+              </motion.div>
+            )}
+            
             {currentPosts.map((post) => (
               <motion.article
                 key={post.id}
                 variants={itemVariants}
-                className="bg-slate-800 rounded-2xl overflow-hidden hover:transform hover:scale-[1.02] transition-all duration-300"
+                whileHover={{ scale: 1.03 }}
+                className="bg-slate-800 rounded-2xl overflow-hidden transition-all duration-300 relative"
               >
+                {isAdmin && (
+                  <div className="absolute top-3 right-3 flex gap-2 z-10">
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEditPost(post);
+                      }}
+                      className="p-2 bg-slate-900/80 rounded-full hover:bg-emerald-500 transition-colors"
+                    >
+                      <Edit className="w-4 h-4 text-white" />
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeletePost(post.id);
+                      }}
+                      className="p-2 bg-slate-900/80 rounded-full hover:bg-red-500 transition-colors"
+                    >
+                      <Trash className="w-4 h-4 text-white" />
+                    </motion.button>
+                  </div>
+                )}
+                
                 <div className="relative h-48">
                   <Image
                     src={post.imageUrl}
-                    width={720}
-                    height={480}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     alt={post.title}
                     className="w-full h-full object-cover"
+                    onClick={() => setSelectedPost(post)}
                   />
                 </div>
                 <div className="p-6">
@@ -489,7 +1119,7 @@ const BlogPage = () => {
                     {post.excerpt}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.map((tag) => (
+                    {post.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
                         className="px-3 py-1 text-sm bg-slate-700 rounded-full text-emerald-400"
@@ -497,6 +1127,11 @@ const BlogPage = () => {
                         {tag}
                       </span>
                     ))}
+                    {post.tags.length > 3 && (
+                      <span className="px-3 py-1 text-sm bg-slate-700 rounded-full text-emerald-400">
+                        +{post.tags.length - 3}
+                      </span>
+                    )}
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-sm text-gray-400">
