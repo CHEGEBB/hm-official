@@ -1,9 +1,11 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, Calendar, Clock, User, ChevronRight, X, Bookmark, Share2, ThumbsUp, Edit, Trash, Plus, LogIn } from 'lucide-react'
+import { Search, Calendar, Clock, User, ChevronRight, X, Bookmark, Share2, ThumbsUp, Edit, Trash, Plus, LogIn, Menu } from 'lucide-react'
 import Image from 'next/image'
 import AppwriteService from '../appwriteservices/AppwriteService';
+import Link from "next/link";
+import "../sass/home.scss"
 
 const categories = ["All", "Technology", "Health Tips", "Wellness", "Medical Research", "Patient Care"];
 
@@ -539,6 +541,7 @@ const BlogPage = () => {
   const [showEditorModal, setShowEditorModal] = useState(false);
   const [editingPost, setEditingPost] = useState<Post | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(true);
 
@@ -735,44 +738,109 @@ const BlogPage = () => {
     <div className="min-h-screen bg-slate-900 text-white">
       {/* Navbar with admin button */}
       <div className="bg-slate-800 shadow-lg sticky top-0 z-40">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex justify-between items-center py-4">
-            <h1 className="text-xl font-bold text-emerald-400">HealthMaster</h1>
-            
-            <div className="flex items-center gap-4">
-              {isAdmin ? (
-                <>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleCreatePost}
-                    className="flex items-center gap-2 bg-emerald-500 px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors"
-                  >
-                    <Plus className="w-4 h-4" /> New Post
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleAdminLogout}
-                    className="px-4 py-2 border border-gray-600 rounded-lg hover:bg-slate-700 transition-colors"
-                  >
-                    Logout
-                  </motion.button>
-                </>
-              ) : (
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={handleAdminLogin}
-                  className="flex items-center gap-2 bg-slate-700 px-4 py-2 rounded-lg hover:bg-slate-600 transition-colors"
-                >
-                  <LogIn className="w-4 h-4" /> Admin
-                </motion.button>
-              )}
-            </div>
-          </div>
+  <div className="container mx-auto px-4 sm:px-6">
+    <div className="flex justify-between items-center py-4">
+      {/* Logo */}
+      <h1 className="text-xl font-bold text-emerald-400">HealthMaster</h1>
+
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex items-center gap-6 nav">
+        <Link href="/" className="text-white hover:text-emerald-400 transition">Home</Link>
+        <Link href="/about" className="text-white hover:text-emerald-400 transition">About</Link>
+        <Link href="/ourapp" className="text-white hover:text-emerald-400 transition">Our App</Link>
+        <Link href="/services" className="text-white hover:text-emerald-400 transition">Services</Link>
+        <Link href="/blog" className="text-white hover:text-emerald-400 transition">Blog</Link>
+        <Link href="/contact" className="text-white hover:text-emerald-400 transition">Contact</Link>
+        <Link href="/doctors" className="text-white hover:text-emerald-400 transition">Doctors Portal</Link>
+      </div>
+
+      {/* Admin Button */}
+      <div className="flex items-center gap-4">
+        {isAdmin ? (
+          <>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleCreatePost}
+              className="flex items-center gap-2 bg-emerald-500 px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors"
+            >
+              <Plus className="w-4 h-4" /> New Post
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleAdminLogout}
+              className="px-4 py-2 border border-gray-600 rounded-lg hover:bg-slate-700 transition-colors"
+            >
+              Logout
+            </motion.button>
+          </>
+        ) : (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleAdminLogin}
+            className="flex items-center gap-2 bg-slate-700 px-4 py-2 rounded-lg hover:bg-slate-600 transition-colors"
+          >
+            <LogIn className="w-4 h-4" /> Admin
+          </motion.button>
+        )}
+      </div>
+
+      {/* Hamburger Button (Mobile) */}
+      <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+    </div>
+
+    {/* Mobile Menu */}
+    {isMenuOpen && (
+      <div className="md:hidden flex flex-col items-center gap-4 py-4 bg-slate-900">
+        <Link href="/" className="text-white hover:text-emerald-400 transition" onClick={() => setIsMenuOpen(false)}>Home</Link>
+        <Link href="/about" className="text-white hover:text-emerald-400 transition" onClick={() => setIsMenuOpen(false)}>About</Link>
+        <Link href="/ourapp" className="text-white hover:text-emerald-400 transition" onClick={() => setIsMenuOpen(false)}>Our App</Link>
+        <Link href="/services" className="text-white hover:text-emerald-400 transition" onClick={() => setIsMenuOpen(false)}>Services</Link>
+        <Link href="/blog" className="text-white hover:text-emerald-400 transition" onClick={() => setIsMenuOpen(false)}>Blog</Link>
+        <Link href="/contact" className="text-white hover:text-emerald-400 transition" onClick={() => setIsMenuOpen(false)}>Contact</Link>
+        <Link href="/doctors" className="text-white hover:text-emerald-400 transition" onClick={() => setIsMenuOpen(false)}>Doctors Portal</Link>
+
+        {/* Admin Button in Mobile */}
+        <div className="flex flex-col items-center gap-2">
+          {isAdmin ? (
+            <>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => { handleCreatePost(); setIsMenuOpen(false); }}
+                className="flex items-center gap-2 bg-emerald-500 px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors"
+              >
+                <Plus className="w-4 h-4" /> New Post
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => { handleAdminLogout(); setIsMenuOpen(false); }}
+                className="px-4 py-2 border border-gray-600 rounded-lg hover:bg-slate-700 transition-colors"
+              >
+                Logout
+              </motion.button>
+            </>
+          ) : (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => { handleAdminLogin(); setIsMenuOpen(false); }}
+              className="flex items-center gap-2 bg-slate-700 px-4 py-2 rounded-lg hover:bg-slate-600 transition-colors"
+            >
+              <LogIn className="w-4 h-4" /> Admin
+            </motion.button>
+          )}
         </div>
       </div>
+    )}
+  </div>
+</div>
+
       
       {/* Auth Modal */}
       <AnimatePresence>
