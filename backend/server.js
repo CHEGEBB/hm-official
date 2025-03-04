@@ -43,7 +43,6 @@ app.post('/api/auth/login', async (req, res) => {
         const user = users.documents[0];
         
         // Verify password (in a real app, use proper password hashing)
-        // Here we're assuming the password is stored in plain text for simplicity
         if (user.password !== password) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
@@ -53,14 +52,15 @@ app.post('/api/auth/login', async (req, res) => {
             return res.status(403).json({ message: 'Not authorized as staff' });
         }
         
-        // Create a session token (you might want to use JWT in a real app)
-        const session = await account.createJWT();
+        // Instead of using account.createJWT(), create a simple token
+        // In a production app, you should use a proper JWT library
+        const token = Buffer.from(`${user.$id}:${Date.now()}`).toString('base64');
         
         res.json({ 
             userId: user.$id,
             name: user.name,
             email: user.email,
-            token: session.jwt
+            token: token
         });
     } catch (error) {
         console.error('Login error:', error);
