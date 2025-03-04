@@ -146,7 +146,22 @@ const BlogEditorModal = ({
     '/assets/images/break.jpeg',
     '/assets/images/patient.jpeg',
     '/assets/images/fut.jpeg',
-    '/assets/images/blogg.jpg'
+    '/assets/images/blogg.jpg',
+    '/assets/images/bg1.jpeg',
+    '/assets/images/bg2.jpeg',
+    '/assets/images/bg3.jpeg',
+    '/assets/images/bg4.jpeg',
+    '/assets/images/bg5.jpeg',
+    '/assets/images/bg6.jpeg',
+    '/assets/images/bg7.jpeg',
+    '/assets/images/bg8.jpeg',
+    '/assets/images/bg9.jpeg',
+    '/assets/images/bg10.jpeg',
+    '/assets/images/bg11.jpeg',
+    '/assets/images/bg12.jpeg',
+    '/assets/images/bg13.jpeg',
+
+
   ];
 
   const addTag = () => {
