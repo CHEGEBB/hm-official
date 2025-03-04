@@ -6,10 +6,6 @@ import Navbar from "../components/navbar"
 import Image from 'next/image'
 import AppwriteService from '../appwriteservices/AppwriteService';
 
-
-// Blog posts data
-
-
 const categories = ["All", "Technology", "Health Tips", "Wellness", "Medical Research", "Patient Care"];
 
 interface Post {

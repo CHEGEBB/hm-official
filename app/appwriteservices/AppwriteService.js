@@ -1,4 +1,3 @@
-// AppwriteService.js
 const API_URL = 'https://hm-official.onrender.com/api';
 
 const AppwriteService = {
