@@ -3,7 +3,6 @@ import cors from 'cors';
 import { Client, Databases, Query } from 'node-appwrite';
 import dotenv from 'dotenv';
 
-// Ensure module is treated as ES module
 dotenv.config();
 
 const app = express();

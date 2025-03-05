@@ -1,7 +1,7 @@
-// scripts/create-admin.js
-const { Client, Databases } = require('node-appwrite');
-require('dotenv').config();
+import { Client, Databases } from 'node-appwrite';
+import dotenv from 'dotenv';
 
+dotenv.config();
 // Appwrite Client
 const client = new Client()
     .setEndpoint(process.env.APPWRITE_ENDPOINT)
@@ -15,9 +15,9 @@ const DATABASE_ID = process.env.APPWRITE_DATABASE_ID;
 const USERS_COLLECTION_ID = process.env.APPWRITE_USERS_COLLECTION_ID;
 
 // Admin user details - change these
-const adminName = 'Admin User';
+const adminName = 'Admin';
 const adminEmail = 'admin@healthmaster.com';
-const adminPassword = 'securepassword123'; // In a real app, use a secure password
+const adminPassword = 'securepassword123';
 
 const createAdmin = async () => {
   try {
@@ -30,7 +30,7 @@ const createAdmin = async () => {
       {
         name: adminName,
         email: adminEmail,
-        password: adminPassword, // In a real app, hash this password
+        password: adminPassword,
         isStaff: true
       }
     );
