@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import Head from 'next/head';
 import { Client, Account } from 'appwrite';
 import { FiEye, FiEyeOff, FiLock, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
@@ -17,8 +17,9 @@ const account = new Account(client);
 type ResetPasswordProps = unknown;
 
 const ResetPassword: React.FC<ResetPasswordProps> = () => {
-  const router = useRouter();
-  const { userId, secret } = router.query;
+  const searchParams = useSearchParams();
+  const userId = searchParams.get('userId');
+  const secret = searchParams.get('secret');
   
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -32,7 +33,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
 
   useEffect(() => {
     // Check if we have the required parameters
-    if (userId && secret && typeof userId === 'string' && typeof secret === 'string') {
+    if (userId && secret) {
       setValidParams(true);
     }
   }, [userId, secret]);
@@ -84,7 +85,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
     
     try {
       // Update recovery (reset password)
-      if (typeof userId === 'string' && typeof secret === 'string') {
+      if (userId && secret) {
         await account.updateRecovery(userId, secret, password);
         setSuccess(true);
         
