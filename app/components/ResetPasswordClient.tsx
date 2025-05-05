@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { Client, Account } from 'appwrite';
 import { FiEye, FiEyeOff, FiLock, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import Image from 'next/image';
@@ -14,11 +13,12 @@ client
 
 const account = new Account(client);
 
-export default function ResetPasswordClient() {
-  const searchParams = useSearchParams();
-  const userId = searchParams.get('userId');
-  const secret = searchParams.get('secret');
-  
+type ResetPasswordClientProps = {
+  userId: string | null;
+  secret: string | null;
+}
+
+export default function ResetPasswordClient({ userId, secret }: ResetPasswordClientProps) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -125,7 +125,7 @@ export default function ResetPasswordClient() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Image
           className="mx-auto h-16 w-auto"
-          src="/assets/1.png"
+          src="/assets/icons/1.png"
           width={64}
           height={64}
           alt="Health Master Logo"
