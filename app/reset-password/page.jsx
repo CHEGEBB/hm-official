@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import Image from 'next/image';
 import { Client, Account } from 'appwrite';
+import "../reset.css"
 
 // Initialize Appwrite client
 const client = new Client();
