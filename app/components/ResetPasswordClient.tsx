@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Client, Account } from 'appwrite';
 import { FiEye, FiEyeOff, FiLock, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Initialize Appwrite client
 const client = new Client();
@@ -25,6 +26,7 @@ export default function ResetPasswordClient() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState<'weak' | 'medium' | 'strong' | ''>('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // Extract params from URL on client side
   useEffect(() => {
@@ -92,11 +94,7 @@ export default function ResetPasswordClient() {
       if (userId && secret) {
         await account.updateRecovery(userId, secret, password);
         setSuccess(true);
-        
-        // Redirect to home page after 3 seconds
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 3000);
+        setShowSuccessModal(true);
       } else {
         throw new Error('Invalid userId or secret');
       }
@@ -131,9 +129,9 @@ export default function ResetPasswordClient() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Image
           className="mx-auto h-16 w-auto rounded-full"
-          src="/assets/icons/1.png"
           width={64}
           height={64}
+          src="/assets/icons/1.png"
           alt="Health Master Logo"
         />
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -185,7 +183,12 @@ export default function ResetPasswordClient() {
           ) : (
             <form className="space-y-6" onSubmit={handleResetPassword}>
               {error && (
-                <div className="rounded-md bg-red-50 p-4 animate-fadeIn">
+                <motion.div 
+                  className="rounded-md bg-red-50 p-4"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: "spring", damping: 12 }}
+                >
                   <div className="flex">
                     <div className="flex-shrink-0">
                       <FiAlertCircle className="h-5 w-5 text-red-400" />
@@ -194,7 +197,7 @@ export default function ResetPasswordClient() {
                       <h3 className="text-sm font-medium text-red-800">{error}</h3>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               <div>
@@ -316,6 +319,77 @@ export default function ResetPasswordClient() {
           </p>
         </div>
       </div>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <motion.div 
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div 
+              className="bg-white rounded-lg shadow-xl max-w-md w-full p-6 relative overflow-hidden"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", damping: 15 }}
+            >
+              {/* Success checkmark animation */}
+              <motion.div 
+                className="absolute top-0 left-0 right-0 h-1.5 bg-teal-500"
+                initial={{ width: 0 }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 2 }}
+              />
+              
+              <div className="flex justify-center">
+                <motion.div 
+                  className="rounded-full bg-teal-100 p-3"
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5, repeatType: "reverse" }}
+                >
+                  <FiCheckCircle className="h-12 w-12 text-teal-600" />
+                </motion.div>
+              </div>
+              
+              <motion.h3 
+                className="text-xl font-bold text-center mt-4 text-gray-800"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                Password Reset Successful!
+              </motion.h3>
+              
+              <motion.p 
+                className="text-center text-gray-600 mt-3"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                Your password has been reset successfully. Go back to your Health Master app and login with your new password.
+              </motion.p>
+              
+              <motion.div 
+                className="mt-6 flex justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7 }}
+              >
+                <motion.a 
+                  href="https://www.healthmasterco.com"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-colors duration-150"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Return to Health Master
+                </motion.a>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
