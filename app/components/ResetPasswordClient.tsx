@@ -223,6 +223,7 @@ export default function ResetPasswordClient() {
                     <button
                       type="button"
                       onClick={togglePasswordVisibility}
+                      disabled={isLoading}
                       className="text-gray-400 hover:text-gray-500 focus:outline-none"
                     >
                       {showPassword ? (
