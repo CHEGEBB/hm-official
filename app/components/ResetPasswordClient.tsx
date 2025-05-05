@@ -13,12 +13,9 @@ client
 
 const account = new Account(client);
 
-type ResetPasswordClientProps = {
-  userId: string | null;
-  secret: string | null;
-}
-
-export default function ResetPasswordClient({ userId, secret }: ResetPasswordClientProps) {
+export default function ResetPasswordClient() {
+  const [userId, setUserId] = useState<string | null>(null);
+  const [secret, setSecret] = useState<string | null>(null);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -29,12 +26,21 @@ export default function ResetPasswordClient({ userId, secret }: ResetPasswordCli
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState<'weak' | 'medium' | 'strong' | ''>('');
 
+  // Extract params from URL on client side
   useEffect(() => {
-    // Check if we have the required parameters
-    if (userId && secret) {
-      setValidParams(true);
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userIdParam = urlParams.get('userId');
+      const secretParam = urlParams.get('secret');
+      
+      setUserId(userIdParam);
+      setSecret(secretParam);
+      
+      if (userIdParam && secretParam) {
+        setValidParams(true);
+      }
     }
-  }, [userId, secret]);
+  }, []);
 
   useEffect(() => {
     // Password strength checker
@@ -124,7 +130,7 @@ export default function ResetPasswordClient({ userId, secret }: ResetPasswordCli
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-teal-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Image
-          className="mx-auto h-16 w-auto"
+          className="mx-auto h-16 w-auto rounded-full"
           src="/assets/icons/1.png"
           width={64}
           height={64}
