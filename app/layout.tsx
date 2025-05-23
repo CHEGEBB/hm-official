@@ -16,22 +16,22 @@ export const metadata: Metadata = {
   title: "Healthmaster",
   description: "HealthMaster helps you keep track of your health.",
   icons: {
-    icon: "/con2.png", 
-    apple: "/con2.png", 
+    icon: "/adaptive.png", 
+    apple: "/adaptive.png", 
     other: [
       {
         rel: "icon",
-        url: "/con2.png", 
+        url: "/adaptive.png", 
         sizes: "32x32",
       },
       {
         rel: "icon",
-        url: "/con2.png", 
+        url: "/adaptive.png", 
         sizes: "16x16",
       },
       {
         rel: "icon",
-        url: "/con2.png", 
+        url: "/adaptive.png", 
         sizes: "180x180",  // For Apple devices
       },
     ],
