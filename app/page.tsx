@@ -282,7 +282,7 @@ const LandingPage = () => {
             className="text-center mb-14"
           >
             <h2 className="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl font-rubik text-emerald-500">
-              Discover What's Inside
+              Discover What&apos;s Inside
             </h2>
             <p className="max-w-2xl mx-auto text-lg font-raleway text-gray-300">
               A comprehensive suite of tools designed to enhance your healthcare experience
@@ -631,7 +631,7 @@ const LandingPage = () => {
               Latest Updates
             </h2>
             <p className="max-w-2xl mx-auto text-lg text-gray-300 font-raleway">
-              Stay informed about Health Master's development and healthcare insights
+              Stay informed about Health Master&apos;s development and healthcare insights
             </p>
           </motion.div>
 
