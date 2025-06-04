@@ -26,7 +26,7 @@ const AppPage = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/50 to-slate-900/90" />
           <Image
-            src="/assets/images/design.png"
+            src="/assets/images/graphic.png"
             alt="App Page Background"
             fill
             className="object-cover opacity-30"

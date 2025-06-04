@@ -438,13 +438,13 @@ const LandingPage = () => {
               },
             }}
           >
-            {[1, 2, 3, 4, 5, 6, 7].map((index) => (
+            {[1, 2, 3, 4, 5, 6, 7,8].map((index) => (
               <motion.div
                 key={index}
                 className="relative flex-none w-52 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg"
               >
                 <Image
-                  src={`/assets/images/screen${index}.jpg`}
+                  src={`/assets/screenshots/screen${index}.png`}
                   width={300}
                   height={600}
                   quality={100}
@@ -454,13 +454,13 @@ const LandingPage = () => {
               </motion.div>
             ))}
             {/* Duplicate for seamless loop */}
-            {[1, 2, 3, 4, 5, 6, 7].map((index) => (
+            {[1, 2, 3, 4, 5, 6, 7,8].map((index) => (
               <motion.div
                 key={`dup-${index}`}
                 className="relative flex-none w-52 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg "
               >
                 <Image
-                  src={`/assets/images/screen${index}.jpg`}
+                  src={`/assets/screenshots/screen${index}.png`}
                   width={300}
                   height={600}
                   quality={100}
@@ -486,13 +486,13 @@ const LandingPage = () => {
               },
             }}
           >
-            {[8, 9, 10, 11, 12, 13, 14].map((index) => (
+            {[ 9, 10, 11, 12, 13, 14,15,16].map((index) => (
               <motion.div
                 key={index}
                 className="relative flex-none w-48 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg"
               >
                 <Image
-                  src={`/assets/images/screen${index}.jpg`}
+                  src={`/assets/screenshots/screen${index}.png`}
                   width={300}
                   height={600}
                   quality={100}
@@ -502,13 +502,13 @@ const LandingPage = () => {
               </motion.div>
             ))}
             {/* Duplicate for seamless loop */}
-            {[8, 9, 10, 11, 12, 13, 14].map((index) => (
+            {[9, 10, 11, 12, 13, 14, 15,16].map((index) => (
               <motion.div
                 key={`dup-${index}`}
                 className="relative flex-none w-48 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg"
               >
                 <Image
-                  src={`/assets/images/screen${index}.jpg`}
+                  src={`/assets/screenshots/screen${index}.png`}
                   width={300}
                   height={600}
                   quality={100}
