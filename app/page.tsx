@@ -640,7 +640,7 @@ const LandingPage = () => {
               {
                 title: "HealthMaster Beta Launch",
                 excerpt: "Introducing our innovative healthcare management platform",
-                image: "/assets/images/land1.png",
+                image: "/assets/images/graphic.png",
                 date: "2 weeks ago"
               },
               {
@@ -652,7 +652,7 @@ const LandingPage = () => {
               {
                 title: "What's Next for HealthMaster",
                 excerpt: "Upcoming features and improvements based on user feedback",
-                image: "/assets/images/im.jpeg",
+                image: "/assets/screenshots/screen15.png",
                 date: "3 days ago"
               }
             ].map((post, index) => (
