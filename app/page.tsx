@@ -12,7 +12,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import "./sass/home.scss";
-import { FaUserDoctor, FaGooglePlay } from 'react-icons/fa6';
 
 const LandingPage = () => {
   const pathname = usePathname();
