@@ -245,12 +245,12 @@ const LandingPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="mb-6 text-4xl font-bold sm:text-5xl lg:text-6xl font-rubik">
+              <h1 className="mb-6 text-4xl font-bold sm:text-3xl lg:text-4xl font-rubik">
                 Your Personal Health Companion
               </h1>
-              <p className="mb-8 text-lg sm:text-xl lg:text-2xl font-raleway text-white/90">
+              <p className="mb-8 text-lg sm:text-xl lg:text-xl  text-white/90 leading-normal">
                 Take control of your health journey with HealthMaster. Manage medications, 
-                track appointments, and connect with healthcare professionals - all in one place.
+                check drug interactions, Learn about your meds and store your medical records- all in one place.
               </p>
               
               <motion.a
