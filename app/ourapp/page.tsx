@@ -204,12 +204,12 @@ const features = [
 ];
 
 const screenshots = [
-  '/assets/images/screen1.jpg',
-  '/assets/images/screen2.jpg',
-  '/assets/images/screen3.jpg',
-  '/assets/images/screen4.jpg',
-  '/assets/images/screen5.jpg',
-  '/assets/images/screen6.jpg',
+  '/assets/screenshots/view1.png',
+  '/assets/screenshots/view2.png',
+  '/assets/screenshots/view3.png',
+  '/assets/screenshots/view4.png',
+  '/assets/screenshots/view5.png',
+  '/assets/screenshots/view6.png',
 ];
 
 export default AppPage;
