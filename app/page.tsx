@@ -42,7 +42,7 @@ const LandingPage = () => {
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="relative w-[308px] h-[720px] mx-auto -mt-12 -z-56"
+        className="relative w-[308px] h-[720px] mx-auto mt-12 "
       >
         <div className="absolute w-full h-full">
           {/* Phone frame using mockup.png */}
@@ -57,7 +57,7 @@ const LandingPage = () => {
             />
             
             {/* Screen Content - positioned inside the mockup */}
-            <div className="absolute top-[9%] left-[7%] right-[7%] bottom-[9%] overflow-hidden rounded-[20px]">
+            <div className="absolute top-[7%] left-[6.5%] right-[7%] bottom-[9%] overflow-hidden rounded-[20px]">
               <iframe
                 width="100%"
                 height="100%"
@@ -230,7 +230,7 @@ const LandingPage = () => {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/50 to-slate-900/90" />
           <Image
-            src="/assets/images/1.jpg"
+            src="/assets/images/healthbg3.jpg"
             alt="Medical background"
             fill
             className="object-cover opacity-30"
