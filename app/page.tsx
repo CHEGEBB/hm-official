@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpCircle, Menu, X, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Download, Star, Calendar, Clock, User, Heart } from 'lucide-react';
+import { ArrowUpCircle, Menu, X, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Download, Star, Calendar, Clock, User, Heart, ChevronRight, ChevronLeft, HeartPulse } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -11,15 +11,14 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import "./sass/home.scss"
-import { FaUserDoctor } from 'react-icons/fa6';
+import "./sass/home.scss";
+import { FaUserDoctor, FaGooglePlay } from 'react-icons/fa6';
 
 const LandingPage = () => {
-  // const router = useRouter();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const videoRef = useRef(null);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -32,10 +31,10 @@ const LandingPage = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    {name :'Our App', path: '/ourapp'},
-    {name :'Services', path: '/services'},
-    {name :'Blog', path: '/blog'},
-    {name :'Contact', path: '/contact'},
+    { name: 'Our App', path: '/ourapp' },
+    { name: 'Services', path: '/services' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const PhoneMockup = () => {
@@ -44,48 +43,35 @@ const LandingPage = () => {
         initial={{ opacity: 0, y: 80 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="relative w-[300px] h-[600px] mx-auto mt-12"
+        className="relative w-[308px] h-[720px] mx-auto -mt-12 -z-56"
       >
         <div className="absolute w-full h-full">
-          {/* Phone frame */}
-          <div className="absolute w-full h-full border-[14px] border-gray-800 rounded-[45px] overflow-hidden shadow-xl bg-black">
-            {/* Screen Content */}
-            <div className="relative w-full h-full overflow-hidden bg-black">
-              {/* Dynamic notch */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120px] h-[30px] bg-black rounded-b-[20px] z-20">
-                <div className="absolute top-[10px] left-1/2 -translate-x-1/2 w-[60px] h-[4px] bg-gray-800 rounded-full" />
-                <div className="absolute top-[8px] left-[25px] w-[8px] h-[8px] bg-gray-700 rounded-full" />
-                <div className="absolute top-[8px] right-[25px] w-[8px] h-[8px] bg-gray-700 rounded-full" />
-              </div>
-              
-              {/* Video content */}
+          {/* Phone frame using mockup.png */}
+          <div className="absolute w-full h-full">
+            {/* Phone frame image */}
+            <Image
+              src="/assets/images/mockup.png"
+              alt="Phone mockup"
+              width={606}
+              height={1280}
+              className="object-contain w-full h-full"
+            />
+            
+            {/* Screen Content - positioned inside the mockup */}
+            <div className="absolute top-[9%] left-[7%] right-[7%] bottom-[9%] overflow-hidden rounded-[20px]">
               <iframe
-          width="100%"
-          height="100%"
-          src="https://www.youtube.com/embed/yee1MjD-vtc?start=160"
-          title="HealthMaster Demo Video"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="rounded-lg shadow-lg"
-        ></iframe>
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/Ox81MF4VU1U?autoplay=1&mute=1&start=0&playlist=Ox81MF4VU1U&loop=1"
+                title="HealthMaster Demo Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="bg-black"
+                ref={videoRef}
+              ></iframe>
             </div>
-  
-            {/* Home indicator */}
-            <div className="absolute bottom-2 left-1/2 w-32 h-1 -translate-x-1/2 bg-gray-300 rounded-full" />
           </div>
-  
-          {/* Side buttons */}
-          <div className="absolute -left-[2px] top-[120px] w-[4px] h-16 bg-gray-700 rounded-l-lg" /> {/* Volume up */}
-          <div className="absolute -left-[2px] top-[170px] w-[4px] h-16 bg-gray-700 rounded-l-lg" /> {/* Volume down */}
-          <div className="absolute -right-[2px] top-[140px] w-[4px] h-20 bg-gray-700 rounded-r-lg" /> {/* Power button */}
-  
-          {/* Silent switch */}
-          <div className="absolute -left-[2px] top-[80px] w-[4px] h-6 bg-gray-700 rounded-l-lg" />
-  
-          {/* Top and bottom speaker grills */}
-          <div className="absolute top-[8px] left-1/2 -translate-x-1/2 w-16 h-[4px] bg-gray-700 rounded-full" />
-          <div className="absolute bottom-[8px] left-1/2 -translate-x-1/2 w-16 h-[4px] bg-gray-700 rounded-full" />
         </div>
       </motion.div>
     );
@@ -160,43 +146,35 @@ const LandingPage = () => {
               </Link>
             ))}
           </div>
-          {/* <div className="portal">
-          <Link
-              href="/doctors-portal"
-              className="w-50 rounded-2xl px-6 py-2 mt-2 text-left bg-emerald-500 hover:bg-emerald-600 font-poppins"
-            >
-              Doctors Portal
-            </Link>
-            </div> */}
-            
 
           <div className="hidden md:flex md:items-center md:space-x-4">
-      <a href="#">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center px-6  py-2 text-sm text-white transition-colors rounded-full font-poppins bg-emerald-500 hover:bg-emerald-600"
-        >
-          <Download className="w-4 h-4 mr-2" />
-          Download App
-        </motion.button>
-      </a>
-    </div>
-    <div className="hidden md:flex md:items-center md:space-x-4">
-      <a href="/doctors-portal">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center px-6  py-2 text-sm text-white transition-colors rounded-full font-poppins bg-emerald-500 hover:bg-emerald-600"
-        >
-          <FaUserDoctor className="w-4 h-4 mr-2" />
-          Doctors Portal
-        </motion.button>
-      </a>
-    </div>
+            <a href="#">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center px-6 py-2 text-sm text-white transition-colors rounded-full font-poppins bg-emerald-500 hover:bg-emerald-600"
+              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 283"><path fill="#ea4335" d="M119.553 134.916L1.06 259.061a32.14 32.14 0 0 0 47.062 19.071l133.327-75.934z"/><path fill="#fbbc04" d="M239.37 113.814L181.715 80.79l-64.898 56.95l65.162 64.28l57.216-32.67a31.345 31.345 0 0 0 0-55.537z"/><path fill="#4285f4" d="M1.06 23.487A30.6 30.6 0 0 0 0 31.61v219.327a32.3 32.3 0 0 0 1.06 8.124l122.555-120.966z"/><path fill="#34a853" d="m120.436 141.274l61.278-60.483L48.564 4.503A32.85 32.85 0 0 0 32.051 0C17.644-.028 4.978 9.534 1.06 23.399z"/></svg>
+
+                Coming Soon
+              </motion.button>
+            </a>
+          </div>
+          <div className="hidden md:flex md:items-center md:space-x-4">
+            <a href="/doctors-portal">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center px-6 py-2 text-sm text-white transition-colors rounded-full font-poppins bg-emerald-500 hover:bg-emerald-600"
+              >
+              <HeartPulse  className="w-4 h-4 mr-2"/>
+                Doctors Portal
+              </motion.button>
+            </a>
+          </div>
 
           <button 
-            className="text-emerald-500 md:hidden mr-10 pr-10" 
+            className="text-emerald-500 md:hidden" 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X /> : <Menu />}
@@ -229,8 +207,8 @@ const LandingPage = () => {
                 whileTap={{ scale: 0.95 }}
                 className="w-full px-6 py-2 mt-2 text-left bg-emerald-500 hover:bg-emerald-600 font-poppins"
               >
-                <Download className="inline w-4 h-4 mr-2" />
-                Download App
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 283"><path fill="#ea4335" d="M119.553 134.916L1.06 259.061a32.14 32.14 0 0 0 47.062 19.071l133.327-75.934z"/><path fill="#fbbc04" d="M239.37 113.814L181.715 80.79l-64.898 56.95l65.162 64.28l57.216-32.67a31.345 31.345 0 0 0 0-55.537z"/><path fill="#4285f4" d="M1.06 23.487A30.6 30.6 0 0 0 0 31.61v219.327a32.3 32.3 0 0 0 1.06 8.124l122.555-120.966z"/><path fill="#34a853" d="m120.436 141.274l61.278-60.483L48.564 4.503A32.85 32.85 0 0 0 32.051 0C17.644-.028 4.978 9.534 1.06 23.399z"/></svg>
+                Coming Soon
               </motion.button>
             </motion.div>
           )}
@@ -239,16 +217,15 @@ const LandingPage = () => {
 
       {/* Hero Section */}
       <header className="relative flex items-center min-h-screen px-4 pt-32 pb-16 overflow-hidden sm:px-6">
-        {/* Animated background */}
+        {/* Parallax background */}
         <motion.div
           animate={{ 
-            scale: [1, 1.1, 1],
-            rotate: [0, 2, -2, 0],
+            y: [-20, 0, -20],
           }}
           transition={{
-            duration: 20,
+            duration: 10,
             repeat: Infinity,
-            ease: "linear"
+            ease: "easeInOut"
           }}
           className="absolute inset-0 z-0"
         >
@@ -283,8 +260,9 @@ const LandingPage = () => {
                 className="inline-flex items-center px-8 py-3 text-lg font-poppins text-white transition-colors rounded-full bg-emerald-500 hover:bg-emerald-600"
                 href='#'
               >
-                <Download className="w-5 h-5 mr-2" />
-                Download Beta Version
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 256 283"><path fill="#ea4335" d="M119.553 134.916L1.06 259.061a32.14 32.14 0 0 0 47.062 19.071l133.327-75.934z"/><path fill="#fbbc04" d="M239.37 113.814L181.715 80.79l-64.898 56.95l65.162 64.28l57.216-32.67a31.345 31.345 0 0 0 0-55.537z"/><path fill="#4285f4" d="M1.06 23.487A30.6 30.6 0 0 0 0 31.61v219.327a32.3 32.3 0 0 0 1.06 8.124l122.555-120.966z"/><path fill="#34a853" d="m120.436 141.274l61.278-60.483L48.564 4.503A32.85 32.85 0 0 0 32.051 0C17.644-.028 4.978 9.534 1.06 23.399z"/></svg>
+              
+                Coming Soon on Google Play
               </motion.a>
             </motion.div>
 
@@ -305,382 +283,412 @@ const LandingPage = () => {
             className="text-center mb-14"
           >
             <h2 className="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl font-rubik text-emerald-500">
-              Discover Whats Inside
+              Discover What's Inside
             </h2>
             <p className="max-w-2xl mx-auto text-lg font-raleway text-gray-300">
               A comprehensive suite of tools designed to enhance your healthcare experience
             </p>
           </motion.div>
 
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={70}
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 5000 }}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-            }}
-            className="!pb-12"
-          >
-            {features.map((feature) => (
-              <SwiperSlide key={feature.title}>
-                <motion.div
-                  whileHover={{ y: -10 }}
-                  className="p-6 h-full transition-transform bg-slate-700 rounded-2xl"
-                >
-                  <div className="p-4 mb-4 rounded-lg bg-slate-600/50 w-fit">
-                    {feature.icon}
-                  </div>
-                  <h3 className="mb-3 text-xl font-bold font-rubik text-emerald-400">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-300 font-raleway">
-                    {feature.description}
-                  </p>
-                </motion.div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <div className="relative">
+            {/* Custom navigation buttons positioned outside cards */}
+            <div className="absolute top-1/2 -left-4 z-10 transform -translate-y-1/2 hidden md:block">
+              <button className="swiper-button-prev-custom bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-2 shadow-lg">
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="absolute top-1/2 -right-4 z-10 transform -translate-y-1/2 hidden md:block">
+              <button className="swiper-button-next-custom bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-2 shadow-lg">
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={30}
+              slidesPerView={1}
+              navigation={{
+                prevEl: '.swiper-button-prev-custom',
+                nextEl: '.swiper-button-next-custom',
+              }}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 5000 }}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+              }}
+              className="!pb-12"
+            >
+              {features.map((feature) => (
+                <SwiperSlide key={feature.title}>
+                  <motion.div
+                    whileHover={{ y: -10 }}
+                    className="p-6 h-full transition-transform bg-slate-700 rounded-2xl"
+                  >
+                    <div className="p-4 mb-4 rounded-lg bg-slate-600/50 w-fit">
+                      {feature.icon}
+                    </div>
+                    <h3 className="mb-3 text-xl font-bold font-rubik text-emerald-400">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-300 font-raleway">
+                      {feature.description}
+                    </p>
+                  </motion.div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </section>
 
       {/* Statistics Section */}
-<section className="py-16 bg-emerald-500">
-  <div className="container px-4 mx-auto sm:px-6">
-    <div className="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
-      {[
-        { number: "120+", label: "Beta Users" },
-        { number: "25+", label: "Healthcare Providers" },
-        { number: "55+", label: "Appointments Booked" },
-        { number: "95%", label: "Beta Satisfaction" }
-      ].map((stat, index) => (
+      <section className="py-16 bg-emerald-500">
+        <div className="container px-4 mx-auto sm:px-6">
+          <div className="grid gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { number: "120+", label: "Beta Users" },
+              { number: "25+", label: "Healthcare Providers" },
+              { number: "55+", label: "Appointments Booked" },
+              { number: "95%", label: "Beta Satisfaction" }
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <h4 className="mb-2 text-4xl font-bold text-white font-rubik">{stat.number}</h4>
+                <p className="text-emerald-100 font-poppins">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* App Showcase Section */}
+      <section className="relative py-20 overflow-hidden bg-emerald-600">
         <motion.div
-          key={stat.label}
           initial={{ opacity: 0, scale: 0.5 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
+          whileInView={{ opacity: 0.1, scale: 1 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0 z-0"
         >
-          <h4 className="mb-2 text-4xl font-bold text-white font-rubik">{stat.number}</h4>
-          <p className="text-emerald-100 font-poppins">{stat.label}</p>
+          <div className="absolute inset-0 bg-pattern opacity-10" />
         </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
 
-<section className="relative py-20 overflow-hidden bg-emerald-600">
-  <motion.div
-    initial={{ opacity: 0, scale: 0.5 }}
-    whileInView={{ opacity: 0.1, scale: 1 }}
-    transition={{ duration: 1 }}
-    className="absolute inset-0 z-0"
-  >
-    <div className="absolute inset-0 bg-pattern opacity-10" />
-  </motion.div>
-
-  <div className="container relative z-10 px-4 mx-auto sm:px-6">
-    <div className="grid items-center gap-8 lg:grid-cols-2">
-      <div className="text-center lg:text-left">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl font-rubik"
-        >
-          Get Early Access
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="mb-8 text-lg text-emerald-100 font-raleway"
-        >
-          Be among the first to experience the future of healthcare management
-        </motion.p>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center px-8 py-3 text-emerald-600 bg-emerald-300 rounded-full hover:bg-emerald-50 font-poppins"
-        >
-          <motion.a
+        <div className="container relative z-10 px-4 mx-auto sm:px-6">
+          <div className="grid items-center gap-8 lg:grid-cols-2">
+            <div className="text-center lg:text-left">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl font-rubik"
+              >
+                Get Early Access
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="mb-8 text-lg text-emerald-100 font-raleway"
+              >
+                Be among the first to experience the future of healthcare management
+              </motion.p>
+              <motion.a
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center px-8 py-3 text-lg font-poppins text-white transition-colors rounded-full bg-emerald-500 hover:bg-emerald-600"
-                href='#'
+                href="#"
+                className="inline-flex items-center px-8 py-3 text-lg font-poppins text-emerald-600 transition-colors rounded-full bg-white hover:bg-emerald-100"
               >
-                <Download className="w-5 h-5 mr-2" />
-                Download Beta Version
+              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 256 283"><path fill="#ea4335" d="M119.553 134.916L1.06 259.061a32.14 32.14 0 0 0 47.062 19.071l133.327-75.934z"/><path fill="#fbbc04" d="M239.37 113.814L181.715 80.79l-64.898 56.95l65.162 64.28l57.216-32.67a31.345 31.345 0 0 0 0-55.537z"/><path fill="#4285f4" d="M1.06 23.487A30.6 30.6 0 0 0 0 31.61v219.327a32.3 32.3 0 0 0 1.06 8.124l122.555-120.966z"/><path fill="#34a853" d="m120.436 141.274l61.278-60.483L48.564 4.503A32.85 32.85 0 0 0 32.051 0C17.644-.028 4.978 9.534 1.06 23.399z"/></svg>
+
+                Coming Soon on Google Play
               </motion.a>
-        </motion.button>
-      </div>
+            </div>
 
-      <div className="overflow-hidden">
-        <div className="flex flex-col gap-4">
-          {/* First row - scrolling right */}
-          <motion.div 
-            className="flex gap-4 pb-4"
-            animate={{
-              x: [0, -1400],
-            }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 20,
-                ease: "linear",
-              },
-            }}
-          >
-            {[1, 2, 3, 4, 5, 6, 7,8].map((index) => (
-              <motion.div
-                key={index}
-                className="relative flex-none w-52 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg"
-              >
-                <Image
-                  src={`/assets/screenshots/screen${index}.png`}
-                  width={300}
-                  height={600}
-                  quality={100}
-                  alt={`App Screenshot ${index}`}
-                  className="object-cover w-full h-full"
-                />
-              </motion.div>
-            ))}
-            {/* Duplicate for seamless loop */}
-            {[1, 2, 3, 4, 5, 6, 7,8].map((index) => (
-              <motion.div
-                key={`dup-${index}`}
-                className="relative flex-none w-52 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg "
-              >
-                <Image
-                  src={`/assets/screenshots/screen${index}.png`}
-                  width={300}
-                  height={600}
-                  quality={100}
-                  alt={`App Screenshot ${index}`}
-                  className="object-cover w-full h-full"
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+            <div className="overflow-hidden">
+              <div className="flex flex-col gap-4">
+                {/* First row - scrolling right */}
+                <motion.div 
+                  className="flex gap-4 pb-4"
+                  animate={{
+                    x: [0, -1400],
+                  }}
+                  transition={{
+                    x: {
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      duration: 20,
+                      ease: "linear",
+                    },
+                  }}
+                >
+                  {[1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
+                    <motion.div
+                      key={index}
+                      className="relative flex-none w-52 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg"
+                    >
+                      <Image
+                        src={`/assets/screenshots/screen${index}.png`}
+                        width={300}
+                        height={600}
+                        quality={100}
+                        alt={`App Screenshot ${index}`}
+                        className="object-cover w-full h-full"
+                      />
+                    </motion.div>
+                  ))}
+                  {/* Duplicate for seamless loop */}
+                  {[1, 2, 3, 4, 5, 6, 7, 8].map((index) => (
+                    <motion.div
+                      key={`dup-${index}`}
+                      className="relative flex-none w-52 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg"
+                    >
+                      <Image
+                        src={`/assets/screenshots/screen${index}.png`}
+                        width={300}
+                        height={600}
+                        quality={100}
+                        alt={`App Screenshot ${index}`}
+                        className="object-cover w-full h-full"
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
 
-          {/* Second row - scrolling left */}
-          <motion.div 
-            className="flex gap-4"
-            animate={{
-              x: [-1400, 0],
-            }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 20,
-                ease: "linear",
-              },
-            }}
-          >
-            {[ 9, 10, 11, 12, 13, 14,15,16].map((index) => (
-              <motion.div
-                key={index}
-                className="relative flex-none w-48 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg"
-              >
-                <Image
-                  src={`/assets/screenshots/screen${index}.png`}
-                  width={300}
-                  height={600}
-                  quality={100}
-                  alt={`App Screenshot ${index}`}
-                  className="object-cover w-full h-full"
-                />
-              </motion.div>
-            ))}
-            {/* Duplicate for seamless loop */}
-            {[9, 10, 11, 12, 13, 14, 15,16].map((index) => (
-              <motion.div
-                key={`dup-${index}`}
-                className="relative flex-none w-48 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg"
-              >
-                <Image
-                  src={`/assets/screenshots/screen${index}.png`}
-                  width={300}
-                  height={600}
-                  quality={100}
-                  alt={`App Screenshot ${index}`}
-                  className="object-cover w-full h-full"
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+                {/* Second row - scrolling left */}
+                <motion.div 
+                  className="flex gap-4"
+                  animate={{
+                    x: [-1400, 0],
+                  }}
+                  transition={{
+                    x: {
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      duration: 20,
+                      ease: "linear",
+                    },
+                  }}
+                >
+                  {[9, 10, 11, 12, 13, 14, 15, 16].map((index) => (
+                    <motion.div
+                      key={index}
+                      className="relative flex-none w-48 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg"
+                    >
+                      <Image
+                        src={`/assets/screenshots/screen${index}.png`}
+                        width={300}
+                        height={600}
+                        quality={100}
+                        alt={`App Screenshot ${index}`}
+                        className="object-cover w-full h-full"
+                      />
+                    </motion.div>
+                  ))}
+                  {/* Duplicate for seamless loop */}
+                  {[9, 10, 11, 12, 13, 14, 15, 16].map((index) => (
+                    <motion.div
+                      key={`dup-${index}`}
+                      className="relative flex-none w-48 aspect-[9/16] rounded-2xl overflow-hidden shadow-lg"
+                    >
+                      <Image
+                        src={`/assets/screenshots/screen${index}.png`}
+                        width={300}
+                        height={600}
+                        quality={100}
+                        alt={`App Screenshot ${index}`}
+                        className="object-cover w-full h-full"
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
-{/* Testimonials Section */}
-<section className="py-20 bg-slate-900">
-  <div className="container px-4 mx-auto sm:px-6">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="text-center mb-14"
-    >
-      <h2 className="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl font-rubik text-emerald-500">
-        Early User Feedback
-      </h2>
-      <p className="max-w-2xl mx-auto text-lg text-gray-300 font-raleway">
-        Here is what our beta testers are saying about HealthMaster
-      </p>
-    </motion.div>
-
-    <Swiper
-      modules={[Navigation, Pagination, Autoplay]}
-      spaceBetween={30}
-      slidesPerView={1}
-      navigation
-      pagination={{ clickable: true }}
-      autoplay={{ delay: 5000 }}
-      breakpoints={{
-        768: {
-          slidesPerView: 2,
-        },
-        1024: {
-          slidesPerView: 3,
-        },
-      }}
-      className="!pb-14"
-    >
-      {[
-        {
-          name: "Bianca grey",
-          role: "Beta Tester",
-          image: "/assets/images/12.jpeg",
-          content: "As someone who just started using HealthMaster two weeks ago, I'm impressed by how intuitive the medication tracking is."
-        },
-        {
-          name: "Sarah Williams",
-          role: "Early Access User",
-          image: "/assets/images/ab5.jpeg",
-          content: "The appointment scheduling feature has already saved me so much time. Looking forward to seeing what's next!"
-        },
-        {
-          name: "Michael Brown",
-          role: "Beta Program",
-          image: "/assets/images/54.jpg",
-          content: "Just completed my first week with HealthMaster. The health metrics tracking is exactly what I've been looking for."
-        }
-      ].map((testimonial, index) => (
-        <SwiperSlide key={index}>
+      {/* Testimonials Section */}
+      <section className="py-20 bg-slate-900">
+        <div className="container px-4 mx-auto sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="p-6 h-full bg-slate-800 rounded-2xl"
+            transition={{ duration: 0.8 }}
+            className="text-center mb-14"
           >
-            <div className="flex items-center mb-4 space-x-4">
-              <Image
-                src={testimonial.image}
-                alt={testimonial.name}
-                width={60}
-                height={60}
-                className="rounded-full"
-              />
-              <div>
-                <h4 className="font-bold text-emerald-400 font-sora">{testimonial.name}</h4>
-                <p className="text-sm text-gray-400 font-poppins">{testimonial.role}</p>
-              </div>
-            </div>
-            <p className="text-gray-300 font-raleway">{testimonial.content}</p>
-            <div className="flex mt-4 space-x-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 text-emerald-500 fill-current" />
-              ))}
-            </div>
+            <h2 className="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl font-rubik text-emerald-500">
+              Early User Feedback
+            </h2>
+            <p className="max-w-2xl mx-auto text-lg text-gray-300 font-raleway">
+              Here is what our beta testers are saying about HealthMaster
+            </p>
           </motion.div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
-</section>
 
-{/* Blog Section */}
-<section className="py-20 bg-slate-800">
-  <div className="container px-4 mx-auto sm:px-6">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="text-center mb-14"
-    >
-      <h2 className="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl font-rubik text-emerald-500">
-        Latest Updates
-      </h2>
-      <p className="max-w-2xl mx-auto text-lg text-gray-300 font-raleway">
-        Stay informed about Health Masters development and healthcare insights
-      </p>
-    </motion.div>
+          <div className="relative">
+            {/* Custom navigation buttons positioned outside cards */}
+            <div className="absolute top-1/2 -left-4 z-10 transform -translate-y-1/2 hidden md:block">
+              <button className="swiper-button-prev-testimonial bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-2 shadow-lg">
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="absolute top-1/2 -right-4 z-10 transform -translate-y-1/2 hidden md:block">
+              <button className="swiper-button-next-testimonial bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-2 shadow-lg">
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
 
-    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {[
-        {
-          title: "HealthMaster Beta Launch",
-          excerpt: "Introducing our innovative healthcare management platform",
-          image: "/assets/images/land1.png",
-          date: "2 weeks ago"
-        },
-        {
-          title: "Early User Success Stories",
-          excerpt: "How our beta users are transforming their healthcare experience",
-          image: "/assets/images/user.jpeg",
-          date: "1 week ago"
-        },
-        {
-          title: "What's Next for HealthMaster",
-          excerpt: "Upcoming features and improvements based on user feedback",
-          image: "/assets/images/im.jpeg",
-          date: "3 days ago"
-        }
-      ].map((post, index) => (
-        <motion.article
-          key={index}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="overflow-hidden bg-slate-700 rounded-2xl"
-        >
-          <div className="relative h-48">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="p-6">
-            <p className="mb-2 text-sm text-emerald-400 font-poppins">{post.date}</p>
-            <h3 className="mb-2 text-xl font-bold text-white font-rubik">{post.title}</h3>
-            <p className="mb-4 text-gray-300 font-raleway">{post.excerpt}</p>
-            <Link
-              href="/blog"
-              className="inline-flex items-center text-emerald-400 hover:text-emerald-300 font-poppins"
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={30}
+              slidesPerView={1}
+              navigation={{
+                prevEl: '.swiper-button-prev-testimonial',
+                nextEl: '.swiper-button-next-testimonial',
+              }}
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 5000 }}
+              breakpoints={{
+                768: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+              }}
+              className="!pb-14"
             >
-              Read More
-              <ArrowUpCircle className="w-4 h-4 ml-2 rotate-90" />
-            </Link>
+              {[
+                {
+                  name: "Bianca Grey",
+                  role: "Beta Tester",
+                  image: "/assets/images/12.jpeg",
+                  content: "As someone who just started using HealthMaster two weeks ago, I'm impressed by how intuitive the medication tracking is."
+                },
+                {
+                  name: "Sarah Williams",
+                  role: "Early Access User",
+                  image: "/assets/images/ab5.jpeg",
+                  content: "The appointment scheduling feature has already saved me so much time. Looking forward to seeing what's next!"
+                },
+                {
+                  name: "Michael Brown",
+                  role: "Beta Program",
+                  image: "/assets/images/54.jpg",
+                  content: "Just completed my first week with HealthMaster. The health metrics tracking is exactly what I've been looking for."
+                }
+              ].map((testimonial, index) => (
+                <SwiperSlide key={index}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="p-6 h-full bg-slate-800 rounded-2xl"
+                  >
+                    <div className="flex items-center mb-4 space-x-4">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        width={60}
+                        height={60}
+                        className="rounded-full"
+                      />
+                      <div>
+                        <h4 className="font-bold text-emerald-400 font-sora">{testimonial.name}</h4>
+                        <p className="text-sm text-gray-400 font-poppins">{testimonial.role}</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-300 font-raleway">{testimonial.content}</p>
+                    <div className="flex mt-4 space-x-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 text-emerald-500 fill-current" />
+                      ))}
+                    </div>
+                  </motion.div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
-        </motion.article>
-      ))}
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
+
+      {/* Blog Section */}
+      <section className="py-20 bg-slate-800">
+        <div className="container px-4 mx-auto sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-14"
+          >
+            <h2 className="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl font-rubik text-emerald-500">
+              Latest Updates
+            </h2>
+            <p className="max-w-2xl mx-auto text-lg text-gray-300 font-raleway">
+              Stay informed about Health Master's development and healthcare insights
+            </p>
+          </motion.div>
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                title: "HealthMaster Beta Launch",
+                excerpt: "Introducing our innovative healthcare management platform",
+                image: "/assets/images/land1.png",
+                date: "2 weeks ago"
+              },
+              {
+                title: "Early User Success Stories",
+                excerpt: "How our beta users are transforming their healthcare experience",
+                image: "/assets/images/user.jpeg",
+                date: "1 week ago"
+              },
+              {
+                title: "What's Next for HealthMaster",
+                excerpt: "Upcoming features and improvements based on user feedback",
+                image: "/assets/images/im.jpeg",
+                date: "3 days ago"
+              }
+            ].map((post, index) => (
+              <motion.article
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="overflow-hidden bg-slate-700 rounded-2xl"
+              >
+                <div className="relative h-48">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="mb-2 text-sm text-emerald-400 font-poppins">{post.date}</p>
+                  <h3 className="mb-2 text-xl font-bold text-white font-rubik">{post.title}</h3>
+                  <p className="mb-4 text-gray-300 font-raleway">{post.excerpt}</p>
+                  <Link
+                    href="/blog"
+                    className="inline-flex items-center text-emerald-400 hover:text-emerald-300 font-poppins"
+                  >
+                    Read More
+                    <ArrowUpCircle className="w-4 h-4 ml-2 rotate-90" />
+                  </Link>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-slate-800">
@@ -731,7 +739,7 @@ const LandingPage = () => {
                 <div>
                   <h4 className="text-lg font-semibold text-emerald-400">Visit Us</h4>
                   <p className="text-gray-300">
-                  Norrsken House Kigali , 1 KN 78 St, Kigali
+                  Norrsken House Kigali, 1 KN 78 St, Kigali
                   </p>
                 </div>
               </div>
@@ -776,17 +784,19 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
       <footer className="py-12 bg-slate-900">
         <div className="container px-4 mx-auto sm:px-6">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             <div>
               <Link href="/" className="flex items-center mb-6">
                 <Image 
-                  src="/assets/icons/logo.png" 
+                  src="/assets/icons/1.png" 
                   width={40} 
                   height={40}
                   alt="HealthMaster logo" 
-                  className="w-8 h-8 mr-2" 
+                  className="w-8 h-8 mr-2 rounded-full" 
                 />
                 <span className="text-xl font-bold text-emerald-500">Health Master</span>
               </Link>
@@ -902,6 +912,16 @@ const LandingPage = () => {
           </div>
         </div>
       </footer>
+
+      {/* Scroll to top button */}
+      <motion.button
+        className="fixed bottom-6 right-6 p-3 bg-emerald-500 text-white rounded-full shadow-lg hover:bg-emerald-600 transition-colors z-50"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
+        <ArrowUpCircle className="w-6 h-6" />
+      </motion.button>
     </div>
   );
 }

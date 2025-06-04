@@ -15,7 +15,7 @@
     "@heroicons/react": "^2.2.0",
     "@tinymce/tinymce-react": "^6.0.0",
     "appwrite": "^16.0.2",
-    "framer-motion": "^11.11.11",
+    "framer-motion": "^12.16.0",
     "lucide-react": "^0.454.0",
     "next": "15.0.2",
     "react": "^18.3.1",
@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "^18.3.23",
     "@types/react-dom": "^18",
     "@types/recharts": "^1.8.29",
     "eslint": "^8",
