@@ -205,19 +205,19 @@ const AppPage = () => {
 const features = [
   { title: 'Personal Health Dashboard', description: 'Track your health metrics and get personalized insights.', icon: '/assets/icons/dash.png' },
   { title: 'Medication Reminders', description: 'Never miss a dose with timely notifications.', icon: '/assets/icons/rem.png' },
-  { title: 'Appointment Scheduling', description: 'Schedule Appointments with your healthcare providers securely.', icon: '/assets/icons/message.png' },
+  { title: 'AI-Powered Drug Interaction Alerts', description: 'Prevent harmful combinations, our system analyzes medication history to flag risky interactions instantly.', icon: '/assets/icons/message.png' },
   { title: 'Health Stats', description: 'Access your health stats anytime, anywhere with smartwatch IOT intergration.', icon: '/assets/icons/records.png' },
-  { title: 'Telehealth Services', description: 'Consult with doctors through video calls.', icon: '/assets/icons/teleh.png' },
+  { title: 'Digital Medication History', description: 'A single place to view past and current prescriptions, helping both patients and pharmacies avoid repeat errors.', icon: '/assets/icons/teleh.png' },
   { title: 'Community Support', description: 'Join forums and connect with others on similar health journeys.', icon: '/assets/icons/community.png' },
 ];
 
 const screenshots = [
-  '/assets/screenshots/view1.png',
-  '/assets/screenshots/view2.png',
-  '/assets/screenshots/view3.png',
-  '/assets/screenshots/view4.png',
-  '/assets/screenshots/view5.png',
-  '/assets/screenshots/view6.png',
+  '/assets/screenshots/seen1.png',
+  '/assets/screenshots/seen2.png',
+  '/assets/screenshots/seen3.png',
+  '/assets/screenshots/seen4.png',
+  '/assets/screenshots/seen5.png',
+  '/assets/screenshots/seen6.png',
 ];
 
 export default AppPage;

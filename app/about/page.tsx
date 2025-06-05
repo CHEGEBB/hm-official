@@ -66,7 +66,7 @@ const AboutPage = () => {
                 Our Mission
               </h2>
               <p className="mb-6 text-lg font-raleway text-gray-300">
-                At Health Master, our mission is to revolutionize the way individuals manage their healthcare. We believe that by empowering people with the right tools and information, we can help them make more informed decisions, improve their overall well-being, and achieve better health outcomes.
+              To empower healthcare providers and patients with intelligent, accessible, and personalized tools that make medication management safer, simpler, and more human, by harnessing the power of AI and inclusive technology.
               </p>
               <p className="mb-6 text-lg font-raleway text-gray-300">
                 Through our comprehensive platform, we aim to bridge the gap between patients and healthcare providers, fostering a more collaborative and transparent healthcare ecosystem. Our goal is to put the power of healthcare management in the hands of the people, enabling them to take control of their journey and achieve their best health.
@@ -81,7 +81,7 @@ const AboutPage = () => {
                 Our Vision
               </h2>
               <p className="mb-6 text-lg font-raleway text-gray-300">
-                Our vision for HealthMaster is to become the premier healthcare management platform that empowers individuals to take control of their health and wellness. We envision a future where everyone has access to the tools, resources, and support they need to make informed decisions, manage their conditions effectively, and ultimately, lead healthier and more fulfilling lives.
+              A world where no one suffers due to forgotten medications, drug interactions, or lack of access to clear health information, regardless of where they live or who they are.
               </p>
               <p className="mb-6 text-lg font-raleway text-gray-300">
                 By seamlessly integrating cutting-edge technology, data-driven insights, and personalized guidance, we aim to redefine the healthcare experience. Our platform will serve as a centralized hub, connecting patients, healthcare providers, and the broader healthcare ecosystem to foster a more collaborative and efficient system.

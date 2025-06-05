@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpCircle, Menu, X, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Star, Calendar, Clock, User, Heart, ChevronRight, ChevronLeft, HeartPulse } from 'lucide-react';
+import { ArrowUpCircle, Menu, X, Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Star, User, Heart, ChevronRight, ChevronLeft, HeartPulse, Pill, HeartPulseIcon, HospitalIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -78,9 +78,9 @@ const LandingPage = () => {
 
   const features = [
     {
-      icon: <Calendar className="w-12 h-12 text-emerald-500" />,
-      title: "Quick Scheduling",
-      description: "Book and manage appointments with healthcare providers seamlessly."
+      icon: <HeartPulseIcon className="w-12 h-12 text-emerald-500" />,
+      title: "AI-Powered Interaction Checker",
+      description: " Instantly detect drug-to-drug interaction, keeping yourself safe with every dose."
     },
     {
       icon: <Heart className="w-12 h-12 text-emerald-500" />,
@@ -93,19 +93,19 @@ const LandingPage = () => {
       description: "Access and share your medical history securely."
     },
     {
-      icon: <Clock className="w-12 h-12 text-emerald-500" />,
-      title: "Reminders",
-      description: "Never miss your medications or appointments with smart alerts."
-    },
-    {
-      icon: <Mail className="w-12 h-12 text-emerald-500" />,
-      title: "Secure Messaging",
-      description: "Communicate with your healthcare team efficiently."
+      icon: <Pill className="w-12 h-12 text-emerald-500" />,
+      title: "Smart Medication Tracking",
+      description: "Stay on top of your medication schedule with intelligent reminders."
     },
     {
       icon: <Star className="w-12 h-12 text-emerald-500" />,
-      title: "Progress Tracking",
-      description: "Visualize your health journey with detailed analytics."
+      title: "Personalized Drug Information",
+      description: " Access simple, reliable information about each medication you take, dosage, usage, and side effects."
+    },
+    {
+      icon: <HospitalIcon className="w-12 h-12 text-emerald-500" />,
+      title: "Tools for Pharmacies and Providers (Coming Soon)",
+      description: " Interaction alerts, refill tracking, and analytics to serve customers better and build loyalty."
     }
   ];
 
@@ -352,7 +352,7 @@ const LandingPage = () => {
             {[
               { number: "120+", label: "Beta Users" },
               { number: "25+", label: "Healthcare Providers" },
-              { number: "55+", label: "Appointments Booked" },
+              { number: "100%", label: "Learn about your medications" },
               { number: "95%", label: "Beta Satisfaction" }
             ].map((stat, index) => (
               <motion.div
@@ -569,19 +569,19 @@ const LandingPage = () => {
                   name: "Bianca Grey",
                   role: "Beta Tester",
                   image: "/assets/images/12.jpeg",
-                  content: "As someone who just started using HealthMaster two weeks ago, I'm impressed by how intuitive the medication tracking is."
+                  content: "Health Master has made managing my medications so much easier. Adding my prescriptions and checking for interactions is a breeze. I feel more in control of my health than ever before."
                 },
                 {
                   name: "Sarah Williams",
                   role: "Early Access User",
                   image: "/assets/images/ab5.jpeg",
-                  content: "The appointment scheduling feature has already saved me so much time. Looking forward to seeing what's next!"
+                  content: "Health Master has completely transformed how I manage my health. The AI interaction checker is a game changer for me."
                 },
                 {
                   name: "Michael Brown",
                   role: "Beta Program",
                   image: "/assets/images/54.jpg",
-                  content: "Just completed my first week with HealthMaster. The health metrics tracking is exactly what I've been looking for."
+                  content: "I love how HealthMaster keeps all my medical records in one place. It's so convenient to have everything I need at my fingertips."
                 }
               ].map((testimonial, index) => (
                 <SwiperSlide key={index}>

@@ -164,17 +164,17 @@ const ServicesPage = () => {
 // Sample data for services and testimonials
 const services = [
   { title:'Medication Adherence', description: 'Receive reminders and track your medication intake.', icon: '/assets/icons/medication.png' },
-  { title: 'Appointment management', description: 'Schedule and manage your healthcare appointments.', icon: '/assets/icons/appointment.png' },
-  { title: 'Personal Health Coaching', description: 'Get one-on-one coaching tailored to your health goals.', icon: '/assets/icons/personal.png' },
-  { title: 'Mental Health Support', description: 'Access mental health resources and counseling services.', icon: '/assets/icons/brain.png' },
-  { title: 'Chronic Disease Management', description: 'Support and resources for managing chronic conditions.', icon: '/assets/icons/chronic.png' },
-  { title: 'Telehealth Services', description: 'Consult with our healthcare professionals online.', icon: '/assets/icons/tele.png' },
+  { title: 'AI-Powered Drug Interaction Alerts', description: 'Stay informed about potential drug interactions with our AI alerts.', icon: '/assets/icons/appointment.png' },
+  { title: 'Personal Health Management', description: 'Manage your health records, appointments, and medications seamlessly', icon: '/assets/icons/personal.png' },
+  { title: 'Manage all your records in one place', description: 'Effortlessly store and access your health records securely.', icon: '/assets/icons/brain.png' },
+  { title: 'Health tips to stay healthy', description: 'Discover personalized health tips and wellness strategies.', icon: '/assets/icons/chronic.png' },
+  { title: 'Search any medication learn about it', description:'Explore our extensive database of medications and their uses', icon: '/assets/icons/tele.png' },
 ];
 
 const testimonials = [
-  { name: 'Sarah Johnson', comment: 'HealthMaster has completely transformed my approach to wellness!' },
-  { name: 'David Smith', comment: 'The personal coaching I received was invaluable for my health journey.' },
-  { name: 'Emily Davis', comment: 'I love the supportive community and the resources available!' },
+  { name: 'Sarah Johnson', comment: 'I used to forget my pills all the time. With Health Master, I feel in control and haven’t missed a dose in months!' },
+  { name: 'David Smith', comment: 'Health Master has transformed how I manage my health. The reminders and tracking features are incredibly helpful.' },
+  { name: 'Emily Davis', comment: 'Health Master has been a game-changer for me. I love the personalized health tips and the ease of managing my medications.' }
 ];
 
 export default ServicesPage;
