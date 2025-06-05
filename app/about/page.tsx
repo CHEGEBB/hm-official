@@ -288,7 +288,7 @@ const AboutPage = () => {
         <div className="relative w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
           <Image
             src="/assets/images/bonheur.jpg"
-            alt="Bonheur Dishimimana"
+            alt="Bonheur Dushimimana "
             fill
             className="object-cover"
           />
