@@ -352,7 +352,7 @@ const LandingPage = () => {
             {[
               { number: "120+", label: "Beta Users" },
               { number: "25+", label: "Healthcare Providers" },
-              { number: "100%", label: "accuracy checking drug interactions" },
+              { number: "100%", label: "Accuracy in detecting drug interactions" },
               { number: "95%", label: "Beta Satisfaction" }
             ].map((stat, index) => (
               <motion.div
