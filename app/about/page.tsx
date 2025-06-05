@@ -293,7 +293,7 @@ const AboutPage = () => {
             className="object-cover"
           />
         </div>
-        <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Bonheur Dishimimana</h3>
+        <h3 className="mb-2 text-xl font-bold text-emerald-400 font-rubik">Bonheur Dushimimana </h3>
         <p className="mb-4 text-gray-300 font-raleway">COO & Co-Founder</p>
         <p className="text-gray-400 font-raleway">
           Bonheur, a passionate medical student from Rwanda, co-founded HealthMaster with a deep commitment to improving healthcare access and delivery. Known for his go-getter attitude, Bonheur excels in connecting with people, fostering a positive environment, and working effectively with others.
